@@ -25,7 +25,7 @@ export class EventServiceProvider<Events extends EventTypes> extends EventServic
      * @memberof EventServiceProvider
      */
     protected listeners: EventListener<EventTypes> = {
-        [EventName.HomePage]: [
+        [EventName.SearchPage]: [
             {
                 listener: this.container.get(ContainerName.HomeEventListeners),
                 options: {},

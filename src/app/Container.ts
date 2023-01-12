@@ -1,12 +1,25 @@
 import { AxiosMessage } from "@odg/axios";
-import { type PageInterface } from "@odg/chemical-x";
+import { type HandlerInterface, type PageInterface } from "@odg/chemical-x";
+
+import { ContainerName } from "./Enums/ContainerName";
+
 import { EventEmitterBus } from "@odg/events";
+
+import { type PageOrHandlerFactoryType } from "./Factory/PageFactory";
+
 import { ConsoleLogger } from "@odg/log";
+
+import { HomeEventListeners } from "./Listeners/HomeEventListeners";
+
 import {
     Container as ContainerInversify, decorate, injectable, type interfaces,
 } from "inversify";
 
+import { EventServiceProvider } from "./Provider/EventServiceProvider";
+import { ExampleCrawlerService } from "./Services/ExampleCrawlerService";
+
 import { Browser, Context, Page } from "../Browser";
+import Kernel from "../Console/Kernel";
 import {
     type BrowserClassEngine,
     type BrowserTypeEngine,
@@ -14,15 +27,11 @@ import {
     type PageClassEngine,
     browserEngine,
 } from "../engine";
+import { GoogleSearchHandler } from "../Handlers/GoogleSearch/GoogleSearchHandler";
 import { type BasePageInterface } from "../Interfaces/BasePageInterface";
 import { type ContainerType } from "../Interfaces/ContainerInterface";
 import { type EventTypes } from "../Interfaces/EventsInterface";
-import { HomePage } from "../Pages/Google/HomePage";
-
-import { ContainerName } from "./Enums/ContainerName";
-import { HomeEventListeners } from "./Listeners/HomeEventListeners";
-import { EventServiceProvider } from "./Provider/EventServiceProvider";
-import { ExampleCrawlerService } from "./Services/ExampleCrawlerService";
+import { SearchPage } from "../Pages/Google/SearchPage";
 
 export default class Container {
 
@@ -75,6 +84,11 @@ export default class Container {
         this.bind(
             ContainerName.ExampleCrawlerService,
         ).to(ExampleCrawlerService).inSingletonScope();
+
+        // Example Service
+        this.bind(
+            ContainerName.Kernel,
+        ).to(Kernel).inSingletonScope();
     }
 
     public async bindEventsAndListeners(): Promise<void> {
@@ -107,9 +121,13 @@ export default class Container {
             ).setUp(),
         ).inSingletonScope();
 
-        // HomePage Google
-        this.bind(ContainerName.HomePage)
-            .toFactory(() => this.instancePage<HomePage>(HomePage));
+        // SearchPage Google
+        this.bind(ContainerName.SearchPage)
+            .toFactory(() => this.instancePageOrHandler<SearchPage>(SearchPage));
+
+        // SearchHandler Google
+        this.bind(ContainerName.SearchHandler)
+            .toFactory(() => this.instancePageOrHandler<GoogleSearchHandler>(GoogleSearchHandler));
     }
 
     public async checkCanRun(): Promise<void> {
@@ -157,16 +175,17 @@ export default class Container {
      * @private
      * @template {PageInterface} PageType
      * @param {BasePageInterface} BasePagePrepare Page Class instantiable
-     * @returns {(page: PageClassEngine)=>PageType}
+     * @returns {PageOrHandlerFactoryType<PageType>}
      * @memberof Container
      */
-    private instancePage<PageType extends PageInterface>(
+    private instancePageOrHandler<PageType extends HandlerInterface | PageInterface>(
         BasePagePrepare: BasePageInterface,
-    ): (page: PageClassEngine) => PageType {
+    ): PageOrHandlerFactoryType<PageType> {
         return (page: PageClassEngine): PageType => {
-            const container = `Page${this.pageContainerNumber++}`;
+            const container = `PageOrHandler${this.pageContainerNumber++}`;
             this.container.bind(container).to(BasePagePrepare);
             const value = this.container.get<PageType>(container);
+            this.container.unbind(container);
             (value as unknown as { page: unknown }).page = page;
 
             return value;

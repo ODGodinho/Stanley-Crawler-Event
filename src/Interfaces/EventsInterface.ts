@@ -8,7 +8,7 @@ export interface EventBrowserParameters {
 }
 
 export interface EventBaseInterface extends EventObjectType {
-    [EventName.HomePage]: EventBrowserParameters;
+    [EventName.SearchPage]: EventBrowserParameters;
 }
 
 export type EventTypes<T extends Record<EventName, unknown> = EventBaseInterface> = T;

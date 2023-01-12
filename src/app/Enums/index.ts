@@ -1,2 +1,2 @@
 export * from "./ContainerName";
-export * from "./Events";
+export * from "./EventName";

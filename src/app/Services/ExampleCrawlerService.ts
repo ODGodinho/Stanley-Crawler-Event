@@ -3,8 +3,10 @@ import { LoggerInterface } from "@odg/log";
 import { inject, injectable } from "inversify";
 
 import { MyBrowser } from "../../engine";
+import { type GoogleSearchHandler } from "../../Handlers/GoogleSearch/GoogleSearchHandler";
 import { type EventTypes } from "../../Interfaces/EventsInterface";
 import { ContainerName, EventName } from "../Enums";
+import { PageOrHandlerFactoryType } from "../Factory/PageFactory";
 
 @injectable()
 export class ExampleCrawlerService {
@@ -18,13 +20,18 @@ export class ExampleCrawlerService {
     @inject(ContainerName.Browser)
     protected browser!: MyBrowser;
 
+    @inject(ContainerName.SearchHandler)
+    protected searchHandler!: PageOrHandlerFactoryType<GoogleSearchHandler>;
+
     public async execute(): Promise<void> {
         await this.log.info("Executing example crawler service");
         const context = await this.browser.newContext();
         const page = await context.newPage();
-        await this.bus.dispatch(EventName.HomePage, {
+        await this.bus.dispatch(EventName.SearchPage, {
             page: page,
         });
+
+        await this.searchHandler(page).execute();
     }
 
 }
