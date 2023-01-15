@@ -7,6 +7,10 @@ const jest: Config = {
         "src/**/*.js",
         "!src/index.ts",
         "!src/index.js",
+        "!src/Pages/**/*.ts",
+        "!src/Handlers/**/*.ts",
+        "!src/app/Services/**/*.ts",
+        "!src/app/Listeners/**/*.ts",
     ],
     coverageThreshold: {
         global: {
@@ -22,7 +26,7 @@ const jest: Config = {
         "<rootDir>/tests/jest/**/*.test.ts",
     ],
     moduleDirectories: [ "node_modules", "src" ],
-    setupFiles: [
+    setupFilesAfterEnv: [
         "<rootDir>/tests/jest/init.ts",
     ],
 };

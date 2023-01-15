@@ -1,7 +1,5 @@
 import { ContainerName } from "../../../src/app/Enums";
 import { ExampleCrawlerService } from "../../../src/app/Services/ExampleCrawlerService";
-import { type MyPage } from "../../../src/engine";
-import { SearchPage } from "../../../src/Pages/Google/SearchPage";
 import { container } from "../SingletonTest";
 
 describe("Container Test", () => {
@@ -15,10 +13,8 @@ describe("Container Test", () => {
     });
 });
 
-describe("Container Instance Page", () => {
+describe("Is Runnable Code", () => {
     test("Container SetUp", async () => {
-        const page = container.get(ContainerName.SearchPage);
-        expect(typeof page).toBe("function");
-        expect(page(undefined as unknown as MyPage)).toBeInstanceOf(SearchPage);
+        await expect(container.checkCanRun()).resolves.toBeUndefined();
     });
 });

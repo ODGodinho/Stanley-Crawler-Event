@@ -1,18 +1,17 @@
-import { type EventBusInterface } from "@odg/events";
+import { type EventListenerInterface, type EventBusInterface } from "@odg/events";
 import { type LoggerInterface } from "@odg/log";
 import { type MessageInterface } from "@odg/message";
 
 import { type EventTypes } from "./EventsInterface";
 
-import type Container from "../app/Container";
-import { type ContainerName } from "../app/Enums";
-import { type PageOrHandlerFactoryType } from "../app/Factory/PageFactory";
-import { type HomeEventListeners } from "../app/Listeners/HomeEventListeners";
-import { type EventServiceProvider } from "../app/Provider/EventServiceProvider";
-import { type ExampleCrawlerService } from "../app/Services/ExampleCrawlerService";
-import type Kernel from "../Console/Kernel";
-import { type BrowserClassEngine } from "../engine";
-import { type SearchPage } from "../Pages/Google/SearchPage";
+import type Container from "../src/app/Container";
+import { type EventName, type ContainerName } from "../src/app/Enums";
+import { type PageOrHandlerFactoryType } from "../src/app/Factory/PageFactory";
+import { type EventServiceProvider } from "../src/app/Provider/EventServiceProvider";
+import { type ExampleCrawlerService } from "../src/app/Services/ExampleCrawlerService";
+import type Kernel from "../src/Console/Kernel";
+import { type BrowserClassEngine } from "../src/engine";
+import { type SearchPage } from "../src/Pages/Google/SearchPage";
 
 export interface ContainerInterface {
     [ContainerName.Logger]: LoggerInterface | undefined;
@@ -32,7 +31,7 @@ export interface ContainerInterface {
     [ContainerName.SearchHandler]: PageOrHandlerFactoryType<SearchPage>;
 
     // Events
-    [ContainerName.HomeEventListeners]: HomeEventListeners;
+    [ContainerName.SearchEventListeners]: EventListenerInterface<EventTypes, EventName.SearchPage>;
 
     // Services
     [ContainerName.ExampleCrawlerService]: ExampleCrawlerService;

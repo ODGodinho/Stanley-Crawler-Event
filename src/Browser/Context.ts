@@ -1,8 +1,8 @@
 import { Context as ContextBase } from "@odg/chemical-x";
 
 import {
+    type ContextOptionsEngine,
     type BrowserClassEngine,
-    type BrowserOptionsEngine,
     type BrowserTypeEngine,
     type ContextClassEngine,
     type PageClassEngine,
@@ -15,10 +15,9 @@ export class Context extends ContextBase<
     PageClassEngine
 > {
 
-    public async contextOptions(): Promise<BrowserOptionsEngine> {
+    public async contextOptions(): Promise<ContextOptionsEngine> {
         return {
             ...await super.contextOptions(),
-            headless: false,
         };
     }
 

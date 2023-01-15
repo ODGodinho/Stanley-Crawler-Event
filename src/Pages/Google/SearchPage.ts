@@ -4,15 +4,15 @@ import { type PageInterface } from "@odg/chemical-x";
 import { injectable } from "inversify";
 
 import {
-    type GoogleHomeSelectorsType,
-    googleHomeSelectors,
+    type GoogleSearchSelectorsType,
+    googleSearchSelectors,
 } from "../../Selectors";
 import { BasePage } from "../BasePage";
 
 @injectable()
 export class SearchPage extends BasePage implements PageInterface {
 
-    public $s: GoogleHomeSelectorsType = googleHomeSelectors;
+    public $s: GoogleSearchSelectorsType = googleSearchSelectors;
 
     /**
      * Execute this step
@@ -22,7 +22,7 @@ export class SearchPage extends BasePage implements PageInterface {
     public async execute(): Promise<void> {
         await this.start(async () => {
             await this.preStart();
-            await this.page.goto("https://google.com", { timeout: 8000, waitUntil: "domcontentloaded" });
+            await this.page.goto("https://www.google.com/", { timeout: 8000, waitUntil: "domcontentloaded" });
             await this.fillSearch();
             await this.search();
         });

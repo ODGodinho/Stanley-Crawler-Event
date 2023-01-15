@@ -2,9 +2,9 @@ import { EventBusInterface } from "@odg/events";
 import { LoggerInterface } from "@odg/log";
 import { inject, injectable } from "inversify";
 
+import type { EventTypes } from "../../@types/EventsInterface";
 import { MyBrowser } from "../../engine";
 import { type GoogleSearchHandler } from "../../Handlers/GoogleSearch/GoogleSearchHandler";
-import { type EventTypes } from "../../Interfaces/EventsInterface";
 import { ContainerName, EventName } from "../Enums";
 import { PageOrHandlerFactoryType } from "../Factory/PageFactory";
 
@@ -32,6 +32,8 @@ export class ExampleCrawlerService {
         });
 
         await this.searchHandler(page).execute();
+        await context.close();
+        await this.browser.close();
     }
 
 }

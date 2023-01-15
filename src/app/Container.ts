@@ -9,7 +9,7 @@ import { type PageOrHandlerFactoryType } from "./Factory/PageFactory";
 
 import { ConsoleLogger } from "@odg/log";
 
-import { HomeEventListeners } from "./Listeners/HomeEventListeners";
+import { SearchEventListeners } from "./Listeners/SearchEventListeners";
 
 import {
     Container as ContainerInversify, decorate, injectable, type interfaces,
@@ -18,6 +18,8 @@ import {
 import { EventServiceProvider } from "./Provider/EventServiceProvider";
 import { ExampleCrawlerService } from "./Services/ExampleCrawlerService";
 
+import type { ContainerType } from "../@types/ContainerInterface";
+import type { EventTypes } from "../@types/EventsInterface";
 import { Browser, Context, Page } from "../Browser";
 import Kernel from "../Console/Kernel";
 import {
@@ -29,8 +31,6 @@ import {
 } from "../engine";
 import { GoogleSearchHandler } from "../Handlers/GoogleSearch/GoogleSearchHandler";
 import { type BasePageInterface } from "../Interfaces/BasePageInterface";
-import { type ContainerType } from "../Interfaces/ContainerInterface";
-import { type EventTypes } from "../Interfaces/EventsInterface";
 import { SearchPage } from "../Pages/Google/SearchPage";
 
 export default class Container {
@@ -97,10 +97,10 @@ export default class Container {
             ContainerName.EventBus,
         ).to(EventEmitterBus<EventTypes>).inSingletonScope();
 
-        // HomeGoogle Listeners bind
+        // SearchGoogle Listeners bind
         this.bind(
-            ContainerName.HomeEventListeners,
-        ).to(HomeEventListeners).inSingletonScope();
+            ContainerName.SearchEventListeners,
+        ).to(SearchEventListeners).inSingletonScope();
 
         // Event Provider
         this.bind(

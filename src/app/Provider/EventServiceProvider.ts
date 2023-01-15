@@ -7,7 +7,7 @@ import {
     inject, injectable,
 } from "inversify";
 
-import { type EventTypes } from "../../Interfaces/EventsInterface";
+import type { EventTypes } from "../../@types/EventsInterface";
 import Container from "../Container";
 import { ContainerName, EventName } from "../Enums";
 
@@ -27,7 +27,7 @@ export class EventServiceProvider<Events extends EventTypes> extends EventServic
     protected listeners: EventListener<EventTypes> = {
         [EventName.SearchPage]: [
             {
-                listener: this.container.get(ContainerName.HomeEventListeners),
+                listener: this.container.get(ContainerName.SearchEventListeners),
                 options: {},
             },
         ],

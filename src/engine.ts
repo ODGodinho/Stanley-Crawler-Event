@@ -5,6 +5,7 @@ import {
     type LaunchOptions,
     type Page,
     type BrowserContext,
+    type BrowserContextOptions,
 } from "playwright-core";
 
 import { type Context as ContextClass, type Browser as BrowserClass } from "./Browser";
@@ -18,6 +19,8 @@ export type ContextClassEngine = BrowserContext;
 export type PageClassEngine = Page;
 
 export type BrowserOptionsEngine = LaunchOptions;
+
+export type ContextOptionsEngine = BrowserContextOptions;
 
 // My Page Union Engine
 

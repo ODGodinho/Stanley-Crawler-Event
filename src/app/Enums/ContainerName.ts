@@ -13,7 +13,7 @@ export enum ContainerName {
     "SearchHandler" = "search.handler",
 
     // Events
-    "HomeEventListeners" = "home.event.listeners",
+    "SearchEventListeners" = "search.event.listeners",
     "EventServiceProvider" = "event.service.provider",
     "ExampleCrawlerService" = "example.crawler.service",
 }

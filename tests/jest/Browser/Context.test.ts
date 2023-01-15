@@ -1,5 +1,5 @@
 import { ContainerName } from "../../../src/app/Enums";
-import { Context } from "../../../src/Browser";
+import { Context, Page } from "../../../src/Browser";
 import { container } from "../SingletonTest";
 
 describe("Context Create Instance", () => {
@@ -9,8 +9,6 @@ describe("Context Create Instance", () => {
         const page = await context.newPage();
 
         expect(context).toBeInstanceOf(Context);
-        await page.close();
-        await context.close();
-        await browser.close();
+        expect(page).toBeInstanceOf(Page);
     });
 });
