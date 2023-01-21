@@ -1,8 +1,4 @@
 /* eslint-disable regex/invalid */
-import type { } from "playwright-core";
-
-// Import type { } from "puppeteer-core";
-
 import type {
     Browser as BrowserBase,
     Context as ContextBase,

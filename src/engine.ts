@@ -1,6 +1,6 @@
 import {
-    type BrowserType,
     chromium,
+    type BrowserType,
     type Browser,
     type LaunchOptions,
     type Page,

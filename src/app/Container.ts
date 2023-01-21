@@ -1,22 +1,10 @@
 import { AxiosMessage } from "@odg/axios";
 import { type HandlerInterface, type PageInterface } from "@odg/chemical-x";
-
-import { ContainerName } from "./Enums/ContainerName";
-
 import { EventEmitterBus } from "@odg/events";
-
-import { type PageOrHandlerFactoryType } from "./Factory/PageFactory";
-
 import { ConsoleLogger } from "@odg/log";
-
-import { SearchEventListeners } from "./Listeners/SearchEventListeners";
-
 import {
     Container as ContainerInversify, decorate, injectable, type interfaces,
 } from "inversify";
-
-import { EventServiceProvider } from "./Provider/EventServiceProvider";
-import { ExampleCrawlerService } from "./Services/ExampleCrawlerService";
 
 import type { ContainerType } from "../@types/ContainerInterface";
 import type { EventTypes } from "../@types/EventsInterface";
@@ -32,6 +20,12 @@ import {
 import { GoogleSearchHandler } from "../Handlers/GoogleSearch/GoogleSearchHandler";
 import { type BasePageInterface } from "../Interfaces/BasePageInterface";
 import { SearchPage } from "../Pages/Google/SearchPage";
+
+import { ContainerName } from "./Enums/ContainerName";
+import { type PageOrHandlerFactoryType } from "./Factory/PageFactory";
+import { SearchEventListeners } from "./Listeners/SearchEventListeners";
+import { EventServiceProvider } from "./Provider/EventServiceProvider";
+import { ExampleCrawlerService } from "./Services/ExampleCrawlerService";
 
 export default class Container {
 
