@@ -8,7 +8,7 @@ import { ContainerName, type EventName } from "../Enums";
 import { PageOrHandlerFactoryType } from "../Factory/PageFactory";
 
 @injectable()
-export class SearchEventListeners implements EventListenerInterface<EventTypes, EventName.SearchPage> {
+export class SearchEventListener implements EventListenerInterface<EventTypes, EventName.SearchPageEvent> {
 
     @inject(ContainerName.Logger)
     public readonly log!: LoggerInterface;

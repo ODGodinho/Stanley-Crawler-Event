@@ -8,7 +8,7 @@ import { EventName } from "../../app/Enums";
 import { BaseHandler } from "../BaseHandler";
 
 @injectable()
-export class GoogleSearchHandler extends BaseHandler implements HandlerInterface {
+export class GoogleSearchToSelectionHandler extends BaseHandler implements HandlerInterface {
 
     public async waitForHandler(): Promise<HandlerFunction> {
         return Promise.race([
@@ -17,7 +17,7 @@ export class GoogleSearchHandler extends BaseHandler implements HandlerInterface
         ]);
     }
 
-    public async timeout(): Promise<number> {
+    public async getTimeout(): Promise<number> {
         // Only For Example Correct use env or config library
         // eslint-disable-next-line @typescript-eslint/no-magic-numbers
         return 5000;
@@ -37,7 +37,7 @@ export class GoogleSearchHandler extends BaseHandler implements HandlerInterface
      */
     public async failedWait(exception: Exception): Promise<RetryAction> {
         await this.log.warning(exception.message);
-        await this.bus.dispatch(EventName.SearchPage, { page: this.page });
+        await this.bus.dispatch(EventName.SearchPageEvent, { page: this.page });
 
         return RetryAction.Default;
     }
@@ -49,7 +49,7 @@ export class GoogleSearchHandler extends BaseHandler implements HandlerInterface
      * @memberof GoogleSearchHandler
      */
     public async success(): Promise<void> {
-        const result = this.page.locator(this.$$s.googleListSelectors.results.resultTitles).first();
+        const result = this.page.locator(this.$$s.googleListSelector.results.resultTitles).first();
         const resultText = await result.textContent() ?? "";
         await this.log.alert(`Google search result: ${resultText}`);
     }
@@ -62,10 +62,10 @@ export class GoogleSearchHandler extends BaseHandler implements HandlerInterface
      * @memberof GoogleSearchHandler
      */
     public async identifySuccessSearch(): Promise<HandlerFunction> {
-        return this.page.waitForSelector(
-            this.$$s.googleListSelectors.results.resultTitles,
-            { timeout: await this.timeout() },
-        ).then(() => this.successSolution.bind(this));
+        return this.page.locator(this.$$s.googleListSelector.results.resultTitles)
+            .first()
+            .waitFor({ timeout: await this.getTimeout() })
+            .then(() => this.successSolution.bind(this));
     }
 
     /**
@@ -76,10 +76,9 @@ export class GoogleSearchHandler extends BaseHandler implements HandlerInterface
      * @memberof GoogleSearchHandler
      */
     public async identifyNoResult(): Promise<HandlerFunction> {
-        return this.page.waitForSelector(
-            this.$$s.googleListSelectors.notResult,
-            { timeout: await this.timeout() },
-        ).then(() => this.noResultSolution.bind(this));
+        return this.page.locator(this.$$s.googleListSelector.notResult)
+            .waitFor({ timeout: await this.getTimeout() })
+            .then(() => this.noResultSolution.bind(this));
     }
 
     /**
@@ -89,7 +88,7 @@ export class GoogleSearchHandler extends BaseHandler implements HandlerInterface
      * @memberof GoogleSearchHandler
      */
     public async noResultSolution(): Promise<HandlerSolution> {
-        await this.bus.dispatch(EventName.SearchPage, { page: this.page });
+        await this.bus.dispatch(EventName.SearchPageEvent, { page: this.page });
 
         return HandlerSolution.Retry;
     }

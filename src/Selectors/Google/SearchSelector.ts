@@ -1,8 +1,8 @@
-export const googleSearchSelectors = {
+export const googleSearchSelector = {
     searchInput: "input[name=\"q\"]",
     buttons: {
         submit: "input[name=\"btnK\"] >> visible=true",
     },
 };
 
-export type GoogleSearchSelectorsType = typeof googleSearchSelectors;
+export type GoogleSearchSelectorType = typeof googleSearchSelector;

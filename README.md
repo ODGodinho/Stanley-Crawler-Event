@@ -28,14 +28,23 @@
 - [🎇 Benefits](#-benefits)
 - [📗 Libraries](#-libraries)
 - [📁 Dependencies](#-dependencies)
+- [🔘 Use Template](#-use-template)
+  - [🙈 Change to Puppeteer](#-change-to-puppeteer)
 - [⏩ Get Started](#-get-started)
-  - [🔘 Use Template](#-use-template)
-  - [🔑 Engine Example](#-configure-github-token)
-    - [🙈 Change to Puppeteer](#-change-to-puppeteer)
-  - [💻 Prepare to develop](#-prepare-to-develop)
-  - [📍 Start Project](#-start-project)
-  - [📨 Build and Run](#-build-and-run)
-  - [🧪 Teste Code](#-teste-code)
+  - [🦻 Event / Listeners](#-event-listeners)
+  - [↖️ Selector](#-selector)
+  - [⚙️ Container Bind](#-container-bind)
+  - [❕ Extract Text Helper](#-extract-text-helper)
+  - [🟢 Make File](#-make-file)
+- [💓 Cycle Time](#-cycle-time)
+  - [📽️ Project Life Cycle](#-project-life-cycle)
+  - [🐠 Service Life Cycle](#-service-life-cycle)
+  - [💦 Page Life Cycle](#-page-life-cycle)
+  - [🀄 Handler Life Cycle](#-handler-life-cycle)
+- [💻 Prepare to develop](#-prepare-to-develop)
+- [📍 Start Project](#-start-project)
+- [📨 Build and Run](#-build-and-run)
+- [🧪 Teste Code](#-teste-code)
 
 ---
 
@@ -49,6 +58,7 @@
 - 🧪 Automatic Test when opening pull-request/merge
 - 📦 Automatic Package and release generate on merge
 - ⚙️ IOT/IOC (Inversion of Control) for easy use of libraries
+- 🟢 Make:Files Command to make base files
 
 ## 📗 Libraries
 
@@ -65,17 +75,11 @@
 - [Yarn](https://yarnpkg.com/) Optional/Recommended
 - [ODG TsConfig](https://github.com/ODGodinho/tsconfig) Last Version
 
-## ⏩ Get Started
-
----
-
 ### 🔘 Use Template
 
 Click in use this template button and clone your template project
 
 ![Use Template](https://raw.githubusercontent.com/ODGodinho/Stanley-TheTemplate/main/public/images/UseTemplate.png)
-
-### 🔑 Configure Github Token
 
 #### 🙈 Change to Puppeteer
 
@@ -103,7 +107,120 @@ export type BrowserOptionsEngine = PuppeteerLaunchOptions;
 export const browserEngine = puppeteer;
 ```
 
-### 💻 Prepare To Develop
+## ⏩ Get Started
+
+---
+
+### 🦻 Event / Listeners
+
+Events can be fired with EventBusInterface Example
+Include the execution of your page in an event so that you can execute any page at any time
+
+```typescript
+export class ExampleEventListener implements EventListenerInterface<EventTypes, EventName.ExampleEvent> {
+
+    @inject(ContainerName.Logger)
+    public readonly log!: LoggerInterface;
+
+    public async handler(_receivedData: unknown) {
+        await this.log.info('Example Event Listener');
+    }
+
+}
+```
+
+> Register all Events name in `./src/app/Enums/EventName.ts`
+---
+> Register all Events Types in `./@types/EventsInterface.ts`
+---
+> Register your events in EventServiceProvider to automatic listeners.
+
+### ↖️ Selector
+
+The selectors are in the selectors folder
+
+```typescript
+export const googleSearchSelector = {
+    searchInput: "input[name=\"q\"]",
+    buttons: {
+        submit: "input[name=\"btnK\"] >> visible=true",
+    },
+};
+
+export type GoogleSearchSelectorType = typeof googleSearchSelector;
+```
+
+> Register all Selectors in `./src/app/Selectors/index.ts`
+
+### ⚙️ Container Bind
+
+```typescript
+this.bind(
+    ContainerName.Logger,
+).to(ConsoleLogger).inSingletonScope();
+```
+
+> Register all Container name in `src/app/Enums/ContainerName.ts`
+> Register all Container Inject in `src/app/Container.ts`
+
+### ❕ Extract Text Helper
+
+Use Str, Num, Arr helpers class to manipulate Text, Numbers and Arrays
+
+```typescript
+import { Str } from "@odg/chemical-x";
+
+const value = new Str(
+    this.page.locator("#money").innerText(),
+).money();
+```
+
+### 🟢 Make File
+
+To Make a file run command
+
+> Use this to make Page, Handler, Selectors...
+
+```powershell
+yarn odg make
+```
+
+#### Example to make Page File
+
+```powershell
+yarn odg make:page Search
+
+# help with
+yarn odg make:page --help
+```
+
+## 💓 Cycle Time
+
+### 📽️ Project Life Cycle
+
+Project Life cycle
+
+![LifeCycle](./public/images/LifeCycle.jpg)
+
+### 🐠 Service Life Cycle
+
+Example Service Life Cycle
+
+![LifeCycle](./public/images/ServiceLifeCycle.jpg)
+
+### 💦 Page Life Cycle
+
+Example Page Life Cycle
+
+![LifeCycle](./public/images/PageLifeCycle.jpg)
+
+### 🀄 Handler Life Cycle
+
+Example Handler Life Cycle
+
+![LifeCycle](./public/images/HandlerLifeCycle.jpg)
+
+## 💻 Prepare To Develop
 
 Copy `.env.example` to `.env` and add the values according to your needs.
 

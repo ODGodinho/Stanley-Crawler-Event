@@ -1,2 +1,2 @@
-export * from "./Google/SearchSelectors";
-export * from "./Google/ListSelectors";
+export * from "./Google/SearchSelector";
+export * from "./Google/ListSelector";

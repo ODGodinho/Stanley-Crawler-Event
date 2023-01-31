@@ -4,15 +4,15 @@ import { type PageInterface } from "@odg/chemical-x";
 import { injectable } from "inversify";
 
 import {
-    type GoogleSearchSelectorsType,
-    googleSearchSelectors,
+    type GoogleSearchSelectorType,
+    googleSearchSelector,
 } from "../../Selectors";
 import { BasePage } from "../BasePage";
 
 @injectable()
 export class SearchPage extends BasePage implements PageInterface {
 
-    public $s: GoogleSearchSelectorsType = googleSearchSelectors;
+    public readonly $s: GoogleSearchSelectorType = googleSearchSelector;
 
     /**
      * Execute this step

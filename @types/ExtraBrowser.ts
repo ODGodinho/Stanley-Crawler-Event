@@ -1,4 +1,3 @@
-/* eslint-disable regex/invalid */
 import type {
     Browser as BrowserBase,
     Context as ContextBase,

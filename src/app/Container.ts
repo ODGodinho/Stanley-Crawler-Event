@@ -1,6 +1,7 @@
 import { AxiosMessage } from "@odg/axios";
 import { type HandlerInterface, type PageInterface } from "@odg/chemical-x";
 import { EventEmitterBus } from "@odg/events";
+import { JSONLoggerPlugin } from "@odg/json-log";
 import { ConsoleLogger } from "@odg/log";
 import {
     Container as ContainerInversify, decorate, injectable, type interfaces,
@@ -17,13 +18,13 @@ import {
     type PageClassEngine,
     browserEngine,
 } from "../engine";
-import { GoogleSearchHandler } from "../Handlers/GoogleSearch/GoogleSearchHandler";
+import { GoogleSearchToSelectionHandler } from "../Handlers/GoogleSearch/GoogleSearchHandler";
 import { type BasePageInterface } from "../Interfaces/BasePageInterface";
 import { SearchPage } from "../Pages/Google/SearchPage";
 
 import { ContainerName } from "./Enums/ContainerName";
 import { type PageOrHandlerFactoryType } from "./Factory/PageFactory";
-import { SearchEventListeners } from "./Listeners/SearchEventListeners";
+import { SearchEventListener } from "./Listeners/SearchEventListener";
 import { EventServiceProvider } from "./Provider/EventServiceProvider";
 import { ExampleCrawlerService } from "./Services/ExampleCrawlerService";
 
@@ -42,6 +43,7 @@ export default class Container {
         await this.bindStanley();
         await this.bindEventsAndListeners();
         await this.bindCrawler();
+        await this.loadLoggerPlugins();
     }
 
     /**
@@ -94,7 +96,7 @@ export default class Container {
         // SearchGoogle Listeners bind
         this.bind(
             ContainerName.SearchEventListeners,
-        ).to(SearchEventListeners).inSingletonScope();
+        ).to(SearchEventListener).inSingletonScope();
 
         // Event Provider
         this.bind(
@@ -121,7 +123,22 @@ export default class Container {
 
         // SearchHandler Google
         this.bind(ContainerName.SearchHandler)
-            .toFactory(() => this.instancePageOrHandler<GoogleSearchHandler>(GoogleSearchHandler));
+            .toFactory(() => this.instancePageOrHandler<GoogleSearchToSelectionHandler>(
+                GoogleSearchToSelectionHandler,
+            ));
+    }
+
+    /**
+     * Load Logger Plugins container
+     *
+     * @returns {Promise<void>}
+     * @memberof Container
+     */
+    public async loadLoggerPlugins(): Promise<void> {
+        const logger = this.get(ContainerName.Logger);
+        if (!(logger instanceof ConsoleLogger) && logger) {
+            logger.use(new JSONLoggerPlugin(process.env.APP_NAME!));
+        }
     }
 
     public async checkCanRun(): Promise<void> {
