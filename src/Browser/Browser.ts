@@ -18,7 +18,7 @@ export class Browser extends BrowserBase<
     public async browserOptions(): Promise<BrowserOptionsEngine> {
         return {
             ...await super.browserOptions(),
-            headless: process.env.USE_HEADLESS?.trim() === "true",
+            headless: process.env.USE_HEADLESS === "true",
         };
     }
 
