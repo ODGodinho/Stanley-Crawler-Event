@@ -14,12 +14,14 @@
 
 <p align="center">
 
+[![codecov](https://codecov.io/gh/ODGodinho/Stanley-TheTemplate-Typescript/branch/main/graph/badge.svg?token=HNBNLLPZ3J)](https://codecov.io/gh/ODGodinho/Stanley-TheTemplate-Typescript)
 [![Stargazers](https://img.shields.io/github/stars/ODGodinho/Stanley-Crawler-Event?color=F430A4)](https://github.com/ODGodinho/Stanley-Crawler-Event/stargazers)
 [![Made by ODGodinho](https://img.shields.io/badge/made%20by-ODGodinho-%2304A361)](https://www.linkedin.com/in/victor-alves-odgodinho/)
 [![Forks](https://img.shields.io/github/forks/ODGodinho/Stanley-Crawler-Event?color=CD4D34)](https://github.com/ODGodinho/Stanley-Crawler-Event/network/members)
 ![Repository size](https://img.shields.io/github/repo-size/ODGodinho/Stanley-Crawler-Event)
 [![GitHub last commit](https://img.shields.io/github/last-commit/ODGodinho/Stanley-Crawler-Event)](https://github.com/ODGodinho/Stanley-Crawler-Event/commits/master)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen)](https://opensource.org/licenses/MIT)
+[![StyleCI](https://github.styleci.io/repos/577106458/shield?branch=main)](https://github.styleci.io/repos/577106458?branch=main)
 
 </p>
 
