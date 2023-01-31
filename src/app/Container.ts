@@ -7,8 +7,17 @@ import {
     Container as ContainerInversify, decorate, injectable, type interfaces,
 } from "inversify";
 
-import type { ContainerType } from "../@types/ContainerInterface";
-import type { EventTypes } from "../@types/EventsInterface";
+import type { ContainerType } from "#types/ContainerInterface";
+import type { EventTypes } from "#types/EventsInterface";
+import { ContainerName } from "@enums";
+import type { PageOrHandlerFactoryType } from "@factory/PageFactory";
+import type { BasePageInterface } from "@interfaces/BasePageInterface";
+import { SearchEventListener } from "@listeners/SearchEventListener";
+import { GoogleSearchToSelectionHandler } from "@pageHandler/GoogleSearch/GoogleSearchHandler";
+import { SearchPage } from "@pages/Google/SearchPage";
+import { EventServiceProvider } from "@providers/EventServiceProvider";
+import { ExampleCrawlerService } from "@services/ExampleCrawlerService";
+
 import { Browser, Context, Page } from "../Browser";
 import Kernel from "../Console/Kernel";
 import {
@@ -18,15 +27,6 @@ import {
     type PageClassEngine,
     browserEngine,
 } from "../engine";
-import { GoogleSearchToSelectionHandler } from "../Handlers/GoogleSearch/GoogleSearchHandler";
-import { type BasePageInterface } from "../Interfaces/BasePageInterface";
-import { SearchPage } from "../Pages/Google/SearchPage";
-
-import { ContainerName } from "./Enums/ContainerName";
-import { type PageOrHandlerFactoryType } from "./Factory/PageFactory";
-import { SearchEventListener } from "./Listeners/SearchEventListener";
-import { EventServiceProvider } from "./Provider/EventServiceProvider";
-import { ExampleCrawlerService } from "./Services/ExampleCrawlerService";
 
 export default class Container {
 

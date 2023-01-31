@@ -64,7 +64,7 @@
 
 ## 📗 Libraries
 
-- [Node.js 16](https://nodejs.org/?n=dragonsgamers)
+- [Node.js 18](https://nodejs.org/?n=dragonsgamers)
 - [Typescript](https://www.typescriptlang.org/?n=dragonsgamers)
 - [Eslint](https://eslint.org/?n=dragonsgamers)
 - [ODG-Linter-JS](https://github.com/ODGodinho/ODG-Linter-Js?n=dragonsgamers)
@@ -73,9 +73,28 @@
 
 ## 📁 Dependencies
 
-- [Node.js](https://nodejs.org) 16 or later
+- [Node.js](https://nodejs.org) 18 or later
 - [Yarn](https://yarnpkg.com/) Optional/Recommended
-- [ODG TsConfig](https://github.com/ODGodinho/tsconfig) Last Version
+- [Playwright](https://playwright.dev/)
+  - For web scraping / crawling / automation
+- [@odg/axios](https://www.npmjs.com/package/@odg/axios)
+  - Example to message request with axios
+- [@odg/chemical-x](https://www.npmjs.com/package/@odg/chemical-x)
+  - Base For crawlers and helpers project
+- [@odg/command](https://www.npmjs.com/package/@odg/command)
+  - Commands to make:files
+- [@odg/events](https://www.npmjs.com/package/@odg/events)
+  - Abstract Events with async events
+- [@odg/exception](https://www.npmjs.com/package/@odg/exception)
+  - Create custom exception to debug and history
+- [@odg/json-log](https://www.npmjs.com/package/@odg/json-log)
+  - Convert your logs exception, request, in JSON before send
+- [@odg/log](https://www.npmjs.com/package/@odg/log)
+  - Interface of logs
+- [@odg/message](https://www.npmjs.com/package/@odg/message)
+  - Interface of request and messages
+- [@odg/tsconfig](https://www.npmjs.com/package/@odg/tsconfig)
+  - Base Tsconfig to build project
 
 ### 🔘 Use Template
 

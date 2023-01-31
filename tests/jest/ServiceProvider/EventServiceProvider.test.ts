@@ -1,4 +1,5 @@
-import { ContainerName } from "../../../src/app/Enums";
+import { ContainerName } from "@enums";
+
 import { container } from "../SingletonTest";
 
 describe("EventServiceProvider Test", () => {

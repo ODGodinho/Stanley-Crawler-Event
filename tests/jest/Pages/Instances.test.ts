@@ -1,9 +1,10 @@
 import { type PageInterface } from "@odg/chemical-x";
 
-import { ContainerName } from "../../../src/app/Enums";
-import { type PageOrHandlerFactoryType } from "../../../src/app/Factory/PageFactory";
-import { type MyPage } from "../../../src/engine";
-import { BasePage } from "../../../src/Pages/BasePage";
+import { type MyPage } from "@engine";
+import { ContainerName } from "@enums";
+import { type PageOrHandlerFactoryType } from "@factory/PageFactory";
+import { BasePage } from "@pages/BasePage";
+
 import { container } from "../SingletonTest";
 
 const pages = [

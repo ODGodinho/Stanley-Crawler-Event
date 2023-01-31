@@ -2,8 +2,9 @@ import "reflect-metadata";
 
 import { type LoggerInterface } from "@odg/log";
 
+import { ContainerName } from "@enums";
+
 import Container from "./app/Container";
-import { ContainerName } from "./app/Enums";
 
 const project = new Container();
 

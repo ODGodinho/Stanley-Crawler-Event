@@ -4,8 +4,8 @@ import {
 import { type Exception } from "@odg/exception";
 import { injectable } from "inversify";
 
-import { EventName } from "../../app/Enums";
-import { BaseHandler } from "../BaseHandler";
+import { EventName } from "@enums";
+import { BaseHandler } from "@pageHandler/BaseHandler";
 
 @injectable()
 export class GoogleSearchToSelectionHandler extends BaseHandler implements HandlerInterface {

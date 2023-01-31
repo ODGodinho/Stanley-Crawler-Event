@@ -7,9 +7,10 @@ import {
     inject, injectable,
 } from "inversify";
 
-import type { EventTypes } from "../../@types/EventsInterface";
+import type { EventTypes } from "#types/EventsInterface";
+import { ContainerName, EventName } from "@enums";
+
 import Container from "../Container";
-import { ContainerName, EventName } from "../Enums";
 
 @injectable()
 export class EventServiceProvider<Events extends EventTypes> extends EventServiceProviderBase<Events> {

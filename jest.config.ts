@@ -1,4 +1,7 @@
 import { type Config } from "jest";
+import { pathsToModuleNameMapper } from "ts-jest";
+
+import { compilerOptions } from "./tsconfig.json";
 
 const jest: Config = {
     collectCoverage: true,
@@ -25,6 +28,8 @@ const jest: Config = {
     testMatch: [
         "<rootDir>/tests/jest/**/*.test.ts",
     ],
+    modulePaths: [ compilerOptions.baseUrl ],
+    moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: "<rootDir>/" }),
     moduleDirectories: [ "node_modules", "src" ],
     setupFilesAfterEnv: [
         "<rootDir>/tests/jest/init.ts",

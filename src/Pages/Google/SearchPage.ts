@@ -3,11 +3,11 @@ import crypto from "node:crypto";
 import { type PageInterface } from "@odg/chemical-x";
 import { injectable } from "inversify";
 
+import { BasePage } from "@pages/BasePage";
 import {
     type GoogleSearchSelectorType,
     googleSearchSelector,
-} from "../../Selectors";
-import { BasePage } from "../BasePage";
+} from "@selectors";
 
 @injectable()
 export class SearchPage extends BasePage implements PageInterface {

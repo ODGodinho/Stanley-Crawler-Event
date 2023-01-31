@@ -1,8 +1,9 @@
 import { NullLogger } from "@odg/log";
 import { decorate, injectable } from "inversify";
 
-import { ContainerName } from "../../../src/app/Enums";
-import { ExampleCrawlerService } from "../../../src/app/Services/ExampleCrawlerService";
+import { ContainerName } from "@enums";
+import { ExampleCrawlerService } from "@services/ExampleCrawlerService";
+
 import { container } from "../SingletonTest";
 
 describe("Container Test", () => {

@@ -1,5 +1,6 @@
-import { ContainerName } from "../../../src/app/Enums";
-import { Context, Page } from "../../../src/Browser";
+import { Context, Page } from "@browser";
+import { ContainerName } from "@enums";
+
 import { container } from "../SingletonTest";
 
 describe("Context Create Instance", () => {

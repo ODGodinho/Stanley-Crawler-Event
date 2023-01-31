@@ -3,10 +3,11 @@ import { EventBusInterface } from "@odg/events";
 import { LoggerInterface } from "@odg/log";
 import { inject } from "inversify";
 
-import type { EventTypes } from "../@types/EventsInterface";
-import { ContainerName } from "../app/Enums";
+import type { EventTypes } from "#types/EventsInterface";
+import { ContainerName } from "@enums";
+import * as Selectors from "@selectors";
+
 import { type PageClassEngine, type MyPage } from "../engine";
-import * as Selectors from "../Selectors";
 
 export abstract class BaseHandler extends BaseHandlerChemical<typeof Selectors, MyPage> {
 

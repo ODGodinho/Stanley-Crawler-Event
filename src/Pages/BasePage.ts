@@ -2,9 +2,9 @@ import { BasePage as ChemicalBasePage } from "@odg/chemical-x";
 import { type LoggerInterface } from "@odg/log";
 import { inject, injectable } from "inversify";
 
-import { ContainerName } from "../app/Enums";
-import { type PageClassEngine } from "../engine";
-import * as Selectors from "../Selectors";
+import { type PageClassEngine } from "@engine";
+import { ContainerName } from "@enums";
+import * as Selectors from "@selectors";
 
 @injectable()
 export abstract class BasePage extends ChemicalBasePage<typeof Selectors, PageClassEngine> {
