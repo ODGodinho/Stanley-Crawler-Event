@@ -1,6 +1,6 @@
 import {
     type BrowserClassEngine,
-} from "../../src/engine";
+} from "@engine";
 
 export interface Browser {
     $browserInstance: BrowserClassEngine;

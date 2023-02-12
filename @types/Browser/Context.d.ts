@@ -1,6 +1,6 @@
 import {
     type ContextClassEngine,
-} from "../../src/engine";
+} from "@engine";
 
 export interface Context {
     $contextInstance: ContextClassEngine;

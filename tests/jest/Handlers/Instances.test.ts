@@ -3,7 +3,7 @@ import type { HandlerInterface } from "@odg/chemical-x";
 import type { MyPage } from "@engine";
 import { ContainerName } from "@enums";
 import type { PageOrHandlerFactoryType } from "@factory/PageFactory";
-import { BaseHandler } from "@pageHandler/BaseHandler";
+import { BaseHandler } from "@handlers/BaseHandler";
 
 import { container } from "../SingletonTest";
 

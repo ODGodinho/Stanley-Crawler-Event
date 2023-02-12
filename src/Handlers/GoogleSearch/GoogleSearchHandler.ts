@@ -5,7 +5,7 @@ import { type Exception } from "@odg/exception";
 import { injectable } from "inversify";
 
 import { EventName } from "@enums";
-import { BaseHandler } from "@pageHandler/BaseHandler";
+import { BaseHandler } from "@handlers/BaseHandler";
 
 @injectable()
 export class GoogleSearchToSelectionHandler extends BaseHandler implements HandlerInterface {

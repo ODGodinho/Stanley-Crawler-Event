@@ -19,7 +19,10 @@ export class Browser extends BrowserBase<
     public async browserOptions(): Promise<BrowserOptionsEngine> {
         return {
             ...await super.browserOptions(),
-            headless: process.env.USE_HEADLESS === "true",
+            args: [
+                "--no-zygote", // Use this to working in docker
+            ],
+            headless: true,
         };
     }
 

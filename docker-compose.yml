@@ -1,0 +1,10 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/node/Dockerfile
+    volumes:
+      - /app/node_modules/
+      - ./:/app/
+
+version: '3.7'

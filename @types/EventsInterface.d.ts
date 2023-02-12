@@ -1,7 +1,7 @@
 import { type EventObjectType } from "@odg/events";
 
-import { type EventName } from "../src/app/Enums";
-import { type MyPage } from "../src/engine";
+import { type MyPage } from "@engine";
+import { type EventName } from "@enums";
 
 export interface EventBrowserParameters {
     page: MyPage;

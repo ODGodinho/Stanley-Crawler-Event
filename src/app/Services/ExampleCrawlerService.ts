@@ -2,9 +2,9 @@ import { EventBusInterface } from "@odg/events";
 import { LoggerInterface } from "@odg/log";
 import { inject, injectable } from "inversify";
 
+import type { EventTypes } from "#types/EventsInterface";
 import { ContainerName, EventName } from "@enums";
 
-import type { EventTypes } from "../../@types/EventsInterface";
 import { MyBrowser } from "../../engine";
 import { type GoogleSearchToSelectionHandler } from "../../Handlers/GoogleSearch/GoogleSearchHandler";
 import { PageOrHandlerFactoryType } from "../Factory/PageFactory";

@@ -22,7 +22,7 @@ export class SearchPage extends BasePage implements PageInterface {
     public async execute(): Promise<void> {
         await this.start(async () => {
             await this.preStart();
-            await this.page.goto("https://www.google.com/", { timeout: 8000, waitUntil: "domcontentloaded" });
+            await this.page.goto("https://www.google.com/", { timeout: 8000, waitUntil: "load" });
             await this.fillSearch();
             await this.search();
         });

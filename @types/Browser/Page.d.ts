@@ -1,6 +1,6 @@
 import {
     type PageClassEngine,
-} from "../../src/engine";
+} from "@engine";
 
 export interface Page {
     $pageInstance: PageClassEngine;
