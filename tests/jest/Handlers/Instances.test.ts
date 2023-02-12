@@ -1,8 +1,8 @@
-import type { HandlerInterface } from "@odg/chemical-x";
+import { type HandlerInterface } from "@odg/chemical-x";
 
-import type { MyPage } from "@engine";
+import { type PageClassEngine } from "@engine";
 import { ContainerName } from "@enums";
-import type { PageOrHandlerFactoryType } from "@factory/PageFactory";
+import { type PageOrHandlerFactoryType } from "@factory/PageFactory";
 import { BaseHandler } from "@handlers/BaseHandler";
 
 import { container } from "../SingletonTest";
@@ -16,6 +16,6 @@ describe.each(pages)("Container Instance Handler", (page: ContainerName) => {
         const callable = container.container.get<PageOrHandlerFactoryType<HandlerInterface>>(page);
 
         expect(typeof callable).toBe("function");
-        expect(callable(undefined as unknown as MyPage)).toBeInstanceOf(BaseHandler);
+        expect(callable(undefined as unknown as PageClassEngine)).toBeInstanceOf(BaseHandler);
     });
 });

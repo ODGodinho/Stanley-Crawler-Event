@@ -58,7 +58,10 @@
 - 📢 AutoReview when opening a pull-request/merge
     ![AutoReview Comment example](https://user-images.githubusercontent.com/3797062/97085944-87233a80-165b-11eb-94a8-0a47d5e24905.png)
 - 🧪 Automatic Test when opening pull-request/merge
+- 📈 Automatic Code Coverage when opening pull-request/merge
+    ![Code Coverage example](https://app.codecov.io/static/media/codecov-report.eeef5dba5ea18b5ed6a4.png)
 - 📦 Automatic Package and release generate on merge
+- 🪝 Run Lint/Test command pre-commit execute
 - ⚙️ IOT/IOC (Inversion of Control) for easy use of libraries
 - 🟢 Make:Files Command to make base files
 
@@ -114,6 +117,12 @@ import puppeteer, {
     type BrowserContext,
     type PuppeteerNode,
 } from "puppeteer";
+
+import {
+    type Context as ContextClass,
+    type Browser as BrowserClass,
+    type Page as PageClass,
+} from "./Browser";
 
 export type BrowserTypeEngine = PuppeteerNode;
 

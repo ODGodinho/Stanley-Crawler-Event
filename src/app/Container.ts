@@ -7,12 +7,12 @@ import {
     Container as ContainerInversify, decorate, injectable, type interfaces,
 } from "inversify";
 
-import type { ContainerType } from "#types/ContainerInterface";
-import type { EventTypes } from "#types/EventsInterface";
+import { type ContainerType } from "#types/ContainerInterface";
+import { type EventTypes } from "#types/EventsInterface";
 import { ContainerName } from "@enums";
-import type { PageOrHandlerFactoryType } from "@factory/PageFactory";
+import { type PageOrHandlerFactoryType } from "@factory/PageFactory";
 import { GoogleSearchToSelectionHandler } from "@handlers/GoogleSearch/GoogleSearchHandler";
-import type { BasePageInterface } from "@interfaces/BasePageInterface";
+import { type BasePageInterface } from "@interfaces/BasePageInterface";
 import { SearchEventListener } from "@listeners/SearchEventListener";
 import { SearchPage } from "@pages/Google/SearchPage";
 import { EventServiceProvider } from "@providers/EventServiceProvider";

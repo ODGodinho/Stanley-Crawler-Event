@@ -1,6 +1,7 @@
 {
-    "typescript.preferences.importModuleSpecifier": "non-relative",
     "conventionalCommits.scopes": [
-        "Docker"
-    ]
+        "Docker",
+        "Hooks"
+    ],
+    "typescript.preferences.importModuleSpecifier": "non-relative"
 }

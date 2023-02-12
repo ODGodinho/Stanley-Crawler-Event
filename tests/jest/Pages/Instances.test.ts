@@ -1,6 +1,6 @@
 import { type PageInterface } from "@odg/chemical-x";
 
-import { type MyPage } from "@engine";
+import { type PageClassEngine } from "@engine";
 import { ContainerName } from "@enums";
 import { type PageOrHandlerFactoryType } from "@factory/PageFactory";
 import { BasePage } from "@pages/BasePage";
@@ -16,6 +16,6 @@ describe.each(pages)("Container Instance Page", (page: ContainerName) => {
         const callable = container.container.get<PageOrHandlerFactoryType<PageInterface>>(page);
 
         expect(typeof callable).toBe("function");
-        expect(callable(undefined as unknown as MyPage)).toBeInstanceOf(BasePage);
+        expect(callable(undefined as unknown as PageClassEngine)).toBeInstanceOf(BasePage);
     });
 });

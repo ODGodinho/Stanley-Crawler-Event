@@ -1,11 +1,11 @@
-import type { EventListenerInterface } from "@odg/events";
+import { type EventListenerInterface } from "@odg/events";
 import { LoggerInterface } from "@odg/log";
 import { inject, injectable } from "inversify";
 
-import type { EventBrowserParameters, EventTypes } from "#types/EventsInterface";
+import { type EventBrowserParameters, type EventTypes } from "#types/EventsInterface";
 import { ContainerName, type EventName } from "@enums";
 import { PageOrHandlerFactoryType } from "@factory/PageFactory";
-import type { SearchPage } from "@pages/Google/SearchPage";
+import { type SearchPage } from "@pages/Google/SearchPage";
 
 @injectable()
 export class SearchEventListener implements EventListenerInterface<EventTypes, EventName.SearchPageEvent> {

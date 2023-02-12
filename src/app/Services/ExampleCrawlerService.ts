@@ -2,10 +2,10 @@ import { EventBusInterface } from "@odg/events";
 import { LoggerInterface } from "@odg/log";
 import { inject, injectable } from "inversify";
 
-import type { EventTypes } from "#types/EventsInterface";
+import { type EventTypes } from "#types/EventsInterface";
+import { BrowserClassEngine } from "@engine";
 import { ContainerName, EventName } from "@enums";
 
-import { MyBrowser } from "../../engine";
 import { type GoogleSearchToSelectionHandler } from "../../Handlers/GoogleSearch/GoogleSearchHandler";
 import { PageOrHandlerFactoryType } from "../Factory/PageFactory";
 
@@ -19,7 +19,7 @@ export class ExampleCrawlerService {
     protected bus!: EventBusInterface<EventTypes>;
 
     @inject(ContainerName.Browser)
-    protected browser!: MyBrowser;
+    protected browser!: BrowserClassEngine;
 
     @inject(ContainerName.SearchHandler)
     protected searchToSelectionHandler!: PageOrHandlerFactoryType<GoogleSearchToSelectionHandler>;

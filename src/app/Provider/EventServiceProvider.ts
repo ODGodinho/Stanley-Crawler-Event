@@ -7,7 +7,7 @@ import {
     inject, injectable,
 } from "inversify";
 
-import type { EventTypes } from "#types/EventsInterface";
+import { type EventTypes } from "#types/EventsInterface";
 import { ContainerName, EventName } from "@enums";
 
 import Container from "../Container";
