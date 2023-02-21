@@ -947,9 +947,9 @@
     axios "*"
 
 "@odg/chemical-x@*":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@odg/chemical-x/-/chemical-x-1.5.1.tgz#f925d1886e9f399650f77059f083938e412f9420"
-  integrity sha512-Pdp+Vo11YN6FuchVg1an4CHFTToTDSC9whpSNT8tyw4P9mCB4SWgt+PQ8zCjm0eF/CRt17ILkjb1Lwx/+SWqUQ==
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/@odg/chemical-x/-/chemical-x-1.5.3.tgz#ee0f1cea81c6b3b68afe32b72993ba271082d2e9"
+  integrity sha512-o4Q3B2s6fOsljt4TWgILhB55YmNBDR6dc6odpMYXxocLSKj48NN5GH4dZbCoI9Z6PuEUuLTpssW51pyhmk6xdg==
   dependencies:
     "@odg/exception" "*"
 
