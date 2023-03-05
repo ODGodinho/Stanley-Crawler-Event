@@ -4,7 +4,7 @@ import { type MessageInterface } from "@odg/message";
 
 import { type BrowserClassEngine } from "@engine";
 import { type EventName, type ContainerName } from "@enums";
-import { type PageOrHandlerFactoryType } from "@factory/PageFactory";
+import { type PageOrHandlerFactoryType } from "@factory/PageOrHandlerFactory";
 import { type SearchPage } from "@pages/Google/SearchPage";
 import { type EventServiceProvider } from "@providers/EventServiceProvider";
 import { type ExampleCrawlerService } from "@services/ExampleCrawlerService";
@@ -26,10 +26,10 @@ export interface ContainerInterface {
     // Application
 
     // Pages
-    [ContainerName.SearchPage]: PageOrHandlerFactoryType<SearchPage>;
+    [ContainerName.SearchPageFactory]: PageOrHandlerFactoryType<SearchPage>;
 
     // Handler
-    [ContainerName.SearchHandler]: PageOrHandlerFactoryType<SearchPage>;
+    [ContainerName.SearchHandlerFactory]: PageOrHandlerFactoryType<SearchPage>;
 
     // Events
     [ContainerName.SearchEventListeners]: EventListenerInterface<EventTypes, EventName.SearchPageEvent>;

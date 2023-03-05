@@ -10,7 +10,7 @@ import {
 import { type ContainerType } from "#types/ContainerInterface";
 import { type EventTypes } from "#types/EventsInterface";
 import { ContainerName } from "@enums";
-import { type PageOrHandlerFactoryType } from "@factory/PageFactory";
+import { type PageOrHandlerFactoryType } from "@factory/PageOrHandlerFactory";
 import { GoogleSearchToSelectionHandler } from "@handlers/GoogleSearch/GoogleSearchHandler";
 import { type BasePageInterface } from "@interfaces/BasePageInterface";
 import { SearchEventListener } from "@listeners/SearchEventListener";
@@ -118,11 +118,11 @@ export default class Container {
         ).inSingletonScope();
 
         // SearchPage Google
-        this.bind(ContainerName.SearchPage)
+        this.bind(ContainerName.SearchPageFactory)
             .toFactory(() => this.instancePageOrHandler<SearchPage>(SearchPage));
 
         // SearchHandler Google
-        this.bind(ContainerName.SearchHandler)
+        this.bind(ContainerName.SearchHandlerFactory)
             .toFactory(() => this.instancePageOrHandler<GoogleSearchToSelectionHandler>(
                 GoogleSearchToSelectionHandler,
             ));
@@ -181,7 +181,7 @@ export default class Container {
     }
 
     /**
-     * Use To instance a page Crawler
+     * Use To instance a page and handler Crawler
      *
      * @private
      * @template {PageInterface} PageType

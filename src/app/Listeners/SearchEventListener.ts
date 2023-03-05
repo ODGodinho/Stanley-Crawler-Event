@@ -4,7 +4,7 @@ import { inject, injectable } from "inversify";
 
 import { type EventBrowserParameters, type EventTypes } from "#types/EventsInterface";
 import { ContainerName, type EventName } from "@enums";
-import { PageOrHandlerFactoryType } from "@factory/PageFactory";
+import { PageOrHandlerFactoryType } from "@factory/PageOrHandlerFactory";
 import { type SearchPage } from "@pages/Google/SearchPage";
 
 @injectable()
@@ -13,7 +13,7 @@ export class SearchEventListener implements EventListenerInterface<EventTypes, E
     @inject(ContainerName.Logger)
     public readonly log!: LoggerInterface;
 
-    @inject(ContainerName.SearchPage)
+    @inject(ContainerName.SearchPageFactory)
     public readonly searchPage!: PageOrHandlerFactoryType<SearchPage>;
 
     public async handler({ page }: EventBrowserParameters): Promise<void> {

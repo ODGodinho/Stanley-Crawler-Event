@@ -35,7 +35,7 @@ export class GoogleSearchToSelectionHandler extends BaseHandler implements Handl
      * @param {Exception} exception Exception error
      * @returns {Promise<RetryAction>}
      */
-    public async failedWait(exception: Exception): Promise<RetryAction> {
+    public async failedAttempt(exception: Exception): Promise<RetryAction> {
         await this.log.warning(exception.message);
         await this.bus.dispatch(EventName.SearchPageEvent, { page: this.page });
 

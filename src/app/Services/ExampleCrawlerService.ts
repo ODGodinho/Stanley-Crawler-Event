@@ -7,7 +7,7 @@ import { BrowserClassEngine } from "@engine";
 import { ContainerName, EventName } from "@enums";
 
 import { type GoogleSearchToSelectionHandler } from "../../Handlers/GoogleSearch/GoogleSearchHandler";
-import { PageOrHandlerFactoryType } from "../Factory/PageFactory";
+import { PageOrHandlerFactoryType } from "../Factory/PageOrHandlerFactory";
 
 @injectable()
 export class ExampleCrawlerService {
@@ -21,7 +21,7 @@ export class ExampleCrawlerService {
     @inject(ContainerName.Browser)
     protected browser!: BrowserClassEngine;
 
-    @inject(ContainerName.SearchHandler)
+    @inject(ContainerName.SearchHandlerFactory)
     protected searchToSelectionHandler!: PageOrHandlerFactoryType<GoogleSearchToSelectionHandler>;
 
     public async execute(): Promise<void> {
@@ -32,8 +32,8 @@ export class ExampleCrawlerService {
         await this.bus.dispatch(EventName.SearchPageEvent, {
             page: page,
         });
-
         await this.searchToSelectionHandler(page).execute();
+
         await context.close();
     }
 

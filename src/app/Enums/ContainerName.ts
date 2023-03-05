@@ -7,10 +7,10 @@ export enum ContainerName {
     "Container" = "container",
 
     // Pages
-    "SearchPage" = "search.page",
+    "SearchPageFactory" = "search.page.factory",
 
     // Handlers
-    "SearchHandler" = "search.handler",
+    "SearchHandlerFactory" = "search.handler.factory",
 
     // Events
     "SearchEventListeners" = "search.event.listeners",
