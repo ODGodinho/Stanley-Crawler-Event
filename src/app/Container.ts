@@ -7,7 +7,7 @@ import {
     Container as ContainerInversify, decorate, injectable, type interfaces,
 } from "inversify";
 
-import { type ContainerType } from "#types/ContainerInterface";
+import { type ContainerNameKeys, type ContainerType } from "#types/ContainerInterface";
 import { type EventTypes } from "#types/EventsInterface";
 import { ContainerName } from "@enums";
 import { type PageOrHandlerFactoryType } from "@factory/PageOrHandlerFactory";
@@ -49,8 +49,8 @@ export default class Container {
     /**
      * Adapter Injectable class constructor
      *
-     * @returns {Promise<void>}
      * @memberof Container
+     * @returns {Promise<void>}
      */
     public async prepareInjectable(): Promise<void> {
         decorate(injectable(), ConsoleLogger);
@@ -131,8 +131,8 @@ export default class Container {
     /**
      * Load Logger Plugins container
      *
-     * @returns {Promise<void>}
      * @memberof Container
+     * @returns {Promise<void>}
      */
     public async loadLoggerPlugins(): Promise<void> {
         const logger = this.get(ContainerName.Logger);
@@ -148,22 +148,22 @@ export default class Container {
     /**
      * Get Container Item
      *
-     * @param {ContainerName} serviceIdentifier ContainerName
-     * @returns {ContainerType[ContainerName]}
-     * @memberof Container
+     * @template {ContainerNameKeys} Name
+     * @param {Name} serviceIdentifier ContainerName
+     * @returns {ContainerType[Name]}
      */
-    public get<Name extends keyof ContainerType>(serviceIdentifier: Name): ContainerType[Name] {
+    public get<Name extends ContainerNameKeys>(serviceIdentifier: Name): ContainerType[Name] {
         return this.container.get(serviceIdentifier);
     }
 
     /**
      * Bind Container Item
      *
-     * @param {ContainerName} serviceIdentifier ContainerName
-     * @returns {ContainerType[ContainerName]}
-     * @memberof Container
+     * @template {ContainerNameKeys} Name
+     * @param {Name} serviceIdentifier ContainerName
+     * @returns {interfaces.BindingToSyntax<ContainerType[Name]>}
      */
-    public bind<Name extends keyof ContainerType>(
+    public bind<Name extends ContainerNameKeys>(
         serviceIdentifier: Name,
     ): interfaces.BindingToSyntax<ContainerType[Name]> {
         return this.container.bind(serviceIdentifier);
@@ -172,22 +172,22 @@ export default class Container {
     /**
      * Get Async Container Item
      *
-     * @param {ContainerName} serviceIdentifier ContainerName
-     * @returns {ContainerType[ContainerName]}
+     * @template {ContainerNameKeys} Name
      * @memberof Container
+     * @param {Name} serviceIdentifier ContainerName
+     * @returns {Promise<ContainerType[Name]>}
      */
-    public async getAsync<Name extends keyof ContainerType>(serviceIdentifier: Name): Promise<ContainerType[Name]> {
+    public async getAsync<Name extends ContainerNameKeys>(serviceIdentifier: Name): Promise<ContainerType[Name]> {
         return this.container.getAsync(serviceIdentifier);
     }
 
     /**
      * Use To instance a page and handler Crawler
      *
-     * @private
      * @template {PageInterface} PageType
+     * @memberof Container
      * @param {BasePageInterface} BasePagePrepare Page Class instantiable
      * @returns {PageOrHandlerFactoryType<PageType>}
-     * @memberof Container
      */
     private instancePageOrHandler<PageType extends HandlerInterface | PageInterface>(
         BasePagePrepare: BasePageInterface,

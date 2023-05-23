@@ -3,8 +3,8 @@ import { BasePage } from "../BasePage";
 /**
  * Component Base for pages
  *
- * @abstract
  * @class BaseComponentPage
+ * @abstract
  */
 export abstract class BaseComponentPage extends BasePage {
 

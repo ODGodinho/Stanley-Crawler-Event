@@ -50,8 +50,8 @@ export class SearchPage extends BasePage implements PageInterface {
     /**
      * Number of attempt this step
      *
-     * @returns {Promise<number>}
      * @memberof SearchPage
+     * @returns {Promise<number>}
      */
     public async attempt(): Promise<number> {
         return 1;

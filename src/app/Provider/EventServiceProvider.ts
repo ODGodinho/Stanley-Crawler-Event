@@ -21,9 +21,9 @@ export class EventServiceProvider<Events extends EventTypes> extends EventServic
     /**
      * Listeners for events in the application.
      *
-     * @protected
      * @type {EventListener<EventTypes>}
      * @memberof EventServiceProvider
+     * @protected
      */
     protected listeners: EventListener<EventTypes> = {
         [EventName.SearchPageEvent]: [
@@ -39,8 +39,8 @@ export class EventServiceProvider<Events extends EventTypes> extends EventServic
     /**
      * Constructor inject container
      *
-     * @param {Container} container Container to get listeners
      * @memberof EventServiceProvider
+     * @param {Container} container Container to get listeners
      */
     public constructor(
         @inject(ContainerName.Container) private readonly container: Container,
@@ -51,8 +51,8 @@ export class EventServiceProvider<Events extends EventTypes> extends EventServic
     /**
      * Boot EventServiceProvider
      *
-     * @returns {Promise<void>}
      * @memberof EventServiceProvider
+     * @returns {Promise<void>}
      */
     public async boot(): Promise<void> {
         await super.boot();
@@ -61,8 +61,8 @@ export class EventServiceProvider<Events extends EventTypes> extends EventServic
     /**
      * Shutdown remove all Events Service Provider
      *
-     * @returns {Promise<void>}
      * @memberof EventServiceProvider
+     * @returns {Promise<void>}
      */
     public async shutdown(): Promise<void> {
         await super.shutdown();

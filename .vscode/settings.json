@@ -2,7 +2,8 @@
     "conventionalCommits.scopes": [
         "Docker",
         "Hooks",
-        "Code"
+        "Code",
+        "Lint"
     ],
     "typescript.preferences.importModuleSpecifier": "non-relative"
 }

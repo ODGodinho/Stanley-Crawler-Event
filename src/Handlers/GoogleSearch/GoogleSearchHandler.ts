@@ -45,8 +45,8 @@ export class GoogleSearchToSelectionHandler extends BaseHandler implements Handl
     /**
      * Handler finish with success after all attempts
      *
+     * @memberof GoogleSearchToSelectionHandler
      * @returns {Promise<void>}
-     * @memberof GoogleSearchHandler
      */
     public async success(): Promise<void> {
         const result = this.page.locator(this.$$s.googleListSelector.results.resultTitles).first();
@@ -55,11 +55,10 @@ export class GoogleSearchToSelectionHandler extends BaseHandler implements Handl
     }
 
     /**
-     *
      * @example https://example.print.com/google-search-resullt.png
      *
+     * @memberof GoogleSearchToSelectionHandler
      * @returns {Promise<HandlerFunction>}
-     * @memberof GoogleSearchHandler
      */
     public async identifySuccessSearch(): Promise<HandlerFunction> {
         return this.page.locator(this.$$s.googleListSelector.results.resultTitles)
@@ -69,11 +68,10 @@ export class GoogleSearchToSelectionHandler extends BaseHandler implements Handl
     }
 
     /**
-     *
      * @example https://example.print.com/google-search-resullt.png
      *
+     * @memberof GoogleSearchToSelectionHandler
      * @returns {Promise<HandlerFunction>}
-     * @memberof GoogleSearchHandler
      */
     public async identifyNoResult(): Promise<HandlerFunction> {
         return this.page.locator(this.$$s.googleListSelector.notResult)
@@ -84,8 +82,8 @@ export class GoogleSearchToSelectionHandler extends BaseHandler implements Handl
     /**
      * Action if not resulta google search
      *
+     * @memberof GoogleSearchToSelectionHandler
      * @returns {Promise<HandlerSolution>}
-     * @memberof GoogleSearchHandler
      */
     public async noResultSolution(): Promise<HandlerSolution> {
         await this.bus.dispatch(EventName.SearchPageEvent, { page: this.page });
