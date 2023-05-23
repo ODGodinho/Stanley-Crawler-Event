@@ -73,7 +73,7 @@
         "semantic-release": "^20.1.0",
         "ts-jest": "^29.0.5",
         "ts-node": "^10.9.1",
-        "tsc-alias": "^1.8.3",
+        "tsc-alias": "^1.8.6",
         "typescript": "^4.9.5"
     },
     "dependencies": {
