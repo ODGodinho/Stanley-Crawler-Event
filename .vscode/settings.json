@@ -3,7 +3,8 @@
         "Docker",
         "Hooks",
         "Code",
-        "Lint"
+        "Lint",
+        "Google"
     ],
     "typescript.preferences.importModuleSpecifier": "non-relative"
 }
