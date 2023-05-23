@@ -22,7 +22,7 @@ export class Browser extends BrowserBase<
             args: [
                 "--no-zygote", // Use this to working in docker
             ],
-            headless: false,
+            headless: true,
         };
     }
 
