@@ -4,7 +4,10 @@
         "Hooks",
         "Code",
         "Lint",
-        "Google"
+        "Google",
+        "Tests"
     ],
-    "typescript.preferences.importModuleSpecifier": "non-relative"
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "vitest.commandLine": "yarn test:watch",
+    "vitest.enable": true
 }

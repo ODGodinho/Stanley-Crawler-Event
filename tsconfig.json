@@ -32,7 +32,8 @@
         "typeRoots": [
             "./@types",
             "node_modules/@types"
-        ]
+        ],
+        "types": [ "node" ]
     },
     "exclude": [
         "node_modules/",

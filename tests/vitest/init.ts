@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import "vitest/globals.d.ts";
 import { ContainerName } from "@enums";
 
 import { container } from "./SingletonTest";
