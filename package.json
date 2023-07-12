@@ -84,7 +84,7 @@
         "@odg/log": "*",
         "@odg/message": "*",
         "inversify": "^6.0.1",
-        "playwright": "^1.35.1",
+        "playwright": "^1.36.0",
         "playwright-core": "^1.35.1",
         "reflect-metadata": "^0.1.13"
     }
