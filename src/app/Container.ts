@@ -7,7 +7,7 @@ import {
     Container as ContainerInversify, decorate, injectable, type interfaces,
 } from "inversify";
 
-import { type ContainerNameKeys, type ContainerType } from "#types/ContainerInterface";
+import { type ContainerNameType, type ContainerType } from "#types/ContainerInterface";
 import { type EventTypes } from "#types/EventsInterface";
 import { ContainerName } from "@enums";
 import { type PageOrHandlerFactoryType } from "@factory/PageOrHandlerFactory";
@@ -148,36 +148,49 @@ export default class Container {
     /**
      * Get Container Item
      *
-     * @template {ContainerNameKeys} Name
+     * @template {ContainerNameType} Name
      * @param {Name} serviceIdentifier ContainerName
      * @returns {ContainerType[Name]}
      */
-    public get<Name extends ContainerNameKeys>(serviceIdentifier: Name): ContainerType[Name] {
+    public get<Name extends ContainerNameType>(serviceIdentifier: Name): ContainerType[Name] {
         return this.container.get(serviceIdentifier);
     }
 
     /**
      * Bind Container Item
      *
-     * @template {ContainerNameKeys} Name
+     * @template {ContainerNameType} Name
      * @param {Name} serviceIdentifier ContainerName
      * @returns {interfaces.BindingToSyntax<ContainerType[Name]>}
      */
-    public bind<Name extends ContainerNameKeys>(
+    public bind<Name extends ContainerNameType>(
         serviceIdentifier: Name,
     ): interfaces.BindingToSyntax<ContainerType[Name]> {
         return this.container.bind(serviceIdentifier);
     }
 
     /**
+     * Check if Container Item has bind
+     *
+     * @template {ContainerNameType} Name
+     * @param {Name} serviceIdentifier containerName
+     * @returns {boolean}
+     */
+    public isBound<Name extends ContainerNameType>(
+        serviceIdentifier: Name,
+    ): boolean {
+        return this.container.isBound(serviceIdentifier);
+    }
+
+    /**
      * Get Async Container Item
      *
-     * @template {ContainerNameKeys} Name
+     * @template {ContainerNameType} Name
      * @memberof Container
      * @param {Name} serviceIdentifier ContainerName
      * @returns {Promise<ContainerType[Name]>}
      */
-    public async getAsync<Name extends ContainerNameKeys>(serviceIdentifier: Name): Promise<ContainerType[Name]> {
+    public async getAsync<Name extends ContainerNameType>(serviceIdentifier: Name): Promise<ContainerType[Name]> {
         return this.container.getAsync(serviceIdentifier);
     }
 

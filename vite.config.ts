@@ -25,7 +25,6 @@ const vite = defineConfig({
         ],
     },
     plugins: [ tsconfigPaths() ],
-
 });
 
 export default vite;

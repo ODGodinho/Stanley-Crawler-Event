@@ -15,15 +15,11 @@ describe("Container Test", () => {
 
         expect(service["log"]).not.toBeUndefined();
     });
-});
 
-describe("Is Runnable Code", () => {
     test("Container SetUp", async () => {
         await expect(container.checkCanRun()).resolves.toBeUndefined();
     });
-});
 
-describe("Test Plugin Logger", () => {
     test("New Bind Logger", async () => {
         container.container.unbind(ContainerName.Logger);
         decorate(injectable(), NullLogger);
@@ -33,5 +29,17 @@ describe("Test Plugin Logger", () => {
             .inSingletonScope();
 
         await expect(container.loadLoggerPlugins()).resolves.toBeUndefined();
+    });
+
+    test("Test isBound", async () => {
+        const containerName = "Example" as ContainerName;
+
+        expect(container.isBound(containerName)).toBeFalsy();
+
+        container.bind(containerName)
+            .toDynamicValue(() => void 0)
+            .inSingletonScope();
+
+        expect(container.isBound(containerName)).toBeTruthy();
     });
 });

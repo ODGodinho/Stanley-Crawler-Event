@@ -40,4 +40,4 @@ export interface ContainerInterface {
 
 export type ContainerType<T extends Record<ContainerName, unknown> = ContainerInterface> = T;
 
-export type ContainerNameKeys = keyof ContainerType;
+export type ContainerNameType = keyof ContainerType;
