@@ -616,9 +616,9 @@
     "@odg/tsconfig" "*"
 
 "@odg/tsconfig@*":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@odg/tsconfig/-/tsconfig-1.1.0.tgz#a7962a4a378ccd10263342f0b0ba419427a7a595"
-  integrity sha512-VVgIIR43cSA9jWpssH3awL348jnxhWkcjfNje/5NhaRqIBQWToa3P9f45czmYfFRcvbaZiwXMJaunUROqowhTg==
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@odg/tsconfig/-/tsconfig-1.2.0.tgz#d3e8128220f196a652d9138b1b0802ececafd135"
+  integrity sha512-vMAYFdfllV7a50YUygfGC52xfGAY0VO2ytdlXdmMxVnBWN789glhXAkJvJp08eb+fm92gamTwmEgPNLeEuk2yw==
 
 "@pkgjs/parseargs@^0.11.0":
   version "0.11.0"
