@@ -25,16 +25,7 @@ export class EventServiceProvider<Events extends EventTypes> extends EventServic
      * @memberof EventServiceProvider
      * @protected
      */
-    protected listeners: EventListener<EventTypes> = {
-        [EventName.SearchPageEvent]: [
-            {
-                listener: this.container.get(ContainerName.SearchEventListeners),
-                options: {
-                    once: false,
-                },
-            },
-        ],
-    };
+    protected readonly listeners: EventListener<EventTypes>;
 
     /**
      * Constructor inject container
@@ -46,6 +37,7 @@ export class EventServiceProvider<Events extends EventTypes> extends EventServic
         @inject(ContainerName.Container) private readonly container: Container,
     ) {
         super();
+        this.listeners = this.getListeners();
     }
 
     /**
@@ -66,6 +58,24 @@ export class EventServiceProvider<Events extends EventTypes> extends EventServic
      */
     public async shutdown(): Promise<void> {
         await super.shutdown();
+    }
+
+    /**
+     * Listeners to Load
+     *
+     * @returns {EventListener<EventTypes>}
+     */
+    private getListeners(): EventListener<EventTypes> {
+        return {
+            [EventName.SearchPageEvent]: [
+                {
+                    listener: this.container.get(ContainerName.SearchEventListeners),
+                    options: {
+                        once: false,
+                    },
+                },
+            ],
+        };
     }
 
 }

@@ -9,7 +9,7 @@ import Container from "./app/Container";
 const project = new Container();
 
 process.on("uncaughtException", (error) => {
-    project.container.get<LoggerInterface | undefined>(ContainerName.Logger)?.emergency(error)
+    void project.container.get<LoggerInterface | undefined>(ContainerName.Logger)?.emergency(error)
         .finally(() => process.exit(1));
 });
 

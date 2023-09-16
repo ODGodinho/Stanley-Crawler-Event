@@ -5,7 +5,8 @@
         "Code",
         "Lint",
         "Google",
-        "Tests"
+        "Tests",
+        "Upgrade"
     ],
     "typescript.preferences.importModuleSpecifier": "non-relative",
     "vitest.commandLine": "yarn test:watch",
