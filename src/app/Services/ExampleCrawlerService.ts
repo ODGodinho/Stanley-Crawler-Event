@@ -12,17 +12,15 @@ import { PageOrHandlerFactoryType } from "../Factory/PageOrHandlerFactory";
 @injectable()
 export class ExampleCrawlerService {
 
-    @inject(ContainerName.Logger)
-    protected log!: LoggerInterface;
-
-    @inject(ContainerName.EventBus)
-    protected bus!: EventBusInterface<EventTypes>;
-
-    @inject(ContainerName.Browser)
-    protected browser!: BrowserClassEngine;
-
-    @inject(ContainerName.SearchHandlerFactory)
-    protected searchToSelectionHandler!: PageOrHandlerFactoryType<GoogleSearchToSelectionHandler>;
+    public constructor(
+        @inject(ContainerName.Logger) protected log: LoggerInterface,
+        @inject(ContainerName.EventBus) protected bus: EventBusInterface<EventTypes>,
+        @inject(ContainerName.Browser) protected browser: BrowserClassEngine,
+        @inject(ContainerName.SearchHandlerFactory) protected searchToSelectionHandler: PageOrHandlerFactoryType<
+            GoogleSearchToSelectionHandler
+        >,
+    ) {
+    }
 
     public async execute(): Promise<void> {
         await this.log.info("Executing example crawler service");

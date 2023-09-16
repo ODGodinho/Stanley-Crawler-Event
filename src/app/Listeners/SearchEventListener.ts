@@ -10,11 +10,11 @@ import { type SearchPage } from "@pages/Google/SearchPage";
 @injectable()
 export class SearchEventListener implements EventListenerInterface<EventTypes, EventName.SearchPageEvent> {
 
-    @inject(ContainerName.Logger)
-    public readonly log!: LoggerInterface;
-
-    @inject(ContainerName.SearchPageFactory)
-    public readonly searchPage!: PageOrHandlerFactoryType<SearchPage>;
+    public constructor(
+        @inject(ContainerName.Logger) public readonly log: LoggerInterface,
+        @inject(ContainerName.SearchPageFactory) public readonly searchPage: PageOrHandlerFactoryType<SearchPage>,
+    ) {
+    }
 
     public async handler({ page }: EventBrowserParameters): Promise<void> {
         await this.log.debug("SearchEventListeners is sended");

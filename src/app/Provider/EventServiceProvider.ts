@@ -12,11 +12,13 @@ import { ContainerName, EventName } from "@enums";
 
 import Container from "../Container";
 
+/**
+ * Event Service Provider to Register all event Listeners
+ *
+ * @template {EventTypes} Events Events List
+ */
 @injectable()
 export class EventServiceProvider<Events extends EventTypes> extends EventServiceProviderBase<Events> {
-
-    @inject(ContainerName.EventBus)
-    protected bus!: EventBusInterface<Events>;
 
     /**
      * Listeners for events in the application.
@@ -31,9 +33,11 @@ export class EventServiceProvider<Events extends EventTypes> extends EventServic
      * Constructor inject container
      *
      * @memberof EventServiceProvider
+     * @param {EventBusInterface<Events>} bus Event Bus to Register
      * @param {Container} container Container to get listeners
      */
     public constructor(
+        @inject(ContainerName.EventBus) protected bus: EventBusInterface<Events>,
         @inject(ContainerName.Container) private readonly container: Container,
     ) {
         super();
