@@ -2,9 +2,13 @@ export enum ContainerName {
     "Logger" = "logger",
     "Requester" = "requester",
     "EventBus" = "event.bus",
+    "ProcessKernel" = "ProcessKernel",
     "Kernel" = "kernel",
     "Browser" = "browser",
     "Container" = "container",
+    "Config" = "config",
+    "ConsoleLogger" = "console.logger",
+    "JSONLogger" = "json.logger",
 
     // Pages
     "SearchPageFactory" = "search.page.factory",

@@ -1,6 +1,3 @@
-import { NullLogger } from "@odg/log";
-import { decorate, injectable } from "inversify";
-
 import { ContainerName } from "@enums";
 import { ExampleCrawlerService } from "@services/ExampleCrawlerService";
 
@@ -14,21 +11,6 @@ describe("Container Test", () => {
         expect(service).toHaveProperty("log");
 
         expect(service["log"]).not.toBeUndefined();
-    });
-
-    test("Container SetUp", async () => {
-        await expect(container.checkCanRun()).resolves.toBeUndefined();
-    });
-
-    test("New Bind Logger", async () => {
-        container.container.unbind(ContainerName.Logger);
-        decorate(injectable(), NullLogger);
-
-        container.bind(ContainerName.Logger)
-            .to(NullLogger)
-            .inSingletonScope();
-
-        await expect(container.loadLoggerPlugins()).resolves.toBeUndefined();
     });
 
     test("Test isBound", async () => {

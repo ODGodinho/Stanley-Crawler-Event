@@ -1,4 +1,12 @@
-import { injectable } from "inversify";
+import { randomUUID } from "node:crypto";
+
+import { ConfigInterface } from "@odg/config";
+import { LoggerInterface } from "@odg/log";
+import { inject, injectable } from "inversify";
+
+import Container from "@app/Container";
+import { ContainerName } from "@enums";
+import { ProcessKernel } from "~/Console/ProcessKernel";
 
 /**
  * Kernel command class
@@ -6,10 +14,48 @@ import { injectable } from "inversify";
  * @class Kernel
  */
 @injectable()
-export default class Kernel {
+export class Kernel {
 
-    public async setUp(): Promise<void> {
-        // Example Function
+    public constructor(
+        @inject(ContainerName.Config) public readonly config: ConfigInterface,
+        @inject(ContainerName.ConsoleLogger) public readonly consoleLogger: LoggerInterface,
+        @inject(ContainerName.Container) public readonly container: Container,
+        @inject(ContainerName.ProcessKernel) public readonly processKernel: ProcessKernel,
+    ) {
+    }
+
+    /**
+     * Boot all containers, and prepare robot to execution
+     *
+     * @returns {Promise<void>}
+     */
+    public async boot(): Promise<void> {
+        await Promise.all([
+            this.container.get(ContainerName.Logger)!.info("Kernel Starting"),
+            this.bootLogs(),
+            this.container.get(ContainerName.EventServiceProvider).boot(),
+            process.send?.("ready"),
+        ]);
+    }
+
+    /**
+     * Init before all binders registers, just the essentials before starting all containers.
+     *
+     * @returns {Promise<void>}
+     */
+    public async init(): Promise<void> {
+        await Promise.all([
+            this.processKernel.register(),
+            this.config.init(),
+        ]);
+    }
+
+    private async bootLogs(): Promise<void> {
+        const logger = this.container.get(ContainerName.Logger)!;
+        const jsonLogger = this.container.get(ContainerName.JSONLogger);
+        logger.pushHandler(this.consoleLogger);
+        logger.pushProcessor(jsonLogger);
+        jsonLogger.setIdentifier(randomUUID());
     }
 
 }

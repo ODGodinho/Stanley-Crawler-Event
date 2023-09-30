@@ -3,9 +3,14 @@
         "baseUrl": ".",
         "outDir": "./dist",
         "paths": {
+            "#types": [ "./@types" ],
             "#types/*": [ "./@types/*" ],
+            "@app": [ "./src/app" ],
+            "@app/*": [ "./src/app/*" ],
             "@browser": [ "./src/Browser" ],
             "@browser/*": [ "./src/Browser/*" ],
+            "@configs": [ "./src/Configs" ],
+            "@configs/*": [ "./src/Configs/*" ],
             "@engine": [ "./src/engine" ],
             "@enums": [ "./src/app/Enums" ],
             "@enums/*": [ "./src/app/Enums/*" ],
@@ -23,7 +28,8 @@
             "@selectors": [ "./src/Selectors" ],
             "@selectors/*": [ "./src/Selectors/*" ],
             "@services": [ "./src/app/Services" ],
-            "@services/*": [ "./src/app/Services/*" ]
+            "@services/*": [ "./src/app/Services/*" ],
+            "~/*": [ "./src/*" ]
         },
         "rootDirs": [
             ".",
