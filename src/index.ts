@@ -23,7 +23,9 @@ const project = new Container();
     await browser.close();
 })()
     .then(() => process.exit(0))
-    .catch(async (error) => {
-        await project.get(ContainerName.Logger)?.error(error);
+    .catch(async (exception) => {
+        const loggerName = project.isBound(ContainerName.Logger) ? ContainerName.Logger : ContainerName.ConsoleLogger;
+        await project.get(loggerName)?.error(exception);
+
         process.exit(1);
     });

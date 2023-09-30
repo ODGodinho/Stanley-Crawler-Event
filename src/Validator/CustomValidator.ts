@@ -14,4 +14,16 @@ export class CustomValidator {
         ]);
     }
 
+    public static zodStringNumber(): zod.ZodUnion<[
+        zod.ZodNumber,
+        zod.ZodEffects<zod.ZodEffects<zod.ZodString, number, string>, number, string>]
+    > {
+        return zod.union([
+            zod.number(),
+            zod.string()
+                .transform((data): number => Number(String(data).trim()))
+                .refine((data) => !Number.isNaN(data), { message: "Invalid number" }),
+        ]);
+    }
+
 }

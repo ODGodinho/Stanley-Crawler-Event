@@ -3,6 +3,7 @@ import crypto from "node:crypto";
 import { type PageInterface } from "@odg/chemical-x";
 import { injectable } from "inversify";
 
+import { ConfigName } from "@app/Enums";
 import { BasePage } from "@pages/BasePage";
 import {
     type GoogleSearchSelectorType,
@@ -54,7 +55,7 @@ export class SearchPage extends BasePage implements PageInterface {
      * @returns {Promise<number>}
      */
     public async attempt(): Promise<number> {
-        return 1;
+        return this.config.get(ConfigName.PAGE_ATTEMPT);
     }
 
 }

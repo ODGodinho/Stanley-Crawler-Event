@@ -1,10 +1,13 @@
 import {
-    type HandlerInterface, type HandlerFunction, HandlerSolution, RetryAction,
+    type HandlerInterface,
+    type HandlerFunction,
+    HandlerSolution,
+    RetryAction,
 } from "@odg/chemical-x";
 import { type Exception } from "@odg/exception";
 import { injectable } from "inversify";
 
-import { EventName } from "@enums";
+import { ConfigName, EventName } from "@enums";
 import { BaseHandler } from "@handlers/BaseHandler";
 
 @injectable()
@@ -18,15 +21,11 @@ export class GoogleSearchToSelectionHandler extends BaseHandler implements Handl
     }
 
     public async getTimeout(): Promise<number> {
-        // Only For Example Correct use env or config library
-        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-        return 5000;
+        return this.config.get(ConfigName.HANDLER_TIMEOUT);
     }
 
     public async attempt(): Promise<number> {
-        // Only For Example Correct use env or config library
-        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-        return 5;
+        return this.config.get(ConfigName.HANDLER_ATTEMPT);
     }
 
     /**
