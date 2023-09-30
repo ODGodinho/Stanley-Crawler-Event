@@ -469,7 +469,7 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@odg/axios@^1.5.0":
+"@odg/axios@*":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@odg/axios/-/axios-1.5.0.tgz#36ca007ba2a9ad4103198b6e7599ef700b9113f6"
   integrity sha512-dKGTlPH/TpUvWBvMXDwi3VgECwfGkOm/jO7+69gQwKIsxe2x1BU5CV4Zx7d9lw3iv3hiFwXDCPzwQEZyycDzKw==
@@ -495,7 +495,7 @@
     "@odg/tsconfig" "*"
     commander "^10.0.0"
 
-"@odg/config@^1.1.0":
+"@odg/config@*":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@odg/config/-/config-1.1.0.tgz#49acd15d446294a36b4d6b5b0feea424f644700b"
   integrity sha512-KxTymvWekKA2313ogr6tj4ITQjRfiMUUX+XOqrnHOnbRA7VMuiqsP6S//KsEILhd3n7zuS0abcsjoikr7ZzvRw==
@@ -580,7 +580,7 @@
     "@odg/json-log" "*"
     chalk "^4"
 
-"@odg/message@*", "@odg/message@^1.2.1":
+"@odg/message@*":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@odg/message/-/message-1.2.1.tgz#8401d5749cc304d29f10fa8d8b369c998570b5b4"
   integrity sha512-0sgCfxnP3LZyHXrSYWoF9zHZRRsS1ip5UzEKWTXtlEPgqng4Qiqav9h2ZOK/nEKY6mKfW0QpuJr7My0wI43awQ==
@@ -821,9 +821,9 @@
     eslint-visitor-keys "^3.4.1"
 
 "@vitest/coverage-v8@*":
-  version "0.34.5"
-  resolved "https://registry.yarnpkg.com/@vitest/coverage-v8/-/coverage-v8-0.34.5.tgz#bbef8960ee69dcd03b1da9b5f51bb40467b2fbdc"
-  integrity sha512-97xjhRTSdmeeHCm2nNHhT3hLsMYkAhHXm/rwj6SZ3voka8xiCJrwgtfIjoZIFEL4OO0KezGmVuHWQXcMunULIA==
+  version "0.34.6"
+  resolved "https://registry.yarnpkg.com/@vitest/coverage-v8/-/coverage-v8-0.34.6.tgz#931d9223fa738474e00c08f52b84e0f39cedb6d1"
+  integrity sha512-fivy/OK2d/EsJFoEoxHFEnNGTg+MmdZBAVK9Ka4qhXR2K3J0DS08vcGVwzDtXSuUMabLv4KtPcpSKkcMXFDViw==
   dependencies:
     "@ampproject/remapping" "^2.2.1"
     "@bcoe/v8-coverage" "^0.2.3"
