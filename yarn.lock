@@ -469,7 +469,7 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@odg/axios@^1.5.0":
+"@odg/axios@*":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@odg/axios/-/axios-1.5.0.tgz#36ca007ba2a9ad4103198b6e7599ef700b9113f6"
   integrity sha512-dKGTlPH/TpUvWBvMXDwi3VgECwfGkOm/jO7+69gQwKIsxe2x1BU5CV4Zx7d9lw3iv3hiFwXDCPzwQEZyycDzKw==
@@ -495,7 +495,7 @@
     "@odg/tsconfig" "*"
     commander "^10.0.0"
 
-"@odg/config@^1.1.0":
+"@odg/config@*":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@odg/config/-/config-1.1.0.tgz#49acd15d446294a36b4d6b5b0feea424f644700b"
   integrity sha512-KxTymvWekKA2313ogr6tj4ITQjRfiMUUX+XOqrnHOnbRA7VMuiqsP6S//KsEILhd3n7zuS0abcsjoikr7ZzvRw==
@@ -580,7 +580,7 @@
     "@odg/json-log" "*"
     chalk "^4"
 
-"@odg/message@*", "@odg/message@^1.2.1":
+"@odg/message@*":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@odg/message/-/message-1.2.1.tgz#8401d5749cc304d29f10fa8d8b369c998570b5b4"
   integrity sha512-0sgCfxnP3LZyHXrSYWoF9zHZRRsS1ip5UzEKWTXtlEPgqng4Qiqav9h2ZOK/nEKY6mKfW0QpuJr7My0wI43awQ==
@@ -3041,10 +3041,10 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.2.4.tgz#eca284f75d2965079309dc0ad9255abb2ebc1632"
   integrity sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==
 
-lint-staged@^13.3.0:
-  version "13.3.0"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-13.3.0.tgz#7965d72a8d6a6c932f85e9c13ccf3596782d28a5"
-  integrity sha512-mPRtrYnipYYv1FEE134ufbWpeggNTo+O/UPzngoaKzbzHAthvR55am+8GfHTnqNRQVRRrYQLGW9ZyUoD7DsBHQ==
+lint-staged@^14.0.1:
+  version "14.0.1"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-14.0.1.tgz#57dfa3013a3d60762d9af5d9c83bdb51291a6232"
+  integrity sha512-Mw0cL6HXnHN1ag0mN/Dg4g6sr8uf8sn98w2Oc1ECtFto9tvRF7nkXGJRbx8gPlHyoR0pLyBr2lQHbWwmUHe1Sw==
   dependencies:
     chalk "5.3.0"
     commander "11.0.0"
