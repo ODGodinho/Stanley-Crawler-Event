@@ -469,7 +469,7 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@odg/axios@^1.5.0":
+"@odg/axios@*":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@odg/axios/-/axios-1.5.0.tgz#36ca007ba2a9ad4103198b6e7599ef700b9113f6"
   integrity sha512-dKGTlPH/TpUvWBvMXDwi3VgECwfGkOm/jO7+69gQwKIsxe2x1BU5CV4Zx7d9lw3iv3hiFwXDCPzwQEZyycDzKw==
@@ -486,16 +486,15 @@
     "@odg/exception" "*"
 
 "@odg/command@*":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@odg/command/-/command-1.6.0.tgz#df0244da4b633bcf8b24178c8dff1f5c8f38885f"
-  integrity sha512-XQW9hiyQss4YYS2O+WShm0HkPREU+u68rGg3BxJ/yV/baV473OFIB32loXMhGD4dZ1vim44h3mVqyE/yAbbr/A==
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@odg/command/-/command-1.7.0.tgz#b94a16ef10daa352756c8918eed62bc658e4fd73"
+  integrity sha512-JPxdrRKfc3pUy7dhDmofHVrley1+3v0iUBlEDTAydP+xsA4t6cIPJ853AQXAOwrM72wUbr2LeixcbNA+hbX8fQ==
   dependencies:
     "@odg/chemical-x" "*"
     "@odg/exception" "*"
-    "@odg/tsconfig" "*"
     commander "^10.0.0"
 
-"@odg/config@^1.1.0":
+"@odg/config@*":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@odg/config/-/config-1.1.0.tgz#49acd15d446294a36b4d6b5b0feea424f644700b"
   integrity sha512-KxTymvWekKA2313ogr6tj4ITQjRfiMUUX+XOqrnHOnbRA7VMuiqsP6S//KsEILhd3n7zuS0abcsjoikr7ZzvRw==
@@ -580,7 +579,7 @@
     "@odg/json-log" "*"
     chalk "^4"
 
-"@odg/message@*", "@odg/message@^1.2.1":
+"@odg/message@*":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@odg/message/-/message-1.2.1.tgz#8401d5749cc304d29f10fa8d8b369c998570b5b4"
   integrity sha512-0sgCfxnP3LZyHXrSYWoF9zHZRRsS1ip5UzEKWTXtlEPgqng4Qiqav9h2ZOK/nEKY6mKfW0QpuJr7My0wI43awQ==
