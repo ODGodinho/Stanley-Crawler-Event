@@ -469,7 +469,7 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@odg/axios@^1.5.0":
+"@odg/axios@*":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@odg/axios/-/axios-1.5.0.tgz#36ca007ba2a9ad4103198b6e7599ef700b9113f6"
   integrity sha512-dKGTlPH/TpUvWBvMXDwi3VgECwfGkOm/jO7+69gQwKIsxe2x1BU5CV4Zx7d9lw3iv3hiFwXDCPzwQEZyycDzKw==
@@ -495,7 +495,7 @@
     "@odg/tsconfig" "*"
     commander "^10.0.0"
 
-"@odg/config@^1.1.0":
+"@odg/config@*":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@odg/config/-/config-1.1.0.tgz#49acd15d446294a36b4d6b5b0feea424f644700b"
   integrity sha512-KxTymvWekKA2313ogr6tj4ITQjRfiMUUX+XOqrnHOnbRA7VMuiqsP6S//KsEILhd3n7zuS0abcsjoikr7ZzvRw==
@@ -580,7 +580,7 @@
     "@odg/json-log" "*"
     chalk "^4"
 
-"@odg/message@*", "@odg/message@^1.2.1":
+"@odg/message@*":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@odg/message/-/message-1.2.1.tgz#8401d5749cc304d29f10fa8d8b369c998570b5b4"
   integrity sha512-0sgCfxnP3LZyHXrSYWoF9zHZRRsS1ip5UzEKWTXtlEPgqng4Qiqav9h2ZOK/nEKY6mKfW0QpuJr7My0wI43awQ==
@@ -641,15 +641,12 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
-"@types/node@*":
-  version "20.7.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.7.1.tgz#06d732ead0bd5ad978ef0ea9cbdeb24dc8717514"
-  integrity sha512-LT+OIXpp2kj4E2S/p91BMe+VgGX2+lfO+XTpfXhh+bCk2LkQtHZSub8ewFBMGP5ClysPjTDFa4sMI8Q3n4T0wg==
-
-"@types/node@^18":
-  version "18.18.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.18.0.tgz#bd19d5133a6e5e2d0152ec079ac27c120e7f1763"
-  integrity sha512-3xA4X31gHT1F1l38ATDIL9GpRLdwVhnEFC8Uikv5ZLlXATwrCYyPq7ZWHxzxc3J/30SUiwiYT+bQe0/XvKlWbw==
+"@types/node@*", "@types/node@^20":
+  version "20.8.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.8.4.tgz#0e9ebb2ff29d5c3302fc84477d066fa7c6b441aa"
+  integrity sha512-ZVPnqU58giiCjSxjVUESDtdPk4QR5WQhhINbc9UBrKLU68MX5BF6kbQzTrkwbolyr0X8ChBpXfavr5mZFKZQ5A==
+  dependencies:
+    undici-types "~5.25.1"
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.2"
@@ -4453,6 +4450,11 @@ unbox-primitive@^1.0.2:
     has-bigints "^1.0.2"
     has-symbols "^1.0.3"
     which-boxed-primitive "^1.0.2"
+
+undici-types@~5.25.1:
+  version "5.25.3"
+  resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-5.25.3.tgz#e044115914c85f0bcbb229f346ab739f064998c3"
+  integrity sha512-Ga1jfYwRn7+cP9v8auvEXN1rX3sWqlayd4HP7OKk4mZWylEmu3KzXDUGrQUN6Ol7qo1gPvB2e5gX6udnyEPgdA==
 
 untildify@^4.0.0:
   version "4.0.0"
