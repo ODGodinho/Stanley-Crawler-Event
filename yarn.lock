@@ -571,9 +571,9 @@
     error-stack-parser "^2.1.4"
 
 "@odg/log@*":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@odg/log/-/log-1.6.0.tgz#175669f50b85f1a47ceb7f6d0105d02ad53f83e7"
-  integrity sha512-TSASiU3YjJHwpUj+u3ZehWDDG3OrHb1yWRV2JboV+8P3psjvS0xhUlxGnBO5mDXSV0UmnpoKC2nJnYRslsmXKA==
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/@odg/log/-/log-1.6.1.tgz#631e4256d89049c2a58d259158691c7ddddf0619"
+  integrity sha512-0YKXtJM2wI7Hs+ddo3rFppBKXFq/ckfmJUrraw0PLmOW5pr9GxuUl01ahS8HO2pJ49YL7vbmvYUEkisGQTbqfg==
   dependencies:
     "@odg/exception" "*"
     "@odg/json-log" "*"
