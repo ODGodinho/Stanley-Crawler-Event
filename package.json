@@ -62,15 +62,15 @@
         "@odg/command": "*",
         "@odg/eslint-config": "*",
         "@odg/tsconfig": "*",
-        "@types/node": "^18",
+        "@types/node": ">=18",
         "@vitest/coverage-v8": "*",
-        "concurrently": "^8.2.0",
+        "concurrently": "^8.2.1",
         "eslint": "*",
         "husky": "^8.0.3",
-        "lint-staged": "^13.3.0",
+        "lint-staged": "^15.0.1",
         "rimraf": "^5.0.5",
         "tsc-alias": "^1.8.8",
-        "tsx": "^3.13.0",
+        "tsx": "^3.14.0",
         "typescript": "^5.2.2",
         "vite-tsconfig-paths": "*",
         "vitest": "^0.34.5"
@@ -86,9 +86,9 @@
         "@odg/message": "*",
         "dotenv": "^16.3.1",
         "inversify": "^6.0.1",
-        "playwright": "^1.38.1",
-        "playwright-core": "^1.38.1",
+        "playwright": "^1.39",
+        "playwright-core": "^1.39",
         "reflect-metadata": "^0.1.13",
-        "zod": "^3.22.2"
+        "zod": "^3.22"
     }
 }
