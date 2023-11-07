@@ -561,9 +561,9 @@
   integrity sha512-kWLKHk8Md4WBXNJhjyvexXyZzEn42HXT13W2kNQM5I0/F8dYMLsrHhFGj2GyLwhGlXOu52pvSTYOYtAF5bX7gw==
 
 "@odg/json-log@*":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@odg/json-log/-/json-log-1.2.2.tgz#29c74d6b8b5dc17291b3571559125f553310d4be"
-  integrity sha512-xV4JODsvr5qyhvZIkG7coqoWdWRDim+LuT1QImvFf/irHY8jT8dsw+KxBdGzIBQ0Vrtl2YNpGql4+1tUfjBLbg==
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@odg/json-log/-/json-log-1.2.4.tgz#4fa18acdaaa9ae420159cbd3ef99c5beb64321b8"
+  integrity sha512-3RrmM2sKA7PtfOAE9xeJFwFtmqgobDT82cHA794pWafDduJQJoKKu1/uwENUBHrwzKJMma32dQgCw7G8ASdAJg==
   dependencies:
     "@odg/exception" "*"
     "@odg/log" "*"
