@@ -495,9 +495,9 @@
     commander "^11.0.0"
 
 "@odg/config@*":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@odg/config/-/config-1.1.0.tgz#49acd15d446294a36b4d6b5b0feea424f644700b"
-  integrity sha512-KxTymvWekKA2313ogr6tj4ITQjRfiMUUX+XOqrnHOnbRA7VMuiqsP6S//KsEILhd3n7zuS0abcsjoikr7ZzvRw==
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@odg/config/-/config-1.1.1.tgz#81609d064189d6a077e622d1a3ccfd3c9405e979"
+  integrity sha512-rLYpOV7XcXbuzFeOJb3m5JqToorIRhuATFnae7K3cn48Ve864LpRbpuL2un5I4HN+1mb59GNuLylD58cAs8vKw==
 
 "@odg/eslint-config@*":
   version "1.19.0"
