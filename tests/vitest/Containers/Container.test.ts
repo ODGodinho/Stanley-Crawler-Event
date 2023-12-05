@@ -29,6 +29,6 @@ describe("Container Test", () => {
         const containerName = "Example2" as ContainerName;
 
         expect(container.getOptional(containerName)).toBeUndefined();
-        expect(container.getOptional(ContainerName.ExampleCrawlerService)).not.toBeUndefined();
+        expect(container.getOptional(ContainerName.Logger)).not.toBeUndefined();
     });
 });
