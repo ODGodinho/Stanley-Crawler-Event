@@ -60,6 +60,19 @@ export default class Container {
     }
 
     /**
+     * Get Container Item Optional
+     *
+     * @template {ContainerNameType} Name
+     * @param {Name} serviceIdentifier containerName
+     * @returns {ContainerType[Name] | undefined}
+     */
+    public getOptional<Name extends ContainerNameType>(serviceIdentifier: Name): ContainerType[Name] | undefined {
+        if (!this.isBound(serviceIdentifier)) return;
+
+        return this.container.get(serviceIdentifier);
+    }
+
+    /**
      * Bind Container Item
      *
      * @template {ContainerNameType} Name
