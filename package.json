@@ -73,7 +73,7 @@
         "tsx": "^3.14.0",
         "typescript": "^5.2.2",
         "vite-tsconfig-paths": "*",
-        "vitest": "^0.34.5"
+        "vitest": "^1.0.1"
     },
     "dependencies": {
         "@odg/axios": "*",
