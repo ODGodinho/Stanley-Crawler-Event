@@ -556,9 +556,9 @@
     eventemitter2 "^6.4.9"
 
 "@odg/exception@*", "@odg/exception@^1.1.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@odg/exception/-/exception-1.5.0.tgz#18d5e571f647812ec9386617e6c6d13154d7a170"
-  integrity sha512-kWLKHk8Md4WBXNJhjyvexXyZzEn42HXT13W2kNQM5I0/F8dYMLsrHhFGj2GyLwhGlXOu52pvSTYOYtAF5bX7gw==
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@odg/exception/-/exception-1.5.1.tgz#5788d05aabae68cb2212e128614a9c8670227a36"
+  integrity sha512-sbBv4bw/LKfEG4QHcoqX0i3leIMOPJxoR21BcAzxaMlwxS+fSdBaJIXmGwmOmOW99yJiyG1NJxjmBCFxQC+EUQ==
 
 "@odg/json-log@*":
   version "1.2.4"
