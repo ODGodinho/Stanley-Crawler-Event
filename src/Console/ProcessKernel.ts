@@ -1,4 +1,3 @@
-import { type LoggerInterface } from "@odg/log";
 import { inject, injectable } from "inversify";
 
 import Container from "@app/Container";
