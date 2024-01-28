@@ -14,6 +14,7 @@
             "@engine": [ "./src/engine" ],
             "@enums": [ "./src/app/Enums" ],
             "@enums/*": [ "./src/app/Enums/*" ],
+            "@factory": [ "./src/app/Factory" ],
             "@factory/*": [ "./src/app/Factory/*" ],
             "@handlers": [ "./src/Handlers" ],
             "@handlers/*": [ "./src/Handlers/*" ],

@@ -19,13 +19,15 @@ const project = new Container();
 
     await project.get(ContainerName.Logger)?.info("Shutdown");
 
-    const browser = await project.getAsync(ContainerName.Browser);
-    await browser.close();
+    const browser = project.getOptional(ContainerName.Browser);
+    await browser?.close();
 })()
     .then(() => process.exit(0))
     .catch(async (exception) => {
         const loggerName = project.isBound(ContainerName.Logger) ? ContainerName.Logger : ContainerName.ConsoleLogger;
-        await project.get(loggerName)?.error(exception);
+        await project.getOptional(loggerName)?.error(exception);
+
+        if (!project.isBound(loggerName)) console.error(exception);
 
         process.exit(1);
     });

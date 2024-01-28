@@ -1,3 +1,4 @@
+import { type BrowserManager } from "@odg/chemical-x";
 import {
     chromium,
     type BrowserType,
@@ -7,6 +8,8 @@ import {
     type BrowserContext,
     type BrowserContextOptions,
 } from "playwright-core";
+
+import { type Browser as BrowserClass, type Context as ContextClass } from "./Browser";
 
 export type BrowserTypeEngine = BrowserType;
 
@@ -23,3 +26,11 @@ export type ContextClassEngine = BrowserContext;
 export type PageClassEngine = Page;
 
 export const browserEngine = chromium;
+
+export type MyBrowser = BrowserClass & BrowserClassEngine;
+
+export type MyPage = Page & PageClassEngine;
+
+export type MyContext = ContextClass & ContextClassEngine;
+
+export type BrowserManagerType = BrowserManager<BrowserClassEngine, ContextClassEngine, PageClassEngine>;
