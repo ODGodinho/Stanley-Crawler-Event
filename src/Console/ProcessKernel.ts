@@ -1,9 +1,7 @@
-import { type LoggerInterface } from "@odg/log";
 import { inject, injectable } from "inversify";
 
+import Container from "@app/Container";
 import { ContainerName } from "@enums";
-
-import Container from "../app/Container";
 
 @injectable()
 export class ProcessKernel {
@@ -30,7 +28,7 @@ export class ProcessKernel {
      * @returns {void}
      */
     private uncaughtException(error: Error): void {
-        const logger = this.container.container.get<LoggerInterface | undefined>(ContainerName.Logger);
+        const logger = this.container.getOptional(ContainerName.Logger);
         void logger?.emergency(error);
     }
 
@@ -45,7 +43,7 @@ export class ProcessKernel {
      * @returns {void}
      */
     private messageShutdownListen(message: string): void {
-        const logger = this.container.container.get<LoggerInterface | undefined>(ContainerName.Logger);
+        const logger = this.container.getOptional(ContainerName.Logger);
         if (message === "shutdown") {
             void logger?.debug("Waiting for the crawler to kill the process");
         }

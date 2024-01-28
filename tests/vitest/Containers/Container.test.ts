@@ -24,7 +24,7 @@ describe("Container Test", () => {
         container.container.unbind(ContainerName.Browser);
     });
 
-    test("Test isBound", async () => {
+    test.concurrent("Test isBound", async () => {
         const containerName = "Example" as ContainerName;
 
         expect(container.isBound(containerName)).toBeFalsy();
@@ -42,5 +42,12 @@ describe("Container Test", () => {
 
         expect(container.isBound(containerName)).toBeFalsy();
         expect(container.getOptional(containerName)).toBeUndefined();
+    });
+
+    test.concurrent("Test getOptional", async () => {
+        const containerName = "Example2" as ContainerName;
+
+        expect(container.getOptional(containerName)).toBeUndefined();
+        expect(container.getOptional(ContainerName.Logger)).not.toBeUndefined();
     });
 });

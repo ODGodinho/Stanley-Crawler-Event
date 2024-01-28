@@ -484,9 +484,9 @@
     axios "*"
 
 "@odg/chemical-x@*":
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/@odg/chemical-x/-/chemical-x-1.7.1.tgz#250fb4ca749d2b9cd35eb6e72facb2f0f8b1f577"
-  integrity sha512-sJ/lVjlvefoO2lWDgzFgd4ux9b9mdDi2AEEzaZD1t8D6WyzMW+NchmDxfRa6M7qP1JeiNU01myYpfOv9uF022A==
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@odg/chemical-x/-/chemical-x-1.8.0.tgz#5703e68f058ec75e65d89375aa74ca6a2af17bab"
+  integrity sha512-Q1l3OAjyD7xzHgMJp2BIrgYFX1ZiSvxNVRjDcQHCzGNXdM6QvQlvsoYX2tSacJxv0NYwZxdElF/mqL+wYvsQ8A==
   dependencies:
     "@odg/exception" "*"
 
@@ -696,7 +696,7 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
-"@types/node@>=18":
+"@types/node@>=20":
   version "20.11.8"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.11.8.tgz#bdb6de1048613c3c6ab6c341c37e8fd1a7860308"
   integrity sha512-i7omyekpPTNdv4Jb/Rgqg0RU8YqLcNsI12quKSDkRXNfx7Wxdm6HhK1awT3xTgEkgxPn3bvnSpiEAc7a7Lpyow==
