@@ -4,7 +4,7 @@ import { inject, injectable } from "inversify";
 
 import { type EventBrowserParameters, type EventTypes } from "#types/EventsInterface";
 import { ContainerName, type EventName } from "@enums";
-import { PageOrHandlerFactoryType } from "@factory/PageOrHandlerFactory";
+import { PageOrHandlerFactoryType } from "@factory";
 import { type SearchPage } from "@pages/Google/SearchPage";
 
 @injectable()

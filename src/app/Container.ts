@@ -1,5 +1,11 @@
 import { AxiosMessage } from "@odg/axios";
-import { type HandlerInterface, type PageInterface } from "@odg/chemical-x";
+import {
+    type CreateContextFactoryType,
+    type CreatePageFactoryType,
+    BrowserManager,
+    type HandlerInterface,
+    type PageInterface,
+} from "@odg/chemical-x";
 import { JsonConfig } from "@odg/config";
 import { EventEmitterBus } from "@odg/events";
 import { JSONLoggerPlugin } from "@odg/json-log";
@@ -11,7 +17,7 @@ import {
 import { type ContainerNameType, type ContainerType, type EventTypes } from "#types";
 import { type ConfigType, configValidator } from "@configs";
 import { ConfigName, ContainerName } from "@enums";
-import { type PageOrHandlerFactoryType } from "@factory/PageOrHandlerFactory";
+import { type PageOrHandlerFactoryType } from "@factory";
 import { GoogleSearchToSelectionHandler } from "@handlers/GoogleSearch/GoogleSearchHandler";
 import { type BasePageInterface } from "@interfaces/BasePageInterface";
 import { SearchEventListener } from "@listeners/SearchEventListener";
@@ -23,10 +29,8 @@ import { Browser, Context, Page } from "../Browser";
 import { Kernel, ProcessKernel } from "../Console";
 import {
     type BrowserClassEngine,
-    type BrowserTypeEngine,
     type ContextClassEngine,
     type PageClassEngine,
-    browserEngine,
 } from "../engine";
 
 export default class Container {
@@ -41,11 +45,11 @@ export default class Container {
 
     public async setUp(): Promise<void> {
         await this.prepareInjectable();
+        await this.bindCrawler();
         await this.bindKernel();
         await this.initBeginKernel();
         await this.bindStanley();
         await this.bindEventsAndListeners();
-        await this.bindCrawler();
     }
 
     /**
@@ -206,15 +210,19 @@ export default class Container {
     private async bindCrawler(): Promise<void> {
         // Browser puppeteer/Playwright Instance with Plugins
         this.bind(
-            ContainerName.Browser,
-        ).toDynamicValue(
-            async () => Browser.create<BrowserTypeEngine, BrowserClassEngine, ContextClassEngine, PageClassEngine>(
-                browserEngine,
-                Browser,
-                Context,
-                Page,
-            ).setUp(),
-        ).inSingletonScope();
+            ContainerName.BrowserManager,
+        ).toConstantValue(new BrowserManager<BrowserClassEngine, ContextClassEngine, PageClassEngine>(
+            (
+                browserInstance: BrowserClassEngine,
+                newContext: CreateContextFactoryType<ContextClassEngine, PageClassEngine>,
+                newPage: CreatePageFactoryType<PageClassEngine>,
+            ) => new Browser(browserInstance, newContext, newPage),
+            (
+                contextEngine: ContextClassEngine,
+                newPage: CreatePageFactoryType<PageClassEngine>,
+            ) => new Context(contextEngine, newPage),
+            (pageEngine: PageClassEngine) => new Page(pageEngine),
+        ));
 
         // SearchPage Google
         this.bind(ContainerName.SearchPageFactory)

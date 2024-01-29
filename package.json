@@ -64,16 +64,16 @@
         "@odg/tsconfig": "*",
         "@types/node": ">=20",
         "@vitest/coverage-v8": "*",
-        "concurrently": "^8.2.1",
+        "concurrently": "^8.2.2",
         "eslint": "*",
-        "husky": "^8.0.3",
+        "husky": "^9.0.6",
         "lint-staged": "^15.2.0",
-        "rimraf": "^5.0.5",
+        "rimraf": "*",
         "tsc-alias": "^1.8.8",
-        "tsx": "^3.14.0",
+        "tsx": "^4.1.1",
         "typescript": "^5.3.3",
         "vite-tsconfig-paths": "*",
-        "vitest": "^0.34.5"
+        "vitest": "^1.2.2"
     },
     "dependencies": {
         "@odg/axios": "*",
@@ -84,11 +84,11 @@
         "@odg/json-log": "*",
         "@odg/log": "*",
         "@odg/message": "*",
-        "dotenv": "^16.3.1",
-        "inversify": "^6.0.1",
-        "playwright": "^1.39",
-        "playwright-core": "^1.39",
-        "reflect-metadata": "^0.1.13",
+        "dotenv": "^16.4.1",
+        "inversify": "^6.0.2",
+        "playwright": "^1.41",
+        "playwright-core": "^1.41",
+        "reflect-metadata": "^0.2.1",
         "zod": "^3.22"
     }
 }

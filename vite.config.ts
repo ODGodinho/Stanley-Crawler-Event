@@ -18,6 +18,7 @@ const vite = defineConfig({
                 "src/Handlers/**/*.ts",
                 "src/app/Services/**/*.ts",
                 "src/app/Listeners/**/*.ts",
+                "@types/",
             ],
         },
         setupFiles: [

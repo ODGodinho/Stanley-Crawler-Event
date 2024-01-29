@@ -6,9 +6,12 @@ import { type MessageInterface } from "@odg/message";
 
 import type Container from "@app/Container";
 import { type ConfigType } from "@configs";
-import { type BrowserClassEngine } from "@engine";
+import {
+    type MyBrowser,
+    type BrowserManagerType,
+} from "@engine";
 import { type EventName, type ContainerName } from "@enums";
-import { type PageOrHandlerFactoryType } from "@factory/PageOrHandlerFactory";
+import { type PageOrHandlerFactoryType } from "@factory";
 import { type SearchPage } from "@pages/Google/SearchPage";
 import { type EventServiceProvider } from "@providers/EventServiceProvider";
 import { type ExampleCrawlerService } from "@services/ExampleCrawlerService";
@@ -18,11 +21,12 @@ import { type EventTypes } from "./EventsInterface";
 
 export interface ContainerInterface {
     [ContainerName.Logger]: Logger | undefined;
+    [ContainerName.Browser]: MyBrowser | undefined;
     [ContainerName.Requester]: MessageInterface;
     [ContainerName.EventBus]: EventBusInterface<EventTypes>;
     [ContainerName.ProcessKernel]: ProcessKernel;
     [ContainerName.Kernel]: Kernel;
-    [ContainerName.Browser]: BrowserClassEngine;
+    [ContainerName.BrowserManager]: BrowserManagerType;
     [ContainerName.Container]: Container;
     [ContainerName.Config]: ConfigInterface<ConfigType>;
     [ContainerName.ConsoleLogger]: LoggerInterface;

@@ -2,7 +2,7 @@ import { type PageInterface } from "@odg/chemical-x";
 
 import { type PageClassEngine } from "@engine";
 import { ContainerName } from "@enums";
-import { type PageOrHandlerFactoryType } from "@factory/PageOrHandlerFactory";
+import { type PageOrHandlerFactoryType } from "@factory";
 import { BasePage } from "@pages/BasePage";
 
 import { container } from "../SingletonTest";
