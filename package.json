@@ -87,7 +87,7 @@
         "dotenv": "^16.4.1",
         "inversify": "^6.0.2",
         "playwright": "^1.41",
-        "playwright-core": "^1.41",
+        "playwright-core": "^1.42",
         "reflect-metadata": "^0.2.1",
         "zod": "^3.22"
     }
