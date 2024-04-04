@@ -84,7 +84,7 @@
         "@odg/json-log": "*",
         "@odg/log": "*",
         "@odg/message": "*",
-        "dotenv": "^16.4.1",
+        "dotenv": "^16.4.5",
         "inversify": "^6.0.2",
         "playwright": "^1.41",
         "playwright-core": "^1.41",
