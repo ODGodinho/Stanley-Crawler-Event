@@ -63,7 +63,7 @@
         "@odg/eslint-config": "*",
         "@odg/tsconfig": "*",
         "@types/node": ">=20",
-        "@vitest/coverage-v8": "*",
+        "@vitest/coverage-v8": "2.0.0",
         "concurrently": "^8.2.2",
         "eslint": "*",
         "husky": "^9.0.11",
