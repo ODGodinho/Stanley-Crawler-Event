@@ -1,5 +1,4 @@
-import { type PageOptionsLibraryInterface } from "@odg/chemical-x";
-import { Context as ContextBase } from "@odg/chemical-x";
+import { type PageOptionsLibraryInterface, Context as ContextBase } from "@odg/chemical-x";
 
 import {
     type ContextClassEngine,
