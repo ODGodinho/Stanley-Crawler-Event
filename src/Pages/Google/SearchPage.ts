@@ -1,16 +1,15 @@
 import crypto from "node:crypto";
 
-import { type PageInterface } from "@odg/chemical-x";
-import { injectable } from "inversify";
+import { ContainerHelper, type PageInterface } from "@odg/chemical-x";
 
-import { ConfigName } from "@app/Enums";
+import { ConfigName, ContainerName } from "@app/Enums";
 import { BasePage } from "@pages/BasePage";
 import {
     type GoogleSearchSelectorType,
     googleSearchSelector,
 } from "@selectors";
 
-@injectable()
+@ContainerHelper.injectablePage(ContainerName.SearchPageFactory)
 export class SearchPage extends BasePage implements PageInterface {
 
     public readonly $s: GoogleSearchSelectorType = googleSearchSelector;

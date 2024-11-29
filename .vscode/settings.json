@@ -7,7 +7,8 @@
         "Google",
         "Tests",
         "Upgrade",
-        "Config"
+        "Config",
+        "Container"
     ],
     "typescript.preferences.importModuleSpecifier": "non-relative",
     "vitest.commandLine": "yarn test:watch",

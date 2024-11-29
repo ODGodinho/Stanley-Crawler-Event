@@ -4,8 +4,9 @@ import {
     type EventListener,
 } from "@odg/events";
 import {
-    inject, injectable,
+    inject,
 } from "inversify";
+import { fluentProvide } from "inversify-binding-decorators";
 
 import { type EventTypes } from "#types/EventsInterface";
 import { ContainerName, EventName } from "@enums";
@@ -17,7 +18,7 @@ import Container from "../Container";
  *
  * @template {EventTypes} Events Events List
  */
-@injectable()
+@(fluentProvide(ContainerName.EventServiceProvider).inSingletonScope().done())
 export class EventServiceProvider<Events extends EventTypes> extends EventServiceProviderBase<Events> {
 
     /**

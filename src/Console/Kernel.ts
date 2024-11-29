@@ -1,7 +1,8 @@
 import { randomUUID } from "node:crypto";
 
 import { LoggerInterface } from "@odg/log";
-import { inject, injectable } from "inversify";
+import { inject } from "inversify";
+import { fluentProvide } from "inversify-binding-decorators";
 import { chromium } from "playwright-core";
 
 import { ContainerInterface } from "#types";
@@ -15,7 +16,7 @@ import { ProcessKernel } from "~/Console/ProcessKernel";
  *
  * @class Kernel
  */
-@injectable()
+@(fluentProvide(ContainerName.Kernel).inSingletonScope().done())
 export class Kernel {
 
     public constructor(

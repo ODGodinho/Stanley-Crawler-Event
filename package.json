@@ -85,6 +85,7 @@
         "@odg/message": "*",
         "dotenv": "^16.4.5",
         "inversify": "^6.1.4",
+        "inversify-binding-decorators": "^4.0.0",
         "playwright": "^1.49.0",
         "playwright-core": "^1.49.0",
         "reflect-metadata": "^0.2.2",

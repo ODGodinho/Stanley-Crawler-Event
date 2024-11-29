@@ -1,13 +1,14 @@
 import { type EventListenerInterface } from "@odg/events";
 import { LoggerInterface } from "@odg/log";
-import { inject, injectable } from "inversify";
+import { inject } from "inversify";
+import { fluentProvide } from "inversify-binding-decorators";
 
 import { type EventBrowserParameters, type EventTypes } from "#types/EventsInterface";
 import { ContainerName, type EventName } from "@enums";
 import { PageOrHandlerFactoryType } from "@factory";
 import { type SearchPage } from "@pages/Google/SearchPage";
 
-@injectable()
+@(fluentProvide(ContainerName.SearchEventListeners).inSingletonScope().done())
 export class SearchEventListener implements EventListenerInterface<EventTypes, EventName.SearchPageEvent> {
 
     public constructor(

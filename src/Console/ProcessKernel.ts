@@ -1,9 +1,10 @@
-import { inject, injectable } from "inversify";
+import { inject } from "inversify";
+import { fluentProvide } from "inversify-binding-decorators";
 
 import Container from "@app/Container";
 import { ContainerName } from "@enums";
 
-@injectable()
+@(fluentProvide(ContainerName.ProcessKernel).inSingletonScope().done())
 export class ProcessKernel {
 
     public constructor(

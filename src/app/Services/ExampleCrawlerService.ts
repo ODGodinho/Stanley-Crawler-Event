@@ -1,6 +1,7 @@
 import { EventBusInterface } from "@odg/events";
 import { LoggerInterface } from "@odg/log";
-import { inject, injectable } from "inversify";
+import { inject } from "inversify";
+import { fluentProvide } from "inversify-binding-decorators";
 
 import { type EventTypes } from "#types/EventsInterface";
 import { MyBrowser } from "@engine";
@@ -9,7 +10,7 @@ import { ContainerName, EventName } from "@enums";
 import { type GoogleSearchToSelectionHandler } from "../../Handlers/GoogleSearch/GoogleSearchHandler";
 import { PageOrHandlerFactoryType } from "../Factory";
 
-@injectable()
+@(fluentProvide(ContainerName.ExampleCrawlerService).inSingletonScope().done())
 export class ExampleCrawlerService {
 
     public constructor(
