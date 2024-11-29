@@ -1,5 +1,5 @@
 export const googleSearchSelector = {
-    searchInput: "input[name=\"q\"], textarea[type='search']",
+    searchInput: "input[name=\"q\"], textarea",
     buttons: {
         submit: "input[name=\"btnK\"] >> visible=true",
     },

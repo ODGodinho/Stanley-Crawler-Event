@@ -17,7 +17,7 @@
         "start:build": "yarn build && node ./dist/index.js",
         "lint": "eslint --ext .js,.jsx,.ts,.tsx,.json,.jsonc,.json5,.yml,.yaml,.xml,.txt,.svg,.properties,.gradle,.java,.cpp,.c,.cs,.html,.css,.groovy,.gitignore,.npmignore,.toml,.env,.example,.sample,.ini,.php,.bat,.powershell,.ps1,.sh,.bash,.eslintrc",
         "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx,.json,.jsonc,.json5,.yml,.yaml,.xml,.txt,.svg,.properties,.gradle,.java,.cpp,.c,.cs,.html,.css,.groovy,.gitignore,.npmignore,.toml,.env,.example,.sample,.ini,.php,.bat,.powershell,.ps1,.sh,.bash,.eslintrc --fix",
-        "prepare": "husky install",
+        "prepare": "husky",
         "test": "vitest run",
         "test:ci": "vitest run --passWithNoTests",
         "test:watch": "vitest --watch"
@@ -63,17 +63,16 @@
         "@odg/eslint-config": "*",
         "@odg/tsconfig": "*",
         "@types/node": ">=20",
-        "@vitest/coverage-v8": "*",
-        "concurrently": "^8.2.2",
-        "eslint": "*",
-        "husky": "^9.0.11",
-        "lint-staged": "^15.2.4",
+        "@vitest/coverage-v8": "^1",
+        "concurrently": "^9.1.0",
+        "husky": "^9.1.7",
+        "lint-staged": "^15.2.10",
         "rimraf": "*",
-        "tsc-alias": "^1.8.8",
-        "tsx": "^4.1.1",
-        "typescript": "^5.3.3",
-        "vite-tsconfig-paths": "*",
-        "vitest": "^1.2.2"
+        "tsc-alias": "^1.8.10",
+        "tsx": "^4.19.1",
+        "typescript": "^5.7.2",
+        "vite-tsconfig-paths": "^4",
+        "vitest": "^1"
     },
     "dependencies": {
         "@odg/axios": "*",
@@ -85,10 +84,10 @@
         "@odg/log": "*",
         "@odg/message": "*",
         "dotenv": "^16.4.5",
-        "inversify": "^6.0.2",
-        "playwright": "^1.41",
-        "playwright-core": "^1.42",
-        "reflect-metadata": "^0.2.1",
-        "zod": "^3.22"
+        "inversify": "^6.1.4",
+        "playwright": "^1.49.0",
+        "playwright-core": "^1.49.0",
+        "reflect-metadata": "^0.2.2",
+        "zod": "^3.23"
     }
 }

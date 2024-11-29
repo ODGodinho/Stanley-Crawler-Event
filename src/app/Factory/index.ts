@@ -1,1 +1,1 @@
-export * from "./PageOrHandlerFactory";
+export type * from "./PageOrHandlerFactory";

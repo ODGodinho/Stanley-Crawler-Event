@@ -5,6 +5,7 @@ import {
     BrowserManager,
     type HandlerInterface,
     type PageInterface,
+    type ContextChemicalXInterface,
 } from "@odg/chemical-x";
 import { JsonConfig } from "@odg/config";
 import { EventEmitterBus } from "@odg/events";
@@ -215,13 +216,16 @@ export default class Container {
             (
                 browserInstance: BrowserClassEngine,
                 newContext: CreateContextFactoryType<ContextClassEngine, PageClassEngine>,
-                newPage: CreatePageFactoryType<PageClassEngine>,
+                newPage: CreatePageFactoryType<ContextChemicalXInterface<ContextClassEngine>, PageClassEngine>,
             ) => new Browser(browserInstance, newContext, newPage),
             (
                 contextEngine: ContextClassEngine,
-                newPage: CreatePageFactoryType<PageClassEngine>,
+                newPage: CreatePageFactoryType<ContextChemicalXInterface<ContextClassEngine>, PageClassEngine>,
             ) => new Context(contextEngine, newPage),
-            (pageEngine: PageClassEngine) => new Page(pageEngine),
+            (
+                context: ContextChemicalXInterface<ContextClassEngine>,
+                pageEngine: PageClassEngine,
+            ) => new Page(context, pageEngine),
         ));
 
         // SearchPage Google
