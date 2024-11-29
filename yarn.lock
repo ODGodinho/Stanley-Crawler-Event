@@ -582,11 +582,14 @@
     axios "*"
 
 "@odg/chemical-x@*":
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/@odg/chemical-x/-/chemical-x-1.14.0.tgz#2f85d853252d7153ada1ef4ad885dcb8aaf3bbcf"
-  integrity sha512-9tu7yDYCpSR1y7BHCL80fhiMRGFsg8BCuHwA4ajwcn2Zip2+13omqOT8/fq2OPl83UjJqLpR9Gah4/H+dmltNw==
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/@odg/chemical-x/-/chemical-x-1.15.0.tgz#4a304c0f8b2d24c5fea1cc55f4c142568f35f9e8"
+  integrity sha512-cpZ5JQyEODn9e6/7JjJ2Te1oZ3BG4nncb1O9eYZwr8EBcj9vTiyc1FmOKyZ9HH4qvOQCEN+QEK7sOHf53dfnKA==
   dependencies:
     "@odg/exception" "*"
+  optionalDependencies:
+    inversify "^6.1.4"
+    reflect-metadata "^0.2.2"
 
 "@odg/command@*":
   version "1.7.1"
@@ -836,6 +839,13 @@
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.6.tgz#628effeeae2064a1b4e79f78e81d87b7e5fc7b50"
   integrity sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==
+
+"@types/inversify-binding-decorators@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/inversify-binding-decorators/-/inversify-binding-decorators-2.0.0.tgz#6c248f0e5e87f4dafee9d79cc4ae7f757e3eea86"
+  integrity sha512-s4nGbAsiT1SjxKrw1Fexbw5I3WiRxWNbFPxf0EFdQsKMntQtwCqiJUfa4xKgd0Ll6iQJicgMd3nMjSHa/9BbKw==
+  dependencies:
+    inversify-binding-decorators "*"
 
 "@types/json-schema@*", "@types/json-schema@^7.0.12":
   version "7.0.15"
@@ -2891,6 +2901,11 @@ internal-slot@^1.0.7:
     hasown "^2.0.0"
     side-channel "^1.0.4"
 
+inversify-binding-decorators@*, inversify-binding-decorators@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/inversify-binding-decorators/-/inversify-binding-decorators-4.0.0.tgz#c4d1ac50d7d6531f465ee7894e92031f7471c865"
+  integrity sha512-r8au/oH3vS7ttHj0RivAznwElySeRohLfg8lvOSzbrX6abf/8ik8ptk49XbzdShgrnalvl7CM6MjcskfM7MMqQ==
+
 inversify@^6.1.4:
   version "6.1.4"
   resolved "https://registry.yarnpkg.com/inversify/-/inversify-6.1.4.tgz#7dc288b190bc6c0e2081d7a003cbf6c4f94d946f"
@@ -4564,9 +4579,9 @@ tree-kill@^1.2.2:
   integrity sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==
 
 ts-api-utils@^1.0.1, ts-api-utils@^1.3.0:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/ts-api-utils/-/ts-api-utils-1.4.2.tgz#a6a6dff26117ac7965624fc118525971edc6a82a"
-  integrity sha512-ZF5gQIQa/UmzfvxbHZI3JXN0/Jt+vnAfAviNRAMc491laiK6YCLpCW9ft8oaCRFOTxCZtUTE6XB0ZQAe3olntw==
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/ts-api-utils/-/ts-api-utils-1.4.3.tgz#bfc2215fe6528fecab2b0fba570a2e8a4263b064"
+  integrity sha512-i3eMG77UTMD0hZhgRS562pv83RC6ukSAC2GMNWc+9dieh/+jDM5u5YG+NHX6VNDRHQcHwmsTHctP9LhbC3WxVw==
 
 tsc-alias@^1.8.10:
   version "1.8.10"
