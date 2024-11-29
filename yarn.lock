@@ -592,13 +592,13 @@
     reflect-metadata "^0.2.2"
 
 "@odg/command@*":
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/@odg/command/-/command-1.7.1.tgz#3965d8f17ea1aabde627a9f402761b41708f115a"
-  integrity sha512-g5SFVsz3vMNKFDcEp6CBgjjUD+oFaV94HcpekEx5+Z8vIzePftcBeE3ypA08CAWDyzUuNk5xI2vXnKaZenXE3g==
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@odg/command/-/command-1.8.0.tgz#c81af037ca677f94e01e4fb95ccea303d217bade"
+  integrity sha512-jU+y8nK3lV4pPLlGpsZfvpnvOXAC3BD0kJsXdhHPjT/GKyMmcj92Cz4CyU63YA4UIDVGSybR4XNDuaMkAld4mw==
   dependencies:
     "@odg/chemical-x" "*"
     "@odg/exception" "*"
-    commander "^11.0.0"
+    commander "^12.1.0"
 
 "@odg/config@*":
   version "1.1.2"
@@ -839,13 +839,6 @@
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.6.tgz#628effeeae2064a1b4e79f78e81d87b7e5fc7b50"
   integrity sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==
-
-"@types/inversify-binding-decorators@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@types/inversify-binding-decorators/-/inversify-binding-decorators-2.0.0.tgz#6c248f0e5e87f4dafee9d79cc4ae7f757e3eea86"
-  integrity sha512-s4nGbAsiT1SjxKrw1Fexbw5I3WiRxWNbFPxf0EFdQsKMntQtwCqiJUfa4xKgd0Ll6iQJicgMd3nMjSHa/9BbKw==
-  dependencies:
-    inversify-binding-decorators "*"
 
 "@types/json-schema@*", "@types/json-schema@^7.0.12":
   version "7.0.15"
@@ -1518,20 +1511,15 @@ combined-stream@^1.0.8:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@^11.0.0:
-  version "11.1.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-11.1.0.tgz#62fdce76006a68e5c1ab3314dc92e800eb83d906"
-  integrity sha512-yPVavfyCcRhmorC7rWlkHn15b4wDVgVmBA7kV4QVBsF7kv/9TKJAbAXVTxvTnwP8HHKjRCJDClKbciiYS7p0DQ==
+commander@^12.1.0, commander@~12.1.0:
+  version "12.1.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-12.1.0.tgz#01423b36f501259fdaac4d0e4d60c96c991585d3"
+  integrity sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA==
 
 commander@^9.0.0:
   version "9.5.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-9.5.0.tgz#bc08d1eb5cedf7ccb797a96199d41c7bc3e60d30"
   integrity sha512-KRs7WVDKg86PWiuAqhDrAQnTXZKraVcCc6vFdL14qrZ/DcWwuRo7VoiYXalXO7S5GKpqYiVEwCbgFDfxNHKJBQ==
-
-commander@~12.1.0:
-  version "12.1.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-12.1.0.tgz#01423b36f501259fdaac4d0e4d60c96c991585d3"
-  integrity sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA==
 
 comment-parser@*, comment-parser@1.4.1, comment-parser@^1.4.0:
   version "1.4.1"
@@ -2901,7 +2889,7 @@ internal-slot@^1.0.7:
     hasown "^2.0.0"
     side-channel "^1.0.4"
 
-inversify-binding-decorators@*, inversify-binding-decorators@^4.0.0:
+inversify-binding-decorators@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/inversify-binding-decorators/-/inversify-binding-decorators-4.0.0.tgz#c4d1ac50d7d6531f465ee7894e92031f7471c865"
   integrity sha512-r8au/oH3vS7ttHj0RivAznwElySeRohLfg8lvOSzbrX6abf/8ik8ptk49XbzdShgrnalvl7CM6MjcskfM7MMqQ==
