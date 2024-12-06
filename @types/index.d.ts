@@ -1,2 +1,3 @@
-export * from "./EventsInterface";
-export * from "./ContainerInterface";
+export type * from "./EventsInterface";
+
+export type * from "./ContainerInterface";

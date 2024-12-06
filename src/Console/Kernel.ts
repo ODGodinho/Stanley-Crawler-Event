@@ -1,14 +1,14 @@
 import { randomUUID } from "node:crypto";
 
-import { ConfigInterface } from "@odg/config";
 import { LoggerInterface } from "@odg/log";
-import { inject, injectable } from "inversify";
+import { inject } from "inversify";
+import { fluentProvide } from "inversify-binding-decorators";
 import { chromium } from "playwright-core";
 
+import { ContainerInterface } from "#types";
 import Container from "@app/Container";
-import { type MyBrowser } from "@engine";
-import { BrowserManagerType } from "@engine";
-import { ContainerName } from "@enums";
+import { type MyBrowser, BrowserManagerType } from "@engine";
+import { ConfigName, ContainerName } from "@enums";
 import { ProcessKernel } from "~/Console/ProcessKernel";
 
 /**
@@ -16,11 +16,11 @@ import { ProcessKernel } from "~/Console/ProcessKernel";
  *
  * @class Kernel
  */
-@injectable()
+@(fluentProvide(ContainerName.Kernel).inSingletonScope().done())
 export class Kernel {
 
     public constructor(
-        @inject(ContainerName.Config) public readonly config: ConfigInterface,
+        @inject(ContainerName.Config) public readonly config: ContainerInterface[ContainerName.Config],
         @inject(ContainerName.ConsoleLogger) public readonly consoleLogger: LoggerInterface,
         @inject(ContainerName.Container) public readonly container: Container,
         @inject(ContainerName.ProcessKernel) public readonly processKernel: ProcessKernel,
@@ -68,7 +68,7 @@ export class Kernel {
             args: [
                 "--no-zygote", // Use this to working in docker
             ],
-            headless: process.env.USE_HEADLESS === "true",
+            headless: await this.config.get(ConfigName.USE_HEADLESS),
         })) as MyBrowser;
 
         this.container.bind(

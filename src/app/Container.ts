@@ -3,8 +3,8 @@ import {
     type CreateContextFactoryType,
     type CreatePageFactoryType,
     BrowserManager,
-    type HandlerInterface,
-    type PageInterface,
+    type ContextChemicalXInterface,
+    ContainerHelper,
 } from "@odg/chemical-x";
 import { JsonConfig } from "@odg/config";
 import { EventEmitterBus } from "@odg/events";
@@ -13,31 +13,29 @@ import { ConsoleLogger, Logger } from "@odg/log";
 import {
     Container as ContainerInversify, decorate, injectable, type interfaces,
 } from "inversify";
+import { buildProviderModule } from "inversify-binding-decorators";
 
 import { type ContainerNameType, type ContainerType, type EventTypes } from "#types";
 import { type ConfigType, configValidator } from "@configs";
 import { ConfigName, ContainerName } from "@enums";
-import { type PageOrHandlerFactoryType } from "@factory";
-import { GoogleSearchToSelectionHandler } from "@handlers/GoogleSearch/GoogleSearchHandler";
-import { type BasePageInterface } from "@interfaces/BasePageInterface";
-import { SearchEventListener } from "@listeners/SearchEventListener";
-import { SearchPage } from "@pages/Google/SearchPage";
-import { EventServiceProvider } from "@providers/EventServiceProvider";
-import { ExampleCrawlerService } from "@services/ExampleCrawlerService";
 
 import { Browser, Context, Page } from "../Browser";
-import { Kernel, ProcessKernel } from "../Console";
 import {
     type BrowserClassEngine,
     type ContextClassEngine,
     type PageClassEngine,
 } from "../engine";
 
+import "../Console";
+import "@listeners";
+import "@handlers";
+import "@pages";
+import "@providers";
+import "@services";
+
 export default class Container {
 
     public readonly container: ContainerInversify;
-
-    private pageContainerNumber = 0;
 
     public constructor() {
         this.container = new ContainerInversify({ skipBaseClassChecks: true });
@@ -45,11 +43,12 @@ export default class Container {
 
     public async setUp(): Promise<void> {
         await this.prepareInjectable();
+        this.container.load(buildProviderModule());
+        this.container.load(ContainerHelper.loadModule(this.container));
         await this.bindCrawler();
         await this.bindKernel();
         await this.initBeginKernel();
         await this.bindStanley();
-        await this.bindEventsAndListeners();
     }
 
     /**
@@ -149,25 +148,10 @@ export default class Container {
             ContainerName.ConsoleLogger,
         ).to(ConsoleLogger).inSingletonScope();
 
-        // Event Provider
-        this.bind(
-            ContainerName.EventServiceProvider,
-        ).to(EventServiceProvider).inSingletonScope();
-
         // Container instance
         this.bind(
             ContainerName.Container,
         ).toDynamicValue(() => this).inSingletonScope();
-
-        // Kernel Inject Service
-        this.bind(
-            ContainerName.ProcessKernel,
-        ).to(ProcessKernel).inSingletonScope();
-
-        // Kernel Inject Service
-        this.bind(
-            ContainerName.Kernel,
-        ).to(Kernel).inSingletonScope();
     }
 
     /**
@@ -184,27 +168,15 @@ export default class Container {
             ContainerName.Requester,
         ).to(AxiosMessage).inSingletonScope();
 
-        // Example Service
-        this.bind(
-            ContainerName.ExampleCrawlerService,
-        ).to(ExampleCrawlerService).inSingletonScope();
-
         const appName = await this.get(ContainerName.Config).get(ConfigName.APP_NAME);
         this.bind(
             ContainerName.JSONLogger,
         ).toDynamicValue(() => new JSONLoggerPlugin(appName ?? "unknown")).inSingletonScope();
-    }
 
-    private async bindEventsAndListeners(): Promise<void> {
         // EventBus Interface
         this.bind(
             ContainerName.EventBus,
         ).to(EventEmitterBus<EventTypes>).inSingletonScope();
-
-        // SearchGoogle Listeners bind
-        this.bind(
-            ContainerName.SearchEventListeners,
-        ).to(SearchEventListener).inSingletonScope();
     }
 
     private async bindCrawler(): Promise<void> {
@@ -215,46 +187,17 @@ export default class Container {
             (
                 browserInstance: BrowserClassEngine,
                 newContext: CreateContextFactoryType<ContextClassEngine, PageClassEngine>,
-                newPage: CreatePageFactoryType<PageClassEngine>,
+                newPage: CreatePageFactoryType<ContextChemicalXInterface<ContextClassEngine>, PageClassEngine>,
             ) => new Browser(browserInstance, newContext, newPage),
             (
                 contextEngine: ContextClassEngine,
-                newPage: CreatePageFactoryType<PageClassEngine>,
+                newPage: CreatePageFactoryType<ContextChemicalXInterface<ContextClassEngine>, PageClassEngine>,
             ) => new Context(contextEngine, newPage),
-            (pageEngine: PageClassEngine) => new Page(pageEngine),
+            (
+                context: ContextChemicalXInterface<ContextClassEngine>,
+                pageEngine: PageClassEngine,
+            ) => new Page(context, pageEngine),
         ));
-
-        // SearchPage Google
-        this.bind(ContainerName.SearchPageFactory)
-            .toFactory(() => this.instancePageOrHandler<SearchPage>(SearchPage));
-
-        // SearchHandler Google
-        this.bind(ContainerName.SearchHandlerFactory)
-            .toFactory(() => this.instancePageOrHandler<GoogleSearchToSelectionHandler>(
-                GoogleSearchToSelectionHandler,
-            ));
-    }
-
-    /**
-     * Use To instance a page and handler Crawler
-     *
-     * @template {PageInterface} PageType
-     * @memberof Container
-     * @param {BasePageInterface} BasePagePrepare Page Class instantiable
-     * @returns {PageOrHandlerFactoryType<PageType>}
-     */
-    private instancePageOrHandler<PageType extends HandlerInterface | PageInterface>(
-        BasePagePrepare: BasePageInterface,
-    ): PageOrHandlerFactoryType<PageType> {
-        return (page: PageClassEngine): PageType => {
-            const container = `PageOrHandler${this.pageContainerNumber++}`;
-            this.container.bind(container).to(BasePagePrepare);
-            const value = this.container.get<PageType>(container);
-            this.container.unbind(container);
-            (value as unknown as { page: unknown }).page = page;
-
-            return value;
-        };
     }
 
 }
