@@ -1,3 +1,4 @@
+import { ContainerHelper } from "@odg/chemical-x";
 import {
     EventBusInterface,
     EventServiceProvider as EventServiceProviderBase,
@@ -9,7 +10,7 @@ import {
 import { fluentProvide } from "inversify-binding-decorators";
 
 import { type EventTypes } from "#types/EventsInterface";
-import { ContainerName, EventName } from "@enums";
+import { ContainerName } from "@enums";
 
 import Container from "../Container";
 
@@ -72,14 +73,7 @@ export class EventServiceProvider<Events extends EventTypes> extends EventServic
      */
     private getListeners(): EventListener<EventTypes> {
         return {
-            [EventName.SearchPageEvent]: [
-                {
-                    listener: this.container.get(ContainerName.SearchEventListeners),
-                    options: {
-                        once: false,
-                    },
-                },
-            ],
+            ...ContainerHelper.getEvents(this.container.container),
         };
     }
 
