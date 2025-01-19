@@ -577,23 +577,24 @@
     axios "*"
 
 "@odg/chemical-x@*":
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/@odg/chemical-x/-/chemical-x-1.15.0.tgz#4a304c0f8b2d24c5fea1cc55f4c142568f35f9e8"
-  integrity sha512-cpZ5JQyEODn9e6/7JjJ2Te1oZ3BG4nncb1O9eYZwr8EBcj9vTiyc1FmOKyZ9HH4qvOQCEN+QEK7sOHf53dfnKA==
+  version "1.18.0"
+  resolved "https://registry.yarnpkg.com/@odg/chemical-x/-/chemical-x-1.18.0.tgz#db49e7743620c4c0a17d3c6ac953d156ef7c9cbf"
+  integrity sha512-7AP2KUi88T+zFR2Ntj9d6Wzbl66Gl4hO86JEr7IzDinvdCuPR4lnP+Z3G9KaOV4Heaa0KWT+EucR3j17+P6XKg==
   dependencies:
     "@odg/exception" "*"
   optionalDependencies:
+    "@odg/events" "^1.2.0"
     inversify "^6.1.4"
     reflect-metadata "^0.2.2"
 
 "@odg/command@*":
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/@odg/command/-/command-1.8.0.tgz#c81af037ca677f94e01e4fb95ccea303d217bade"
-  integrity sha512-jU+y8nK3lV4pPLlGpsZfvpnvOXAC3BD0kJsXdhHPjT/GKyMmcj92Cz4CyU63YA4UIDVGSybR4XNDuaMkAld4mw==
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@odg/command/-/command-1.9.0.tgz#279bef7fa979695be6219a3f7676c0bce83e68ad"
+  integrity sha512-UxjnzCO/1B0QVrDsoKakoFdzVcPnNxbdpvixhIZJ5TNWV3jmL25vReAl8EvpHqDD4+kEJPcc3Equ5JhxTJmdyw==
   dependencies:
     "@odg/chemical-x" "*"
     "@odg/exception" "*"
-    commander "^12.1.0"
+    commander "^13.0.0"
 
 "@odg/config@*":
   version "1.1.2"
@@ -650,7 +651,7 @@
     "@typescript-eslint/utils" "*"
     comment-parser "*"
 
-"@odg/events@*":
+"@odg/events@*", "@odg/events@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@odg/events/-/events-1.2.0.tgz#a196aa5de01469434eb4c4b88c5f09b4947bd426"
   integrity sha512-yuyOXDsl5zp7fZ8a8vtAme0PT/Ot8UOdcjLQCDS3VQTaDGm5ikAhX/Lz0IMP8CmdOCazeDayZXtqOoHBYU3QMA==
@@ -1522,15 +1523,20 @@ combined-stream@^1.0.8:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@^12.1.0, commander@~12.1.0:
-  version "12.1.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-12.1.0.tgz#01423b36f501259fdaac4d0e4d60c96c991585d3"
-  integrity sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA==
+commander@^13.0.0:
+  version "13.0.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-13.0.0.tgz#1b161f60ee3ceb8074583a0f95359a4f8701845c"
+  integrity sha512-oPYleIY8wmTVzkvQq10AEok6YcTC4sRUBl8F9gVuwchGVUCTbl/vhLTaQqutuuySYOsu8YTgV+OxKc/8Yvx+mQ==
 
 commander@^9.0.0:
   version "9.5.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-9.5.0.tgz#bc08d1eb5cedf7ccb797a96199d41c7bc3e60d30"
   integrity sha512-KRs7WVDKg86PWiuAqhDrAQnTXZKraVcCc6vFdL14qrZ/DcWwuRo7VoiYXalXO7S5GKpqYiVEwCbgFDfxNHKJBQ==
+
+commander@~12.1.0:
+  version "12.1.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-12.1.0.tgz#01423b36f501259fdaac4d0e4d60c96c991585d3"
+  integrity sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA==
 
 comment-parser@*, comment-parser@1.4.1, comment-parser@^1.4.0:
   version "1.4.1"
