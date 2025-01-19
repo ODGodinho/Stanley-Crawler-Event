@@ -577,13 +577,12 @@
     axios "*"
 
 "@odg/chemical-x@*":
-  version "1.18.0"
-  resolved "https://registry.yarnpkg.com/@odg/chemical-x/-/chemical-x-1.18.0.tgz#db49e7743620c4c0a17d3c6ac953d156ef7c9cbf"
-  integrity sha512-7AP2KUi88T+zFR2Ntj9d6Wzbl66Gl4hO86JEr7IzDinvdCuPR4lnP+Z3G9KaOV4Heaa0KWT+EucR3j17+P6XKg==
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/@odg/chemical-x/-/chemical-x-1.15.0.tgz#4a304c0f8b2d24c5fea1cc55f4c142568f35f9e8"
+  integrity sha512-cpZ5JQyEODn9e6/7JjJ2Te1oZ3BG4nncb1O9eYZwr8EBcj9vTiyc1FmOKyZ9HH4qvOQCEN+QEK7sOHf53dfnKA==
   dependencies:
     "@odg/exception" "*"
   optionalDependencies:
-    "@odg/events" "^1.2.0"
     inversify "^6.1.4"
     reflect-metadata "^0.2.2"
 
@@ -651,7 +650,7 @@
     "@typescript-eslint/utils" "*"
     comment-parser "*"
 
-"@odg/events@*", "@odg/events@^1.2.0":
+"@odg/events@*":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@odg/events/-/events-1.2.0.tgz#a196aa5de01469434eb4c4b88c5f09b4947bd426"
   integrity sha512-yuyOXDsl5zp7fZ8a8vtAme0PT/Ot8UOdcjLQCDS3VQTaDGm5ikAhX/Lz0IMP8CmdOCazeDayZXtqOoHBYU3QMA==
