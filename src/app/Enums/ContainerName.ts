@@ -18,7 +18,7 @@ export enum ContainerName {
     "SearchHandlerFactory" = "search.handler.factory",
 
     // Events
-    "SearchEventListeners" = "search.event.listeners",
+    "SearchEventListener" = "search.event.listener",
     "EventServiceProvider" = "event.service.provider",
     "ExampleCrawlerService" = "example.crawler.service",
 }

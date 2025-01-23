@@ -9,8 +9,8 @@ import { ContainerName, EventName } from "@enums";
 import { PageOrHandlerFactoryType } from "@factory";
 import { type SearchPage } from "@pages/Google/SearchPage";
 
-@ContainerHelper.registerListener(EventName.SearchPageEvent, ContainerName.SearchEventListeners, {})
-@(fluentProvide(ContainerName.SearchEventListeners).inSingletonScope().done())
+@ContainerHelper.registerListener(EventName.SearchPageEvent, ContainerName.SearchEventListener, {})
+@(fluentProvide(ContainerName.SearchEventListener).inSingletonScope().done())
 export class SearchEventListener implements EventListenerInterface<EventTypes, EventName.SearchPageEvent> {
 
     public constructor(
@@ -20,7 +20,7 @@ export class SearchEventListener implements EventListenerInterface<EventTypes, E
     }
 
     public async handler({ page }: EventBrowserParameters): Promise<void> {
-        await this.log.debug("SearchEventListeners is sended");
+        await this.log.debug("SearchEventListener is sended");
         const myStep = this.searchPage(page);
         await myStep.execute();
     }

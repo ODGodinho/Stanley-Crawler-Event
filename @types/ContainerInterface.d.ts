@@ -42,7 +42,7 @@ export interface ContainerInterface {
     [ContainerName.SearchHandlerFactory]: PageOrHandlerFactoryType<SearchPage>;
 
     // Events
-    [ContainerName.SearchEventListeners]: EventListenerInterface<EventTypes, EventName.SearchPageEvent>;
+    [ContainerName.SearchEventListener]: EventListenerInterface<EventTypes, EventName.SearchPageEvent>;
 
     // Services
     [ContainerName.ExampleCrawlerService]: ExampleCrawlerService;

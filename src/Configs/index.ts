@@ -1,13 +1,14 @@
 import zod from "zod";
 
+import { ConfigName } from "@app/Enums";
 import { CustomValidator } from "~/Validator";
 
 export const configValidator = zod.object({
-    USE_HEADLESS: CustomValidator.zodStringBoolean(),
-    APP_NAME: zod.string().nullish(),
-    HANDLER_TIMEOUT: CustomValidator.zodStringNumber(),
-    HANDLER_ATTEMPT: CustomValidator.zodStringNumber(),
-    PAGE_ATTEMPT: CustomValidator.zodStringNumber(),
+    [ConfigName.USE_HEADLESS]: CustomValidator.zodStringBoolean(),
+    [ConfigName.APP_NAME]: zod.string().nullish(),
+    [ConfigName.HANDLER_TIMEOUT]: CustomValidator.zodStringNumber(),
+    [ConfigName.HANDLER_ATTEMPT]: CustomValidator.zodStringNumber(),
+    [ConfigName.PAGE_ATTEMPT]: CustomValidator.zodStringNumber(),
 });
 
 export type ConfigType = zod.infer<typeof configValidator>;
