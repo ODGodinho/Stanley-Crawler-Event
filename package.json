@@ -10,6 +10,7 @@
         "url": "https://github.com/ODGodinho/Stanley-Crawler-Event"
     },
     "scripts": {
+        "reset": "rimraf dist/ node_modules/ && yarn upgrade && yarn build",
         "build": "rimraf dist/ && tsc --project ./tsconfig.build.json && tsc-alias -p tsconfig.build.json",
         "build:watch": "npm run build && (concurrently \"tsc --project ./tsconfig.build.json -w\" \"tsc-alias -p tsconfig.build.json -w\")",
         "dev": "tsx --env-file=.env ./src/index.ts",

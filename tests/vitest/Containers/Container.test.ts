@@ -12,8 +12,10 @@ function bind(): undefined {
 describe("Container Test", () => {
     test("Container GetAsync", async () => {
         container.bind(ContainerName.Browser)
-            .toConstantValue(await container.get(ContainerName.BrowserManager)
-                .newBrowser(async () => chromium.launch()));
+            .toConstantValue(
+                await container.get(ContainerName.BrowserManager)
+                    .newBrowser(async () => chromium.launch()),
+            );
 
         const service = await container.getAsync(ContainerName.ExampleCrawlerService);
 

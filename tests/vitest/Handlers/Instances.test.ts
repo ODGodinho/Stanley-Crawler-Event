@@ -7,9 +7,7 @@ import { BaseHandler } from "@handlers/BaseHandler";
 
 import { container } from "../SingletonTest";
 
-const pages = [
-    ContainerName.SearchHandlerFactory,
-];
+const pages = Object.values(ContainerName).filter((value) => String(value).includes("handler.factory"));
 
 describe.each(pages)("Container Instance Handler", (handlerName: ContainerName) => {
     test(`Instance Handler ${handlerName.toString()}`, async () => {
