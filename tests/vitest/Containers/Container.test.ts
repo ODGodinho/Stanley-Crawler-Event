@@ -53,3 +53,9 @@ describe("Container Test", () => {
         expect(container.getOptional(ContainerName.Logger)).not.toBeUndefined();
     });
 });
+
+describe.each(Object.values(ContainerName))("Container Instances Test", (containerName: ContainerName) => {
+    test(`ContainerName: ${containerName}`, async () => {
+        expect(() => container.getOptional(containerName)).not.toThrowError();
+    });
+});
