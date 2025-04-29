@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
 
-import { ContainerHelper, type PageInterface } from "@odg/chemical-x";
+import { ContainerHelper, ODGDecorators, type PageInterface } from "@odg/chemical-x";
 
 import { ConfigName, ContainerName } from "@app/Enums";
 import { BasePage } from "@pages/BasePage";
@@ -9,6 +9,7 @@ import {
     googleSearchSelector,
 } from "@selectors";
 
+@ODGDecorators.attemptableFlow()
 @ContainerHelper.injectablePage(ContainerName.SearchPageFactory)
 export class SearchPage extends BasePage implements PageInterface {
 
@@ -20,12 +21,10 @@ export class SearchPage extends BasePage implements PageInterface {
      * @returns {Promise<void>}
      */
     public async execute(): Promise<void> {
-        await this.start(async () => {
-            await this.preStart();
-            await this.page.goto("https://www.google.com/", { timeout: 8000, waitUntil: "load" });
-            await this.fillSearch();
-            await this.search();
-        });
+        await this.preStart();
+        await this.page.goto("https://www.google.com/", { timeout: 8000, waitUntil: "load" });
+        await this.fillSearch();
+        await this.search();
     }
 
     /**
