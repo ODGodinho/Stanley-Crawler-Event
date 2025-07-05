@@ -9,8 +9,8 @@ import {
     googleSearchSelector,
 } from "@selectors";
 
-@ODGDecorators.attemptableFlow()
 @ContainerHelper.injectablePage(ContainerName.SearchPageFactory)
+@ODGDecorators.attemptableFlow()
 export class SearchPage extends BasePage implements PageInterface {
 
     public readonly $s: GoogleSearchSelectorType = googleSearchSelector;

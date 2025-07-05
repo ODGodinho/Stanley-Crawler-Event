@@ -47,7 +47,7 @@ export default class Container {
         this.container.load(ContainerHelper.loadModule(this.container));
         await this.bindCrawler();
         await this.bindKernel();
-        await this.initBeginKernel();
+        await this.get(ContainerName.Kernel).init();
         await this.bindStanley();
     }
 
@@ -126,15 +126,6 @@ export default class Container {
     }
 
     /**
-     * Init before all Binders Container
-     *
-     * @returns {Promise<void>}
-     */
-    private async initBeginKernel(): Promise<void> {
-        await this.get(ContainerName.Kernel).init();
-    }
-
-    /**
      * Init all requires class for Kernel
      *
      * @returns {Promise<void>}
@@ -148,6 +139,11 @@ export default class Container {
             ContainerName.ConsoleLogger,
         ).to(ConsoleLogger).inSingletonScope();
 
+        // Logger Class
+        this.bind(
+            ContainerName.Logger,
+        ).to(Logger).inSingletonScope();
+
         // Container instance
         this.bind(
             ContainerName.Container,
@@ -158,11 +154,6 @@ export default class Container {
      * BindStanley method
      */
     private async bindStanley(): Promise<void> {
-        // Logger Class
-        this.bind(
-            ContainerName.Logger,
-        ).to(Logger).inSingletonScope();
-
         // Message/Request Axios
         this.bind(
             ContainerName.Requester,
