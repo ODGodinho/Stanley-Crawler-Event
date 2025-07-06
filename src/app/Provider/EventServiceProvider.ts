@@ -1,4 +1,4 @@
-import { ContainerHelper } from "@odg/chemical-x";
+import { ODGDecorators } from "@odg/chemical-x";
 import {
     EventBusInterface,
     EventServiceProvider as EventServiceProviderBase,
@@ -73,7 +73,7 @@ export class EventServiceProvider<Events extends EventTypes> extends EventServic
      */
     private getListeners(): EventListener<EventTypes> {
         return {
-            ...ContainerHelper.getEvents(this.container.container),
+            ...ODGDecorators.getEvents(this.container.container),
         };
     }
 

@@ -1,4 +1,4 @@
-import { ContainerHelper } from "@odg/chemical-x";
+import { ODGDecorators } from "@odg/chemical-x";
 import { type EventListenerInterface } from "@odg/events";
 import { LoggerInterface } from "@odg/log";
 import { inject } from "inversify";
@@ -9,7 +9,7 @@ import { ContainerName, EventName } from "@enums";
 import { PageOrHandlerFactoryType } from "@factory";
 import { type SearchPage } from "@pages/Google/SearchPage";
 
-@ContainerHelper.registerListener(EventName.SearchPageEvent, ContainerName.SearchEventListener, {})
+@ODGDecorators.registerListener(EventName.SearchPageEvent, ContainerName.SearchEventListener, {})
 @(fluentProvide(ContainerName.SearchEventListener).inSingletonScope().done())
 export class SearchEventListener implements EventListenerInterface<EventTypes, EventName.SearchPageEvent> {
 

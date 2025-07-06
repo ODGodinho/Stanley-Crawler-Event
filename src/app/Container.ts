@@ -4,7 +4,7 @@ import {
     type CreatePageFactoryType,
     BrowserManager,
     type ContextChemicalXInterface,
-    ContainerHelper,
+    ODGDecorators,
 } from "@odg/chemical-x";
 import { JsonConfig } from "@odg/config";
 import { EventEmitterBus } from "@odg/events";
@@ -44,7 +44,7 @@ export default class Container {
     public async setUp(): Promise<void> {
         await this.prepareInjectable();
         this.container.load(buildProviderModule());
-        this.container.load(ContainerHelper.loadModule(this.container));
+        this.container.load(ODGDecorators.loadModule(this.container));
         await this.bindCrawler();
         await this.bindKernel();
         await this.get(ContainerName.Kernel).init();

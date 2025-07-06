@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
 
-import { ContainerHelper, ODGDecorators, type PageInterface } from "@odg/chemical-x";
+import { ODGDecorators, type PageInterface } from "@odg/chemical-x";
 
 import { ConfigName, ContainerName } from "@app/Enums";
 import { BasePage } from "@pages/BasePage";
@@ -9,7 +9,7 @@ import {
     googleSearchSelector,
 } from "@selectors";
 
-@ContainerHelper.injectablePage(ContainerName.SearchPageFactory)
+@ODGDecorators.injectablePageOrHandler(ContainerName.SearchPageFactory)
 @ODGDecorators.attemptableFlow()
 export class SearchPage extends BasePage implements PageInterface {
 

@@ -3,14 +3,14 @@ import {
     type HandlerFunction,
     HandlerSolution,
     RetryAction,
-    ContainerHelper,
+    ODGDecorators,
 } from "@odg/chemical-x";
 import { type Exception } from "@odg/exception";
 
 import { ConfigName, ContainerName, EventName } from "@enums";
 import { BaseHandler } from "@handlers/BaseHandler";
 
-@ContainerHelper.injectablePage(ContainerName.SearchHandlerFactory)
+@ODGDecorators.injectablePageOrHandler(ContainerName.SearchHandlerFactory)
 export class GoogleSearchToSelectionHandler extends BaseHandler implements HandlerInterface {
 
     public async waitForHandler(): Promise<HandlerFunction> {
