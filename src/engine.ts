@@ -9,8 +9,6 @@ import {
     type BrowserContextOptions,
 } from "playwright-core";
 
-import { type Browser as BrowserClass, type Context as ContextClass } from "./Browser";
-
 export type BrowserTypeEngine = BrowserType;
 
 export type BrowserOptionsEngine = LaunchOptions;
@@ -25,12 +23,6 @@ export type ContextClassEngine = BrowserContext;
 
 export type PageClassEngine = Page;
 
-export const browserEngine = chromium;
-
-export type MyBrowser = BrowserClass & BrowserClassEngine;
-
-export type MyPage = Page & PageClassEngine;
-
-export type MyContext = ContextClass & ContextClassEngine;
-
 export type BrowserManagerType = BrowserManager<BrowserClassEngine, ContextClassEngine, PageClassEngine>;
+
+export const browserEngine = chromium;

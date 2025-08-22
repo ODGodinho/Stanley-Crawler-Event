@@ -7,16 +7,17 @@ import zod from "zod";
  */
 export class CustomValidator {
 
-    public static zodStringBoolean(): zod.ZodUnion<[zod.ZodBoolean, zod.ZodEffects<zod.ZodString, boolean, string>]> {
+    public static zodStringBoolean(): zod.ZodUnion<
+        readonly [zod.ZodBoolean, zod.ZodPipe<zod.ZodString, zod.ZodTransform<boolean, string>>]
+    > {
         return zod.union([
             zod.boolean(),
             zod.string().transform((data): boolean => data === "true"),
         ]);
     }
 
-    public static zodStringNumber(): zod.ZodUnion<[
-        zod.ZodNumber,
-        zod.ZodEffects<zod.ZodEffects<zod.ZodString, number, string>, number, string>]
+    public static zodStringNumber(): zod.ZodUnion<
+        readonly [zod.ZodNumber, zod.ZodPipe<zod.ZodString, zod.ZodTransform<number, string>>]
     > {
         return zod.union([
             zod.number(),

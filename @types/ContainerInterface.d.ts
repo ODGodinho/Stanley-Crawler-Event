@@ -7,7 +7,7 @@ import { type MessageInterface } from "@odg/message";
 import type Container from "@app/Container";
 import { type ConfigType } from "@configs";
 import {
-    type MyBrowser,
+    type BrowserClassEngine,
     type BrowserManagerType,
 } from "@engine";
 import { type EventName, type ContainerName } from "@enums";
@@ -21,7 +21,7 @@ import { type EventTypes } from "./EventsInterface";
 
 export interface ContainerInterface {
     [ContainerName.Logger]: Logger | undefined;
-    [ContainerName.Browser]: MyBrowser | undefined;
+    [ContainerName.Browser]: BrowserClassEngine | undefined;
     [ContainerName.Requester]: MessageInterface;
     [ContainerName.EventBus]: EventBusInterface<EventTypes>;
     [ContainerName.ProcessKernel]: ProcessKernel;

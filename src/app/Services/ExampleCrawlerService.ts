@@ -4,7 +4,7 @@ import { inject } from "inversify";
 import { fluentProvide } from "inversify-binding-decorators";
 
 import { type EventTypes } from "#types/EventsInterface";
-import { MyBrowser } from "@engine";
+import { BrowserClassEngine } from "@engine";
 import { ContainerName, EventName } from "@enums";
 
 import { type GoogleSearchToSelectionHandler } from "../../Handlers/GoogleSearch/GoogleSearchHandler";
@@ -16,7 +16,7 @@ export class ExampleCrawlerService {
     public constructor(
         @inject(ContainerName.Logger) protected log: LoggerInterface,
         @inject(ContainerName.EventBus) protected bus: EventBusInterface<EventTypes>,
-        @inject(ContainerName.Browser) protected browser: MyBrowser,
+        @inject(ContainerName.Browser) protected browser: BrowserClassEngine,
         @inject(ContainerName.SearchHandlerFactory) protected searchToSelectionHandler: PageOrHandlerFactoryType<
             GoogleSearchToSelectionHandler
         >,

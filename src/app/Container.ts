@@ -10,9 +10,7 @@ import { JsonConfig } from "@odg/config";
 import { EventEmitterBus } from "@odg/events";
 import { JSONLoggerPlugin } from "@odg/json-log";
 import { ConsoleLogger, Logger } from "@odg/log";
-import {
-    Container as ContainerInversify, decorate, injectable, type interfaces,
-} from "inversify";
+import { Container as ContainerInversify, type interfaces } from "inversify";
 import { buildProviderModule } from "inversify-binding-decorators";
 
 import { type ContainerNameType, type ContainerType, type EventTypes } from "#types";
@@ -42,7 +40,6 @@ export default class Container {
     }
 
     public async setUp(): Promise<void> {
-        await this.prepareInjectable();
         this.container.load(buildProviderModule());
         this.container.load(ODGDecorators.loadModule(this.container));
         await this.bindCrawler();
@@ -114,18 +111,6 @@ export default class Container {
     }
 
     /**
-     * Adapter Injectable class constructor
-     *
-     * @memberof Container
-     * @returns {Promise<void>}
-     */
-    private async prepareInjectable(): Promise<void> {
-        decorate(injectable(), Logger);
-        decorate(injectable(), ConsoleLogger);
-        decorate(injectable(), EventEmitterBus);
-    }
-
-    /**
      * Init all requires class for Kernel
      *
      * @returns {Promise<void>}
@@ -137,12 +122,12 @@ export default class Container {
 
         this.bind(
             ContainerName.ConsoleLogger,
-        ).to(ConsoleLogger).inSingletonScope();
+        ).toDynamicValue(() => new ConsoleLogger()).inSingletonScope();
 
         // Logger Class
         this.bind(
             ContainerName.Logger,
-        ).to(Logger).inSingletonScope();
+        ).toDynamicValue(() => new Logger()).inSingletonScope();
 
         // Container instance
         this.bind(
@@ -167,7 +152,7 @@ export default class Container {
         // EventBus Interface
         this.bind(
             ContainerName.EventBus,
-        ).to(EventEmitterBus<EventTypes>).inSingletonScope();
+        ).toDynamicValue(() => new EventEmitterBus<EventTypes>()).inSingletonScope();
     }
 
     private async bindCrawler(): Promise<void> {

@@ -42,7 +42,7 @@ export class SearchPage extends BasePage implements PageInterface {
      * @returns {Promise<void>}
      */
     public async fillSearch(): Promise<void> {
-        const numberOfCharsHex = 5;
+        const numberOfCharsHex = 2;
         await this.page.fill(this.$s.searchInput, crypto.randomBytes(numberOfCharsHex).toString("hex"));
     }
 

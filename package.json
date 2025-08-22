@@ -67,11 +67,11 @@
         "@vitest/coverage-istanbul": "^1",
         "concurrently": "^9.2.0",
         "husky": "^9.1.7",
-        "lint-staged": "^16.1.2",
+        "lint-staged": "^16.1.5",
         "rimraf": "*",
         "tsc-alias": "^1.8.16",
-        "tsx": "^4.20.3",
-        "typescript": "^5.8.3",
+        "tsx": "^4.20.4",
+        "typescript": "^5.9.2",
         "vite-tsconfig-paths": "^4",
         "vitest": "^1"
     },
@@ -86,9 +86,9 @@
         "@odg/message": "*",
         "inversify": "^6",
         "inversify-binding-decorators": "^4.0.0",
-        "playwright": "^1.53.2",
-        "playwright-core": "^1.53.2",
+        "playwright": "^1.55.0",
+        "playwright-core": "^1.55.0",
         "reflect-metadata": "^0.2.2",
-        "zod": "^3.25.74"
+        "zod": "^4.0.17"
     }
 }

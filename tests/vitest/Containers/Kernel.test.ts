@@ -1,21 +1,25 @@
 import { vi } from "vitest";
 
+import Container from "@app/Container";
 import { ContainerName } from "@enums";
 
-import { container } from "../SingletonTest";
-
 describe("Container Kernel Test", () => {
-    beforeEach(() => {
+    let container: Container;
+    beforeEach(async () => {
+        container = new Container();
+        await container.setUp();
+
         const loggerMock = vi.spyOn(container.get(ContainerName.Logger)!, "info");
         loggerMock.mockImplementation(async (): Promise<void> => {
             // Not action
         });
     });
 
-    test("Kernel setup", async () => {
+    test("Kernel setup and shutdown", async () => {
         const kernel = container.get(ContainerName.Kernel);
 
         await expect(kernel.boot()).resolves.toBeUndefined();
+        await expect(kernel.shutdown()).resolves.toBeUndefined();
     });
 
     test("Kernel boot process.send", async () => {

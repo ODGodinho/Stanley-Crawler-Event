@@ -7,7 +7,7 @@ import { chromium } from "playwright-core";
 
 import { ContainerInterface } from "#types";
 import Container from "@app/Container";
-import { type MyBrowser, BrowserManagerType } from "@engine";
+import { BrowserManagerType } from "@engine";
 import { ConfigName, ContainerName } from "@enums";
 import { ProcessKernel } from "~/Console/ProcessKernel";
 
@@ -44,6 +44,19 @@ export class Kernel {
     }
 
     /**
+     * Shutdown all containers, and end All background Process
+     *
+     * @returns {Promise<void>}
+     */
+    public async shutdown(): Promise<void> {
+        await Promise.all([
+            this.container.get(ContainerName.EventServiceProvider).shutdown(),
+            this.container.getOptional(ContainerName.Browser)?.close(),
+            this.container.container.unbindAllAsync(),
+        ]);
+    }
+
+    /**
      * Init before all binders registers, just the essentials before starting all containers.
      *
      * @returns {Promise<void>}
@@ -69,7 +82,7 @@ export class Kernel {
                 "--no-zygote", // Use this to working in docker
             ],
             headless: await this.config.get(ConfigName.USE_HEADLESS),
-        })) as MyBrowser;
+        }));
 
         this.container.bind(
             ContainerName.Browser,
