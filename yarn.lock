@@ -564,9 +564,9 @@
     axios "*"
 
 "@odg/chemical-x@*", "@odg/chemical-x@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@odg/chemical-x/-/chemical-x-2.0.0.tgz#da28054bbd1d8ba7781de6cc79f1f5c55e81089a"
-  integrity sha512-ZnkjFFNUhbhPkYEsZbciHSOVPNteajKUDlNhsCHhjgPknSCzHYPiwckVVQtzQOnWfLQY1lpfZ/g5Dees2U97yg==
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@odg/chemical-x/-/chemical-x-2.0.3.tgz#c80884abf619fe447815b8b2f58f947f0a8b33bc"
+  integrity sha512-b9uclw/ixxnDrckGKlLVUH0xPHXoL/Xh6kCLv0Nv+0YsfxBfxlOpT23geHeDLhVl9o70r1zpRwum6xE+n4F/EA==
   dependencies:
     "@odg/exception" "*"
 

@@ -5,7 +5,7 @@ import { BaseHandler } from "@handlers/BaseHandler";
 
 import { container } from "../SingletonTest";
 
-const handlers = Object.values(ContainerName).filter((value) => value.includes("handler.factory"));
+const handlers = Object.values(ContainerName).filter((value) => value.endsWith(".handler"));
 
 describe.each(handlers)("Container Instance Handler", (handlerName: ContainerName) => {
     test(`Instance Handler ${handlerName.toString()}`, async () => {

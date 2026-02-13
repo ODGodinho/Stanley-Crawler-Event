@@ -2,12 +2,12 @@ import { buildProviderModule } from "@inversifyjs/binding-decorators";
 import { AxiosMessage } from "@odg/axios";
 import {
     BrowserManager,
+    Container as ContainerBase,
     type ContextChemicalXInterface,
     type CreateContextFactoryType,
     type CreatePageFactoryType,
     ODGDecorators,
 } from "@odg/chemical-x";
-import { Container as ContainerBase } from "@odg/chemical-x/container";
 import { JsonConfig } from "@odg/config";
 import { EventEmitterBus } from "@odg/events";
 import { JSONLoggerPlugin } from "@odg/json-log";
@@ -39,7 +39,7 @@ export class Container extends ContainerBase<ContainerInterface> {
     public async setUp(): Promise<void> {
         await this.bindKernel();
         await this.load(buildProviderModule());
-        await this.load(ODGDecorators.loadModule(this));
+        await ODGDecorators.loadModule(this);
         await this.bindCrawler();
         await this.get(ContainerName.Kernel).init();
         await this.bindStanley();

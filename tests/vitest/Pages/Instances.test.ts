@@ -5,7 +5,7 @@ import { BasePage } from "@pages/BasePage";
 
 import { container } from "../SingletonTest";
 
-const pages = Object.values(ContainerName).filter((value) => value.includes("page.factory"));
+const pages = Object.values(ContainerName).filter((value) => value.endsWith(".page"));
 
 describe.each(pages)("Container Instance Page", (pageName: ContainerName) => {
     test(`Instance Page ${pageName.toString()}`, async () => {
