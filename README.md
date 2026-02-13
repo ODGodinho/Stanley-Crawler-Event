@@ -56,10 +56,10 @@
 - 🚨 Over 800 rules for pattern, possible errors and errors in Linter
 - 🎇 Code quality guaranteed
 - 📢 AutoReview when opening a pull-request/merge
-    ![AutoReview Comment example](https://user-images.githubusercontent.com/3797062/97085944-87233a80-165b-11eb-94a8-0a47d5e24905.png)
+  ![AutoReview Comment example](https://user-images.githubusercontent.com/3797062/97085944-87233a80-165b-11eb-94a8-0a47d5e24905.png)
 - 🧪 Automatic Test when opening pull-request/merge
 - 📈 Automatic Code Coverage when opening pull-request/merge
-    ![Code Coverage example](https://app.codecov.io/static/media/codecov-report.eeef5dba5ea18b5ed6a4.png)
+  ![Code Coverage example](https://app.codecov.io/static/media/codecov-report.eeef5dba5ea18b5ed6a4.png)
 - 📦 Automatic Package and release generate on merge
 - 🪝 Run Lint/Test command pre-commit execute
 - ⚙️ IOT/IOC (Inversion of Control) for easy use of libraries
@@ -67,7 +67,7 @@
 
 ## 📗 Libraries
 
-- [Node.js 18](https://nodejs.org/?n=dragonsgamers)
+- [Node.js 24](https://nodejs.org/?n=dragonsgamers)
 - [Typescript](https://www.typescriptlang.org/?n=dragonsgamers)
 - [Eslint](https://eslint.org/?n=dragonsgamers)
 - [ODG-Linter-JS](https://github.com/ODGodinho/ODG-Linter-Js?n=dragonsgamers)
@@ -110,19 +110,9 @@ Click in use this template button and clone your template project
 To change you crawler to use puppeteer you change `./engine.ts` file for:
 
 ```typescript
-import puppeteer, {
-    type Browser,
-    type PuppeteerLaunchOptions,
-    type Page,
-    type BrowserContext,
-    type PuppeteerNode,
-} from "puppeteer";
+import puppeteer, { type Browser, type PuppeteerLaunchOptions, type Page, type BrowserContext, type PuppeteerNode } from "puppeteer";
 
-import {
-    type Context as ContextClass,
-    type Browser as BrowserClass,
-    type Page as PageClass,
-} from "./Browser";
+import { type Context as ContextClass, type Browser as BrowserClass, type Page as PageClass } from "./Browser";
 
 export type BrowserTypeEngine = PuppeteerNode;
 
@@ -148,21 +138,23 @@ Include the execution of your page in an event so that you can execute any page 
 
 ```typescript
 export class ExampleEventListener implements EventListenerInterface<EventTypes, EventName.ExampleEvent> {
-
-    @inject(ContainerName.Logger)
+    @$inject(ContainerName.Logger)
     public readonly log!: LoggerInterface;
 
     public async handler(_receivedData: unknown) {
-        await this.log.info('Example Event Listener');
+        await this.log.info("Example Event Listener");
     }
-
 }
 ```
 
 > Register all Events name in `./src/app/Enums/EventName.ts`
+
 ---
+
 > Register all Events Types in `./@types/EventsInterface.ts`
+
 ---
+
 > Register your events in EventServiceProvider to automatic listeners.
 
 ### ↖️ Selector
@@ -171,9 +163,9 @@ The selectors are in the selectors folder
 
 ```typescript
 export const googleSearchSelector = {
-    searchInput: "input[name=\"q\"]",
+    searchInput: 'input[name="q"]',
     buttons: {
-        submit: "input[name=\"btnK\"] >> visible=true",
+        submit: 'input[name="btnK"] >> visible=true',
     },
 };
 
@@ -185,9 +177,7 @@ export type GoogleSearchSelectorType = typeof googleSearchSelector;
 ### ⚙️ Container Bind
 
 ```typescript
-this.bind(
-    ContainerName.Logger,
-).to(ConsoleLogger).inSingletonScope();
+this.bind(ContainerName.Logger).to(ConsoleLogger).inSingletonScope();
 ```
 
 > Register all Container name in `src/app/Enums/ContainerName.ts`
@@ -200,9 +190,7 @@ Use Str, Num, Arr helpers class to manipulate Text, Numbers and Arrays
 ```typescript
 import { Str } from "@odg/chemical-x";
 
-const value = new Str(
-    this.page.locator("#money").innerText(),
-).money();
+const value = new Str(this.page.locator("#money").innerText()).money();
 ```
 
 ### 🟢 Make File

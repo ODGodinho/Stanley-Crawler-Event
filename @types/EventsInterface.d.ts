@@ -1,9 +1,10 @@
-import { type EventObjectType } from "@odg/events";
+import type { EventObjectType } from "@odg/events";
 
-import { type PageClassEngine } from "@engine";
-import { type EventName } from "@enums";
+import type { PageClassEngine } from "@engine";
+import type { EventName } from "@enums";
 
 export interface EventBrowserParameters {
+    // ! Remove If use API crawlers without browser
     page: PageClassEngine;
 }
 

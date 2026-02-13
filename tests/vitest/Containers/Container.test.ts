@@ -1,4 +1,4 @@
-import { chromium } from "playwright-core";
+import { chromium } from "playwright";
 
 import { ContainerName } from "@enums";
 import { ExampleCrawlerService } from "@services/ExampleCrawlerService";
@@ -23,7 +23,7 @@ describe("Container Test", () => {
         expect(service).toHaveProperty("log");
 
         expect(service["log"]).not.toBeUndefined();
-        container.container.unbind(ContainerName.Browser);
+        await container.unbind(ContainerName.Browser);
     });
 
     test.concurrent("Test isBound", async () => {

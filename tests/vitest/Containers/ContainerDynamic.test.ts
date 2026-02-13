@@ -1,6 +1,5 @@
 import * as Engine from "@engine";
 import { ContainerName } from "@enums";
-import * as Factory from "@factory";
 import * as BasePageInterface from "@interfaces";
 
 import { container } from "../SingletonTest";
@@ -16,7 +15,6 @@ describe.each(dynamics)("Container Dynamic Value Get", (containerName: Container
     });
 
     test("Test Not Empty", async () => {
-        expect(Factory).toBeDefined();
         expect(BasePageInterface).toBeDefined();
         expect(Engine).toBeDefined();
     });

@@ -1,30 +1,32 @@
 import { randomUUID } from "node:crypto";
 
-import { LoggerInterface } from "@odg/log";
-import { inject } from "inversify";
-import { fluentProvide } from "inversify-binding-decorators";
-import { chromium } from "playwright-core";
+import { provide } from "@inversifyjs/binding-decorators";
+import { Logger, LoggerInterface } from "@odg/log";
+import { injectable } from "inversify";
+import { chromium } from "playwright";
 
 import { ContainerInterface } from "#types";
-import Container from "@app/Container";
+import type { Container } from "@app/Container";
 import { BrowserManagerType } from "@engine";
 import { ConfigName, ContainerName } from "@enums";
 import { ProcessKernel } from "~/Console/ProcessKernel";
+import { $inject } from "~/ContainerInject";
 
 /**
  * Kernel command class
  *
  * @class Kernel
  */
-@(fluentProvide(ContainerName.Kernel).inSingletonScope().done())
+@injectable("Singleton")
+@provide(ContainerName.Kernel)
 export class Kernel {
 
     public constructor(
-        @inject(ContainerName.Config) public readonly config: ContainerInterface[ContainerName.Config],
-        @inject(ContainerName.ConsoleLogger) public readonly consoleLogger: LoggerInterface,
-        @inject(ContainerName.Container) public readonly container: Container,
-        @inject(ContainerName.ProcessKernel) public readonly processKernel: ProcessKernel,
-        @inject(ContainerName.BrowserManager) public readonly browserManager: BrowserManagerType,
+        @$inject(ContainerName.Config) public readonly config: ContainerInterface[ContainerName.Config],
+        @$inject(ContainerName.ConsoleLogger) public readonly consoleLogger: LoggerInterface,
+        @$inject(ContainerName.Container) public readonly container: Container,
+        @$inject(ContainerName.ProcessKernel) public readonly processKernel: ProcessKernel,
+        @$inject(ContainerName.BrowserManager) public readonly browserManager: BrowserManagerType,
     ) {
     }
 
@@ -35,12 +37,12 @@ export class Kernel {
      */
     public async boot(): Promise<void> {
         await Promise.all([
-            this.container.get(ContainerName.Logger)!.info("Kernel Starting"),
+            this.container.get(ContainerName.Logger).info("Kernel Starting"),
             this.bootLogs(),
             this.bootBrowser(),
             this.container.get(ContainerName.EventServiceProvider).boot(),
-            process.send?.("ready"),
         ]);
+        process.send?.("ready");
     }
 
     /**
@@ -52,7 +54,7 @@ export class Kernel {
         await Promise.all([
             this.container.get(ContainerName.EventServiceProvider).shutdown(),
             this.container.getOptional(ContainerName.Browser)?.close(),
-            this.container.container.unbindAllAsync(),
+            this.container.unbindAll(),
         ]);
     }
 
@@ -69,17 +71,20 @@ export class Kernel {
     }
 
     private async bootLogs(): Promise<void> {
-        const logger = this.container.get(ContainerName.Logger)!;
+        const logger = this.container.get(ContainerName.Logger);
         const jsonLogger = this.container.get(ContainerName.JSONLogger);
-        logger.pushHandler(this.consoleLogger);
-        logger.pushProcessor(jsonLogger);
+
+        (logger as Logger).pushHandler(this.consoleLogger);
+        (logger as Logger).pushProcessor(jsonLogger);
+
         jsonLogger.setIdentifier(randomUUID());
     }
 
     private async bootBrowser(): Promise<void> {
         const browser = await this.browserManager.newBrowser(async () => chromium.launch({
             args: [
-                "--no-zygote", // Use this to working in docker
+                // Use this to working in docker
+                "--no-zygote",
             ],
             headless: await this.config.get(ConfigName.USE_HEADLESS),
         }));

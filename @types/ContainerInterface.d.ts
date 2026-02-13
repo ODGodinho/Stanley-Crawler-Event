@@ -1,26 +1,26 @@
-import { type ConfigInterface } from "@odg/config";
-import { type EventListenerInterface, type EventBusInterface } from "@odg/events";
-import { type JSONLoggerPlugin } from "@odg/json-log";
-import { type Logger, type LoggerInterface } from "@odg/log";
-import { type MessageInterface } from "@odg/message";
+import type { ConfigInterface } from "@odg/config";
+import type { EventBusInterface, EventListenerInterface } from "@odg/events";
+import type { JSONLoggerPlugin } from "@odg/json-log";
+import type { Logger, LoggerInterface } from "@odg/log";
+import type { MessageInterface } from "@odg/message";
 
-import type Container from "@app/Container";
-import { type ConfigType } from "@configs";
-import {
-    type BrowserClassEngine,
-    type BrowserManagerType,
+import type { Container } from "@app/Container";
+import type { ConfigType } from "@configs";
+import type {
+    BrowserClassEngine,
+    BrowserManagerType,
 } from "@engine";
-import { type EventName, type ContainerName } from "@enums";
-import { type PageOrHandlerFactoryType } from "@factory";
-import { type SearchPage } from "@pages/Google/SearchPage";
-import { type EventServiceProvider } from "@providers/EventServiceProvider";
-import { type ExampleCrawlerService } from "@services/ExampleCrawlerService";
-import { type Kernel, type ProcessKernel } from "~/Console";
+import type { ContainerName, EventName } from "@enums";
+import type { GoogleSearchToSelectionHandler } from "@handlers";
+import type { SearchPage } from "@pages/Google/SearchPage";
+import type { EventServiceProvider } from "@providers/EventServiceProvider";
+import type { ExampleCrawlerService } from "@services/ExampleCrawlerService";
+import type { Kernel, ProcessKernel } from "~/Console";
 
-import { type EventTypes } from "./EventsInterface";
+import type { EventTypes } from "./EventsInterface";
 
 export interface ContainerInterface {
-    [ContainerName.Logger]: Logger | undefined;
+    [ContainerName.Logger]: Logger | LoggerInterface;
     [ContainerName.Browser]: BrowserClassEngine | undefined;
     [ContainerName.Requester]: MessageInterface;
     [ContainerName.EventBus]: EventBusInterface<EventTypes>;
@@ -36,10 +36,10 @@ export interface ContainerInterface {
     // Application
 
     // Pages
-    [ContainerName.SearchPageFactory]: PageOrHandlerFactoryType<SearchPage>;
+    [ContainerName.SearchPage]: SearchPage;
 
     // Handler
-    [ContainerName.SearchHandlerFactory]: PageOrHandlerFactoryType<SearchPage>;
+    [ContainerName.GoogleSearchToSelectionHandler]: GoogleSearchToSelectionHandler;
 
     // Events
     [ContainerName.SearchEventListener]: EventListenerInterface<EventTypes, EventName.SearchPageEvent>;
@@ -50,4 +50,4 @@ export interface ContainerInterface {
 
 export type ContainerType<T extends Record<ContainerName, unknown> = ContainerInterface> = T;
 
-export type ContainerNameType = keyof ContainerType;
+export type ContainerNameType = keyof ContainerInterface;

@@ -12,13 +12,15 @@ export enum ContainerName {
     "JSONLogger" = "json.logger",
 
     // Pages
-    "SearchPageFactory" = "search.page.factory",
+    "SearchPage" = "search.page",
 
     // Handlers
-    "SearchHandlerFactory" = "search.handler.factory",
+    "GoogleSearchToSelectionHandler" = "google.search.to.selection.handler",
 
     // Events
     "SearchEventListener" = "search.event.listener",
     "EventServiceProvider" = "event.service.provider",
+
+    // Services
     "ExampleCrawlerService" = "example.crawler.service",
 }

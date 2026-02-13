@@ -1,10 +1,10 @@
 import { Browser as BrowserBase } from "@odg/chemical-x";
 
-import {
-    type ContextOptionsEngine,
-    type BrowserClassEngine,
-    type ContextClassEngine,
-    type PageClassEngine,
+import type {
+    ContextOptionsEngine,
+    BrowserClassEngine,
+    ContextClassEngine,
+    PageClassEngine,
 } from "../engine";
 
 export class Browser extends BrowserBase<

@@ -1,13 +1,13 @@
-import { type BrowserManager } from "@odg/chemical-x";
+import type { BrowserManager } from "@odg/chemical-x";
 import {
     chromium,
-    type BrowserType,
     type Browser,
-    type LaunchOptions,
-    type Page,
     type BrowserContext,
     type BrowserContextOptions,
-} from "playwright-core";
+    type BrowserType,
+    type LaunchOptions,
+    type Page,
+} from "playwright";
 
 export type BrowserTypeEngine = BrowserType;
 

@@ -5,11 +5,11 @@ import { ODGDecorators, type PageInterface } from "@odg/chemical-x";
 import { ConfigName, ContainerName } from "@app/Enums";
 import { BasePage } from "@pages/BasePage";
 import {
-    type GoogleSearchSelectorType,
     googleSearchSelector,
+    type GoogleSearchSelectorType,
 } from "@selectors";
 
-@ODGDecorators.injectablePageOrHandler(ContainerName.SearchPageFactory)
+@ODGDecorators.injectablePageOrHandler(ContainerName.SearchPage)
 @ODGDecorators.attemptableFlow()
 export class SearchPage extends BasePage implements PageInterface {
 
@@ -21,7 +21,6 @@ export class SearchPage extends BasePage implements PageInterface {
      * @returns {Promise<void>}
      */
     public async execute(): Promise<void> {
-        await this.preStart();
         await this.page.goto("https://www.google.com/", { timeout: 8000, waitUntil: "load" });
         await this.fillSearch();
         await this.search();
@@ -43,6 +42,7 @@ export class SearchPage extends BasePage implements PageInterface {
      */
     public async fillSearch(): Promise<void> {
         const numberOfCharsHex = 2;
+
         await this.page.fill(this.$s.searchInput, crypto.randomBytes(numberOfCharsHex).toString("hex"));
     }
 

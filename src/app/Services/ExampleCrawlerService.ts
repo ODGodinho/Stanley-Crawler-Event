@@ -1,25 +1,25 @@
+import { provide } from "@inversifyjs/binding-decorators";
 import { EventBusInterface } from "@odg/events";
 import { LoggerInterface } from "@odg/log";
-import { inject } from "inversify";
-import { fluentProvide } from "inversify-binding-decorators";
+import { injectable } from "inversify";
 
-import { type EventTypes } from "#types/EventsInterface";
+import type { EventTypes } from "#types/EventsInterface";
 import { BrowserClassEngine } from "@engine";
 import { ContainerName, EventName } from "@enums";
+import { $inject } from "~/ContainerInject";
 
-import { type GoogleSearchToSelectionHandler } from "../../Handlers/GoogleSearch/GoogleSearchHandler";
-import { PageOrHandlerFactoryType } from "../Factory";
+import type { GoogleSearchToSelectionHandler } from "../../Handlers/GoogleSearch/GoogleSearchHandler";
 
-@(fluentProvide(ContainerName.ExampleCrawlerService).inSingletonScope().done())
+@injectable("Singleton")
+@provide(ContainerName.ExampleCrawlerService)
 export class ExampleCrawlerService {
 
     public constructor(
-        @inject(ContainerName.Logger) protected log: LoggerInterface,
-        @inject(ContainerName.EventBus) protected bus: EventBusInterface<EventTypes>,
-        @inject(ContainerName.Browser) protected browser: BrowserClassEngine,
-        @inject(ContainerName.SearchHandlerFactory) protected searchToSelectionHandler: PageOrHandlerFactoryType<
-            GoogleSearchToSelectionHandler
-        >,
+        @$inject(ContainerName.Logger) protected log: LoggerInterface,
+        @$inject(ContainerName.EventBus) protected bus: EventBusInterface<EventTypes>,
+        @$inject(ContainerName.Browser) protected browser: BrowserClassEngine,
+        @$inject(ContainerName.GoogleSearchToSelectionHandler)
+        protected searchToSelectionHandler: GoogleSearchToSelectionHandler,
     ) {
     }
 
@@ -29,9 +29,11 @@ export class ExampleCrawlerService {
         const page = await context.newPage();
 
         await this.bus.dispatch(EventName.SearchPageEvent, {
-            page: page,
+            page,
         });
-        await this.searchToSelectionHandler(page).execute();
+        await this.searchToSelectionHandler
+            .setPage(page)
+            .execute();
 
         await context.close();
     }

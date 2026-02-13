@@ -1,1 +1,3 @@
-export interface Example {}
+export interface Example {
+    example(): unknown;
+}

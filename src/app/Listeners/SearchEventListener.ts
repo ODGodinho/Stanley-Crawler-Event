@@ -1,28 +1,30 @@
+import { provide } from "@inversifyjs/binding-decorators";
 import { ODGDecorators } from "@odg/chemical-x";
-import { type EventListenerInterface } from "@odg/events";
+import type { EventListenerInterface } from "@odg/events";
 import { LoggerInterface } from "@odg/log";
-import { inject } from "inversify";
-import { fluentProvide } from "inversify-binding-decorators";
+import { injectable } from "inversify";
 
-import { type EventBrowserParameters, type EventTypes } from "#types/EventsInterface";
+import type { EventBrowserParameters, EventTypes } from "#types/EventsInterface";
 import { ContainerName, EventName } from "@enums";
-import { PageOrHandlerFactoryType } from "@factory";
-import { type SearchPage } from "@pages/Google/SearchPage";
+import type { SearchPage } from "@pages/Google/SearchPage";
+import { $inject } from "~/ContainerInject";
 
 @ODGDecorators.registerListener(EventName.SearchPageEvent, ContainerName.SearchEventListener, {})
-@(fluentProvide(ContainerName.SearchEventListener).inSingletonScope().done())
+@injectable("Singleton")
+@provide(ContainerName.SearchEventListener)
 export class SearchEventListener implements EventListenerInterface<EventTypes, EventName.SearchPageEvent> {
 
     public constructor(
-        @inject(ContainerName.Logger) public readonly log: LoggerInterface,
-        @inject(ContainerName.SearchPageFactory) public readonly searchPage: PageOrHandlerFactoryType<SearchPage>,
+        @$inject(ContainerName.Logger) public readonly log: LoggerInterface,
+        @$inject(ContainerName.SearchPage) public readonly searchPage: SearchPage,
     ) {
     }
 
     public async handler({ page }: EventBrowserParameters): Promise<void> {
         await this.log.debug("SearchEventListener is sended");
-        const myStep = this.searchPage(page);
-        await myStep.execute();
+        await this.searchPage
+            .setPage(page)
+            .execute();
     }
 
 }

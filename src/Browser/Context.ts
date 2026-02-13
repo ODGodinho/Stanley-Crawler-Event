@@ -1,8 +1,8 @@
 import { type PageOptionsLibraryInterface, Context as ContextBase } from "@odg/chemical-x";
 
-import {
-    type ContextClassEngine,
-    type PageClassEngine,
+import type {
+    ContextClassEngine,
+    PageClassEngine,
 } from "../engine";
 
 export class Context extends ContextBase<

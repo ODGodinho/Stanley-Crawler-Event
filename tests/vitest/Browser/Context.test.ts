@@ -1,4 +1,4 @@
-import { chromium } from "playwright-core";
+import { chromium } from "playwright";
 
 import { Context, Page } from "@browser";
 import { ContainerName } from "@enums";

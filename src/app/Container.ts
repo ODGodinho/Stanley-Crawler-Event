@@ -1,113 +1,48 @@
+import { buildProviderModule } from "@inversifyjs/binding-decorators";
 import { AxiosMessage } from "@odg/axios";
 import {
-    type CreateContextFactoryType,
-    type CreatePageFactoryType,
     BrowserManager,
     type ContextChemicalXInterface,
+    type CreateContextFactoryType,
+    type CreatePageFactoryType,
     ODGDecorators,
 } from "@odg/chemical-x";
+import { Container as ContainerBase } from "@odg/chemical-x/container";
 import { JsonConfig } from "@odg/config";
 import { EventEmitterBus } from "@odg/events";
 import { JSONLoggerPlugin } from "@odg/json-log";
 import { ConsoleLogger, Logger } from "@odg/log";
-import { Container as ContainerInversify, type interfaces } from "inversify";
-import { buildProviderModule } from "inversify-binding-decorators";
 
-import { type ContainerNameType, type ContainerType, type EventTypes } from "#types";
+import type {
+    ContainerInterface,
+    EventTypes,
+} from "#types";
 import { type ConfigType, configValidator } from "@configs";
 import { ConfigName, ContainerName } from "@enums";
 
 import { Browser, Context, Page } from "../Browser";
-import {
-    type BrowserClassEngine,
-    type ContextClassEngine,
-    type PageClassEngine,
+import type {
+    BrowserClassEngine,
+    ContextClassEngine,
+    PageClassEngine,
 } from "../engine";
 
-import "../Console";
-import "@listeners";
 import "@handlers";
+import "@listeners";
 import "@pages";
 import "@providers";
 import "@services";
+import "../Console";
 
-export default class Container {
-
-    public readonly container: ContainerInversify;
-
-    public constructor() {
-        this.container = new ContainerInversify({ skipBaseClassChecks: true });
-    }
+export class Container extends ContainerBase<ContainerInterface> {
 
     public async setUp(): Promise<void> {
-        this.container.load(buildProviderModule());
-        this.container.load(ODGDecorators.loadModule(this.container));
-        await this.bindCrawler();
         await this.bindKernel();
+        await this.load(buildProviderModule());
+        await this.load(ODGDecorators.loadModule(this));
+        await this.bindCrawler();
         await this.get(ContainerName.Kernel).init();
         await this.bindStanley();
-    }
-
-    /**
-     * Get Container Item
-     *
-     * @template {ContainerNameType} Name
-     * @param {Name} serviceIdentifier ContainerName
-     * @returns {ContainerType[Name]}
-     */
-    public get<Name extends ContainerNameType>(serviceIdentifier: Name): ContainerType[Name] {
-        return this.container.get(serviceIdentifier);
-    }
-
-    /**
-     * Get Container Item Optional
-     *
-     * @template {ContainerNameType} Name
-     * @param {Name} serviceIdentifier containerName
-     * @returns {ContainerType[Name] | undefined}
-     */
-    public getOptional<Name extends ContainerNameType>(serviceIdentifier: Name): ContainerType[Name] | undefined {
-        if (!this.isBound(serviceIdentifier)) return;
-
-        return this.container.get(serviceIdentifier);
-    }
-
-    /**
-     * Bind Container Item
-     *
-     * @template {ContainerNameType} Name
-     * @param {Name} serviceIdentifier ContainerName
-     * @returns {interfaces.BindingToSyntax<ContainerType[Name]>}
-     */
-    public bind<Name extends ContainerNameType>(
-        serviceIdentifier: Name,
-    ): interfaces.BindingToSyntax<ContainerType[Name]> {
-        return this.container.bind(serviceIdentifier);
-    }
-
-    /**
-     * Check if Container Item has bind
-     *
-     * @template {ContainerNameType} Name
-     * @param {Name} serviceIdentifier containerName
-     * @returns {boolean}
-     */
-    public isBound<Name extends ContainerNameType>(
-        serviceIdentifier: Name,
-    ): boolean {
-        return this.container.isBound(serviceIdentifier);
-    }
-
-    /**
-     * Get Async Container Item
-     *
-     * @template {ContainerNameType} Name
-     * @memberof Container
-     * @param {Name} serviceIdentifier ContainerName
-     * @returns {Promise<ContainerType[Name]>}
-     */
-    public async getAsync<Name extends ContainerNameType>(serviceIdentifier: Name): Promise<ContainerType[Name]> {
-        return this.container.getAsync(serviceIdentifier);
     }
 
     /**
@@ -142,9 +77,10 @@ export default class Container {
         // Message/Request Axios
         this.bind(
             ContainerName.Requester,
-        ).to(AxiosMessage).inSingletonScope();
+        ).toDynamicValue(() => new AxiosMessage()).inSingletonScope();
 
         const appName = await this.get(ContainerName.Config).get(ConfigName.APP_NAME);
+
         this.bind(
             ContainerName.JSONLogger,
         ).toDynamicValue(() => new JSONLoggerPlugin(appName ?? "unknown")).inSingletonScope();
@@ -155,6 +91,7 @@ export default class Container {
         ).toDynamicValue(() => new EventEmitterBus<EventTypes>()).inSingletonScope();
     }
 
+    // ! Remove if use API crawlers without browser
     private async bindCrawler(): Promise<void> {
         // Browser puppeteer/Playwright Instance with Plugins
         this.bind(

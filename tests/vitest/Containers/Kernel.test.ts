@@ -1,15 +1,17 @@
 import { vi } from "vitest";
 
-import Container from "@app/Container";
+import { Container } from "@app/Container";
 import { ContainerName } from "@enums";
 
 describe("Container Kernel Test", () => {
     let container: Container;
+
     beforeEach(async () => {
         container = new Container();
         await container.setUp();
 
-        const loggerMock = vi.spyOn(container.get(ContainerName.Logger)!, "info");
+        const loggerMock = vi.spyOn(container.get(ContainerName.Logger), "info");
+
         loggerMock.mockImplementation(async (): Promise<void> => {
             // Not action
         });

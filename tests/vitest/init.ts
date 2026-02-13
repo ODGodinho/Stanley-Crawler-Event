@@ -1,5 +1,5 @@
+/// <reference types="vitest/globals" />
 import "reflect-metadata";
-import "vitest/globals.d.ts";
 
 import { container } from "./SingletonTest";
 

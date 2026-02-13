@@ -1,14 +1,16 @@
-import { inject } from "inversify";
-import { fluentProvide } from "inversify-binding-decorators";
+import { provide } from "@inversifyjs/binding-decorators";
+import { injectable } from "inversify";
 
-import Container from "@app/Container";
+import type { Container } from "@app/Container";
 import { ContainerName } from "@enums";
+import { $inject } from "~/ContainerInject";
 
-@(fluentProvide(ContainerName.ProcessKernel).inSingletonScope().done())
+@injectable("Singleton")
+@provide(ContainerName.ProcessKernel)
 export class ProcessKernel {
 
     public constructor(
-        @inject(ContainerName.Container) public readonly container: Container,
+        @$inject(ContainerName.Container) public readonly container: Container,
     ) {
     }
 
@@ -30,7 +32,9 @@ export class ProcessKernel {
      */
     private uncaughtException(error: Error): void {
         const logger = this.container.getOptional(ContainerName.Logger);
-        void logger?.emergency(error);
+
+        logger?.emergency(error)
+            .catch(() => null);
     }
 
     /**
@@ -45,8 +49,10 @@ export class ProcessKernel {
      */
     private messageShutdownListen(message: string): void {
         const logger = this.container.getOptional(ContainerName.Logger);
+
         if (message === "shutdown") {
-            void logger?.debug("Waiting for the crawler to kill the process");
+            logger?.debug("Waiting for the crawler to kill the process")
+                .catch(() => null);
         }
     }
 

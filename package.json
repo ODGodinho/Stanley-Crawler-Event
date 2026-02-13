@@ -16,12 +16,15 @@
         "dev": "tsx --env-file=.env ./src/index.ts",
         "start": "node --env-file=.env ./dist/index.js",
         "start:build": "yarn build && node --env-file=.env ./dist/index.js",
-        "lint": "eslint --ext .js,.jsx,.ts,.tsx,.json,.jsonc,.json5,.yml,.yaml,.xml,.txt,.svg,.properties,.gradle,.java,.cpp,.c,.cs,.html,.css,.groovy,.gitignore,.npmignore,.toml,.env,.example,.sample,.ini,.php,.bat,.powershell,.ps1,.sh,.bash,.eslintrc",
-        "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx,.json,.jsonc,.json5,.yml,.yaml,.xml,.txt,.svg,.properties,.gradle,.java,.cpp,.c,.cs,.html,.css,.groovy,.gitignore,.npmignore,.toml,.env,.example,.sample,.ini,.php,.bat,.powershell,.ps1,.sh,.bash,.eslintrc --fix",
+        "lint": "eslint",
+        "lint:fix": "eslint --fix",
         "prepare": "husky",
         "test": "vitest run",
         "test:ci": "vitest run --passWithNoTests",
         "test:watch": "vitest --watch"
+    },
+    "engines": {
+        "node": ">=24.0.0"
     },
     "publishConfig": {
         "access": "public"
@@ -61,34 +64,35 @@
     "license": "MIT",
     "devDependencies": {
         "@odg/command": "*",
-        "@odg/eslint-config": "*",
-        "@odg/tsconfig": "*",
-        "@types/node": ">=20",
-        "@vitest/coverage-istanbul": "^1",
-        "concurrently": "^9.2.0",
+        "@odg/eslint-config": "^3.1.0",
+        "@odg/tsconfig": "^1.2.1",
+        "@types/node": ">=24",
+        "@vitest/coverage-istanbul": "^4.0.18",
+        "concurrently": "^9.2.1",
         "husky": "^9.1.7",
-        "lint-staged": "^16.1.5",
+        "lint-staged": "^16.2.7",
         "rimraf": "*",
         "tsc-alias": "^1.8.16",
-        "tsx": "^4.20.4",
-        "typescript": "^5.9.2",
-        "vite-tsconfig-paths": "^4",
-        "vitest": "^1"
+        "tsx": "^4.21.0",
+        "typescript": "^5.9.3",
+        "vite": "^7.3.1",
+        "vite-tsconfig-paths": "^6.1.1",
+        "vitest": "^4.0.18"
     },
     "dependencies": {
-        "@odg/axios": "*",
-        "@odg/chemical-x": "*",
-        "@odg/config": "*",
-        "@odg/events": "*",
-        "@odg/exception": "*",
-        "@odg/json-log": "*",
-        "@odg/log": "*",
-        "@odg/message": "*",
-        "inversify": "^6",
-        "inversify-binding-decorators": "^4.0.0",
-        "playwright": "^1.55.0",
-        "playwright-core": "^1.55.0",
+        "@inversifyjs/binding-decorators": "^1.1.5",
+        "@inversifyjs/strongly-typed": "^2.2.0",
+        "@odg/axios": "^1.11.0",
+        "@odg/chemical-x": "^2.0.0",
+        "@odg/config": "^1.1.2",
+        "@odg/events": "^1.2",
+        "@odg/exception": "^1.7.1",
+        "@odg/json-log": "^1.5.0",
+        "@odg/log": "^1.6.1",
+        "@odg/message": "^1.11.0",
+        "inversify": "^7.11.0",
+        "playwright": "^1.58.2",
         "reflect-metadata": "^0.2.2",
-        "zod": "^4.0.17"
+        "zod": "^4.3.6"
     }
 }

@@ -1,10 +1,10 @@
-import {
-    type Browser as BrowserBase,
-    type Context as ContextBase,
-    type Page as PageBase,
+import type {
+    Browser as BrowserBase,
+    Context as ContextBase,
+    Page as PageBase,
 } from "../src/Browser";
 
-declare module "playwright-core" {
+declare module "playwright" {
     interface Page extends PageBase { }
 
     interface Frame extends PageBase { }
