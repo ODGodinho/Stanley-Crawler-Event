@@ -1,4 +1,3 @@
-/// <reference types="vitest/globals" />
 import "reflect-metadata";
 
 import { container } from "./SingletonTest";
