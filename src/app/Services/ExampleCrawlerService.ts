@@ -1,10 +1,10 @@
 import { provide } from "@inversifyjs/binding-decorators";
-import { EventBusInterface } from "@odg/events";
-import { LoggerInterface } from "@odg/log";
+import type { EventBusInterface } from "@odg/events";
+import type { LoggerInterface } from "@odg/log";
 import { injectable } from "inversify";
 
 import type { EventTypes } from "#types/EventsInterface";
-import { BrowserClassEngine } from "@engine";
+import type { BrowserClassEngine } from "@engine";
 import { ContainerName, EventName } from "@enums";
 import { $inject } from "~/ContainerInject";
 

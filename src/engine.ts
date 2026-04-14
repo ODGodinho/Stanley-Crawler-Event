@@ -1,10 +1,10 @@
 import type { BrowserManager } from "@odg/chemical-x";
 import {
-    chromium,
     type Browser,
     type BrowserContext,
     type BrowserContextOptions,
     type BrowserType,
+    chromium,
     type LaunchOptions,
     type Page,
 } from "playwright";

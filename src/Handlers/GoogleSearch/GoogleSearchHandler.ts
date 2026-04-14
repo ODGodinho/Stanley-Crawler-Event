@@ -34,7 +34,7 @@ export class GoogleSearchToSelectionHandler extends BaseHandler implements Handl
      * @param {Exception} exception Exception error
      * @returns {Promise<RetryAction>}
      */
-    public async retrying(exception: Exception): Promise<RetryAction> {
+    public override async retrying(exception: Exception): Promise<RetryAction> {
         await this.log.warning(exception.message);
         await this.bus.dispatch(EventName.SearchPageEvent, { page: this.page });
 
@@ -47,7 +47,7 @@ export class GoogleSearchToSelectionHandler extends BaseHandler implements Handl
      * @memberof GoogleSearchToSelectionHandler
      * @returns {Promise<void>}
      */
-    public async success(): Promise<void> {
+    public override async success(): Promise<void> {
         const result = this.page.locator(this.$$s.googleListSelector.results.resultTitles).first();
         const resultText = await result.textContent() ?? "";
 

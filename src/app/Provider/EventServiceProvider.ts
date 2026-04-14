@@ -1,9 +1,9 @@
 import { provide } from "@inversifyjs/binding-decorators";
 import { ODGDecorators } from "@odg/chemical-x";
 import {
-    EventBusInterface,
-    EventServiceProvider as EventServiceProviderBase,
+    type EventBusInterface,
     type EventListener,
+    EventServiceProvider as EventServiceProviderBase,
 } from "@odg/events";
 import {
     injectable,
@@ -54,7 +54,7 @@ export class EventServiceProvider<Events extends EventTypes> extends EventServic
      * @memberof EventServiceProvider
      * @returns {Promise<void>}
      */
-    public async boot(): Promise<void> {
+    public override async boot(): Promise<void> {
         await super.boot();
     }
 
@@ -64,7 +64,7 @@ export class EventServiceProvider<Events extends EventTypes> extends EventServic
      * @memberof EventServiceProvider
      * @returns {Promise<void>}
      */
-    public async shutdown(): Promise<void> {
+    public override async shutdown(): Promise<void> {
         await super.shutdown();
     }
 

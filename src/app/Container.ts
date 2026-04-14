@@ -38,7 +38,7 @@ export class Container extends ContainerBase<ContainerInterface> {
 
     public async setUp(): Promise<void> {
         await this.bindKernel();
-        await this.load(buildProviderModule());
+        await this.loadAsync(buildProviderModule());
         await ODGDecorators.loadModule(this);
         await this.bindCrawler();
         await this.get(ContainerName.Kernel).init();

@@ -1,7 +1,7 @@
 import { BaseHandler as BaseHandlerChemical } from "@odg/chemical-x";
-import { ConfigInterface } from "@odg/config";
-import { EventBusInterface } from "@odg/events";
-import { LoggerInterface } from "@odg/log";
+import type { ConfigInterface } from "@odg/config";
+import type { EventBusInterface } from "@odg/events";
+import type { LoggerInterface } from "@odg/log";
 
 import type { EventTypes } from "#types/EventsInterface";
 import type { ConfigType } from "@configs";

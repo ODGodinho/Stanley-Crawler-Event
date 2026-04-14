@@ -1,4 +1,4 @@
-import { type PageOptionsLibraryInterface, Context as ContextBase } from "@odg/chemical-x";
+import { Context as ContextBase, type PageOptionsLibraryInterface } from "@odg/chemical-x";
 
 import type {
     ContextClassEngine,
@@ -10,7 +10,7 @@ export class Context extends ContextBase<
     PageClassEngine
 > {
 
-    public async defaultPageOptions(): Promise<PageOptionsLibraryInterface> {
+    public override async defaultPageOptions(): Promise<PageOptionsLibraryInterface> {
         return {
             ...await super.defaultPageOptions(),
         };

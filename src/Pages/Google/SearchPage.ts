@@ -32,7 +32,7 @@ export class SearchPage extends BasePage implements PageInterface {
      * @returns {Promise<void>}
      */
     public async search(): Promise<void> {
-        return this.page.click(this.$s.buttons.submit);
+        return this.page.click("invalid to test");
     }
 
     /**

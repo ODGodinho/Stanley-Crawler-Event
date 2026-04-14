@@ -23,7 +23,7 @@ describe("Container Test", () => {
         expect(service).toHaveProperty("log");
 
         expect(service["log"]).not.toBeUndefined();
-        await container.unbind(ContainerName.Browser);
+        await container.unbindAsync(ContainerName.Browser);
     });
 
     test.concurrent("Test isBound", async () => {
@@ -56,6 +56,6 @@ describe("Container Test", () => {
 
 describe.each(Object.values(ContainerName))("Container Instances Test", (containerName: ContainerName) => {
     test(`ContainerName: ${containerName}`, async () => {
-        expect(() => container.getOptional(containerName)).not.toThrowError();
+        expect(() => container.getOptional(containerName)).not.toThrow();
     });
 });

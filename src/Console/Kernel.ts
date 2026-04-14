@@ -1,13 +1,13 @@
 import { randomUUID } from "node:crypto";
 
 import { provide } from "@inversifyjs/binding-decorators";
-import { Logger, LoggerInterface } from "@odg/log";
+import type { Logger, LoggerInterface } from "@odg/log";
 import { injectable } from "inversify";
 import { chromium } from "playwright";
 
-import { ContainerInterface } from "#types";
+import type { ContainerInterface } from "#types";
 import type { Container } from "@app/Container";
-import { BrowserManagerType } from "@engine";
+import type { BrowserManagerType } from "@engine";
 import { ConfigName, ContainerName } from "@enums";
 import { ProcessKernel } from "~/Console/ProcessKernel";
 import { $inject } from "~/ContainerInject";
@@ -54,7 +54,7 @@ export class Kernel {
         await Promise.all([
             this.container.get(ContainerName.EventServiceProvider).shutdown(),
             this.container.getOptional(ContainerName.Browser)?.close(),
-            this.container.unbindAll(),
+            this.container.unbindAllAsync(),
         ]);
     }
 

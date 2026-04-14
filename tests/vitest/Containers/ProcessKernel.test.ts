@@ -162,7 +162,7 @@ describe("Test process kernel", async () => {
         expect(mock).toHaveBeenCalled();
     });
 
-    test.skip("KernelProcess called uncaughtException", async () => {
+    test("KernelProcess called uncaughtException", async () => {
         const logger = container.get(ContainerName.Logger);
         const processKernel = container.get(ContainerName.ProcessKernel);
 

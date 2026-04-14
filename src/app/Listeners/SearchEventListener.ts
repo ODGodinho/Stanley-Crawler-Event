@@ -1,7 +1,7 @@
 import { provide } from "@inversifyjs/binding-decorators";
 import { ODGDecorators } from "@odg/chemical-x";
 import type { EventListenerInterface } from "@odg/events";
-import { LoggerInterface } from "@odg/log";
+import type { LoggerInterface } from "@odg/log";
 import { injectable } from "inversify";
 
 import type { EventBrowserParameters, EventTypes } from "#types/EventsInterface";
