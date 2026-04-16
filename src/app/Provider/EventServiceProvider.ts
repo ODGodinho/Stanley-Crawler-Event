@@ -1,13 +1,9 @@
-import { provide } from "@inversifyjs/binding-decorators";
 import { ODGDecorators } from "@odg/chemical-x";
 import {
     type EventBusInterface,
     type EventListener,
     EventServiceProvider as EventServiceProviderBase,
 } from "@odg/events";
-import {
-    injectable,
-} from "inversify";
 
 import type { EventTypes } from "#types/EventsInterface";
 import { ContainerName } from "@enums";
@@ -20,8 +16,7 @@ import type { Container } from "../Container";
  *
  * @template {EventTypes} Events Events List
  */
-@injectable("Singleton")
-@provide(ContainerName.EventServiceProvider)
+@ODGDecorators.injectable(ContainerName.EventServiceProvider, "Singleton")
 export class EventServiceProvider<Events extends EventTypes> extends EventServiceProviderBase<Events> {
 
     /**

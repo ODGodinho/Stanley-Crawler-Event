@@ -1,7 +1,6 @@
-import { provide } from "@inversifyjs/binding-decorators";
+import { ODGDecorators } from "@odg/chemical-x";
 import type { EventBusInterface } from "@odg/events";
 import type { LoggerInterface } from "@odg/log";
-import { injectable } from "inversify";
 
 import type { EventTypes } from "#types/EventsInterface";
 import type { BrowserClassEngine } from "@engine";
@@ -10,8 +9,7 @@ import { $inject } from "~/ContainerInject";
 
 import type { GoogleSearchToSelectionHandler } from "../../Handlers/GoogleSearch/GoogleSearchHandler";
 
-@injectable("Singleton")
-@provide(ContainerName.ExampleCrawlerService)
+@ODGDecorators.injectable(ContainerName.ExampleCrawlerService, "Singleton")
 export class ExampleCrawlerService {
 
     public constructor(

@@ -1,8 +1,7 @@
 import { randomUUID } from "node:crypto";
 
-import { provide } from "@inversifyjs/binding-decorators";
+import { ODGDecorators } from "@odg/chemical-x";
 import type { Logger, LoggerInterface } from "@odg/log";
-import { injectable } from "inversify";
 import { chromium } from "playwright";
 
 import type { ContainerInterface } from "#types";
@@ -17,8 +16,7 @@ import { $inject } from "~/ContainerInject";
  *
  * @class Kernel
  */
-@injectable("Singleton")
-@provide(ContainerName.Kernel)
+@ODGDecorators.injectable(ContainerName.Kernel, "Singleton")
 export class Kernel {
 
     public constructor(
@@ -27,6 +25,7 @@ export class Kernel {
         @$inject(ContainerName.Container) public readonly container: Container,
         @$inject(ContainerName.ProcessKernel) public readonly processKernel: ProcessKernel,
         @$inject(ContainerName.BrowserManager) public readonly browserManager: BrowserManagerType,
+        @$inject(ContainerName.Logger) public readonly logger: Logger,
     ) {
     }
 
@@ -52,7 +51,7 @@ export class Kernel {
      */
     public async shutdown(): Promise<void> {
         await Promise.all([
-            this.container.get(ContainerName.EventServiceProvider).shutdown(),
+            this.container.getOptional(ContainerName.EventServiceProvider)?.shutdown(),
             this.container.getOptional(ContainerName.Browser)?.close(),
             this.container.unbindAllAsync(),
         ]);
@@ -64,6 +63,7 @@ export class Kernel {
      * @returns {Promise<void>}
      */
     public async init(): Promise<void> {
+        this.logger.pushHandler(this.consoleLogger);
         await Promise.all([
             this.processKernel.register(),
             this.config.init(),
@@ -71,12 +71,9 @@ export class Kernel {
     }
 
     private async bootLogs(): Promise<void> {
-        const logger = this.container.get(ContainerName.Logger);
         const jsonLogger = this.container.get(ContainerName.JSONLogger);
 
-        (logger as Logger).pushHandler(this.consoleLogger);
-        (logger as Logger).pushProcessor(jsonLogger);
-
+        this.logger.pushProcessor(jsonLogger);
         jsonLogger.setIdentifier(randomUUID());
     }
 

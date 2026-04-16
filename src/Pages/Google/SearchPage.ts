@@ -9,7 +9,7 @@ import {
     type GoogleSearchSelectorType,
 } from "@selectors";
 
-@ODGDecorators.injectablePageOrHandler(ContainerName.SearchPage)
+@ODGDecorators.injectable(ContainerName.SearchPage)
 @ODGDecorators.attemptableFlow()
 export class SearchPage extends BasePage implements PageInterface {
 
@@ -32,7 +32,7 @@ export class SearchPage extends BasePage implements PageInterface {
      * @returns {Promise<void>}
      */
     public async search(): Promise<void> {
-        return this.page.click("invalid to test");
+        return this.page.click(this.$s.buttons.submit);
     }
 
     /**

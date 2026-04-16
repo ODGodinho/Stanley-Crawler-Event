@@ -10,7 +10,7 @@ import type { Exception } from "@odg/exception";
 import { ConfigName, ContainerName, EventName } from "@enums";
 import { BaseHandler } from "@handlers/BaseHandler";
 
-@ODGDecorators.injectablePageOrHandler(ContainerName.GoogleSearchToSelectionHandler)
+@ODGDecorators.injectable(ContainerName.GoogleSearchToSelectionHandler)
 export class GoogleSearchToSelectionHandler extends BaseHandler implements HandlerInterface {
 
     public async waitForHandler(): Promise<HandlerFunction> {

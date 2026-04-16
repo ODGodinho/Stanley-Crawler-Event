@@ -54,8 +54,14 @@ describe("Container Test", () => {
     });
 });
 
-describe.each(Object.values(ContainerName))("Container Instances Test", (containerName: ContainerName) => {
-    test(`ContainerName: ${containerName}`, async () => {
-        expect(() => container.getOptional(containerName)).not.toThrow();
+describe("Container Instances Test", () => {
+    beforeAll(async () => {
+        await container.get(ContainerName.Kernel).boot();
+    });
+
+    describe.each(Object.values(ContainerName))("Container Instances Test", (containerName: ContainerName) => {
+        test(`ContainerName: ${containerName}`, async () => {
+            expect(() => container.get(containerName)).not.toThrow();
+        });
     });
 });

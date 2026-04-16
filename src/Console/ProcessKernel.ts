@@ -1,12 +1,10 @@
-import { provide } from "@inversifyjs/binding-decorators";
-import { injectable } from "inversify";
+import { ODGDecorators } from "@odg/chemical-x";
 
 import type { Container } from "@app/Container";
 import { ContainerName } from "@enums";
 import { $inject } from "~/ContainerInject";
 
-@injectable("Singleton")
-@provide(ContainerName.ProcessKernel)
+@ODGDecorators.injectable(ContainerName.ProcessKernel, "Singleton")
 export class ProcessKernel {
 
     public constructor(

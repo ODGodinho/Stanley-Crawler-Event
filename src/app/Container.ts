@@ -1,4 +1,3 @@
-import { buildProviderModule } from "@inversifyjs/binding-decorators";
 import { AxiosMessage } from "@odg/axios";
 import {
     BrowserManager,
@@ -38,7 +37,6 @@ export class Container extends ContainerBase<ContainerInterface> {
 
     public async setUp(): Promise<void> {
         await this.bindKernel();
-        await this.loadAsync(buildProviderModule());
         await ODGDecorators.loadModule(this);
         await this.bindCrawler();
         await this.get(ContainerName.Kernel).init();
@@ -68,6 +66,11 @@ export class Container extends ContainerBase<ContainerInterface> {
         this.bind(
             ContainerName.Container,
         ).toDynamicValue(() => this).inSingletonScope();
+
+        // EventBus Interface
+        this.bind(
+            ContainerName.EventBus,
+        ).toDynamicValue(() => new EventEmitterBus<EventTypes>()).inSingletonScope();
     }
 
     /**
@@ -84,11 +87,6 @@ export class Container extends ContainerBase<ContainerInterface> {
         this.bind(
             ContainerName.JSONLogger,
         ).toDynamicValue(() => new JSONLoggerPlugin(appName ?? "unknown")).inSingletonScope();
-
-        // EventBus Interface
-        this.bind(
-            ContainerName.EventBus,
-        ).toDynamicValue(() => new EventEmitterBus<EventTypes>()).inSingletonScope();
     }
 
     // ! Remove if use API crawlers without browser
