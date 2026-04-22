@@ -1,203 +1,133 @@
-# Eventos, Listeners & Services
+# Events, Listeners & Services
 
-Este guia cobre como criar e registrar Events, Listeners e Services no template Stanley-Crawler-Event.
+This guide covers the orchestration layer of the template: event contracts, listeners that execute pages, and services that initiate the flow.
+
+You **MUST** adhere to the rules defined in this document.
 
 ---
 
-## Eventos
+## Events
 
-### O que são Events
+### What are Events?
 
-Eventos são strings tipadas que representam ações assíncronas no barramento. Cada evento leva um payload específico e é escutado por um ou mais Listeners. O barramento desacopla quem dispara de quem executa.
+Events are typed contracts for the asynchronous bus. The event name lives in `EventName` and the payload lives in `@types/EventsInterface.d.ts`. The bus decouples whoever initiates a step from whoever executes it.
 
-### Como criar um Event
+### Payload Modeling Rule
 
-**1. Declare o nome do evento no enum**
-
-Arquivo: `src/app/Enums/EventName.ts`
-
-```typescript
-export enum EventName {
-    "SearchPageEvent" = "SearchPageEvent",
-    "ExampleEvent" = "ExampleEvent",     // ← adicionar aqui
-}
-```
-
-#### padrão de nomenclatura
-- PascalCase key, PascalCase valor
-
-**2. Declare o tipo do payload na interface de eventos**
-
-Arquivo: `@types/EventsInterface.d.ts`
-
+**Minimum payload for a simple step:**
 ```typescript
 export interface EventBrowserParameters {
     page: PageClassEngine;
 }
+```
 
-// Crie aqui EventBrowserParameters
+**Payload for chained flows:**
+```typescript
+export interface SearchFlowContext {
+    query: string;
+    email: string;
+}
 
-export interface EventsInterface {
-    [EventName.SearchPageEvent]: EventBrowserParameters;
-    [EventName.ExampleEvent]: MyCustomExamplePayload;  // ← adicionar aqui use EventBrowserParameters se n for receber nenhum informacao alem do browser ou crie sua própria tipagem
+export interface EventFlowParameters extends EventBrowserParameters {
+    flowContext: SearchFlowContext;
 }
 ```
 
-**3. Disparar o evento em um Service ou Handler**
+### How to Create an Event
 
-```typescript
-await this.bus.dispatch(EventName.ExampleEvent, { page: this.page });
-```
-
----
+1. You **MUST** add the name in the enum `src/app/Enums/EventName.ts`.
+2. You **MUST** add the corresponding payload in `@types/EventsInterface.d.ts`.
+3. You **MUST ONLY** dispatch the event from a Service or Handler. You **MUST NEVER** dispatch an event directly from a Page.
 
 ## Listeners
 
-### O que é um Listener
+### What is a Listener?
 
-Um Listener é uma classe que escuta um evento específico do barramento e executa uma ação em resposta — tipicamente iniciando a execução de uma Page.
+A listener listens to a specific event and executes a corresponding action. In this project, they are primarily used to trigger Pages.
 
-### Como criar um Listener
+### Listener Responsibilities
 
-**1. Scaffolding (recomendado)**
+A Listener **MUST**:
+- Receive the typed payload.
+- Prepare the page with `setPage(...)`.
+- Prepare shared state when it exists.
+- Execute the page (`await pageObject.execute()`).
+- **Execute the handler** (`await handlerObject.execute()`) **IF** the flow is event-driven and there is no Service orchestrating the step (e.g., chained events).
 
-```bash
-# yarn odg make:listener Example -- src/app/Listeners/ExampleEventListener
-yarn odg make:event <eventName>
+A Listener **MUST NOT**:
+- Validate the success of the flow (This is the Handler's job).
+- Decide retries.
+- Dispatch steps of different contexts.
 
-# ou
+### Automatic Registration
 
-# Para gerar uma page e seu evento junto
-yarn odg make:page <NomeDaPage> --event
-```
-
-Isso cria o Listener e o conecta ao evento automaticamente.
-
-**2. Estrutura padrão da classe**
-
-```typescript
-import { ODGDecorators } from "@odg/chemical-x";
-import type { EventListenerInterface } from "@odg/events";
-import type { LoggerInterface } from "@odg/log";
-
-import type { EventBrowserParameters, EventTypes } from "#types/EventsInterface";
-import { ContainerName, EventName } from "@enums";
-import type { ExamplePage } from "@pages";
-import { $inject } from "~/ContainerInject";
-
-@ODGDecorators.injectable(ContainerName.ExampleEventListener, "Singleton")
-@ODGDecorators.registerListener(EventName.ExampleEvent, ContainerName.ExampleEventListener, {})
-export class ExampleEventListener implements EventListenerInterface<EventTypes, EventName.ExampleEvent> {
-
-    public constructor(
-        @$inject(ContainerName.Logger) public readonly log: LoggerInterface,
-        @$inject(ContainerName.ExamplePage) public readonly examplePage: ExamplePage,
-    ) {
-    }
-
-    public async handler({ page }: EventBrowserParameters): Promise<void> {
-        await this.log.debug("ExampleEventListener disparado");
-        await this.examplePage.setPage(page).execute();
-    }
-
-}
-```
-
-**3. Registrar no ContainerName**
-
-Arquivo: `src/app/Enums/ContainerName.ts`
-
-```typescript
-"ExampleEventListener" = "example.event.listener",
-```
-
-**4. Exportar no index da pasta**
-
-Arquivo: `src/app/Listeners/index.ts`
-
-```typescript
-export * from "./ExampleEventListener";
-```
-
-**Exemplo canônico:** [`src/app/Listeners/SearchEventListener.ts`](../../src/app/Listeners/SearchEventListener.ts)
-
-### Como o Listener é registrado automaticamente
-
-O decorator `@ODGDecorators.registerListener(EventName.X, ContainerName.X, {})` registra o listener no `EventServiceProvider` via `ODGDecorators.getEvents(container)`. Desde que a classe seja importada (via `@listeners` no Container), ela é descoberta automaticamente no boot.
+The decorator `@ODGDecorators.registerListener(EventName.X, ContainerName.X, {})` registers the listener automatically in the `EventServiceProvider`. As long as the class is exported via the barrel, it enters the boot cycle automatically.
 
 ---
 
 ## Services
 
-### O que é um Service
+### What is a Service?
 
-Um Service é a camada de orquestração: ele recebe o browser, cria contextos e páginas, dispara eventos e executa handlers. É o ponto de entrada do fluxo de automação.
+A Service is the entry orchestration point of the flow. It creates context and the page, mounts the initial shared state, and dispatches the first step.
 
-### Como criar um Service
+### Service Responsibilities
 
-**1. Estrutura padrão da classe**
+A Service **MUST**:
+- Create the `browser.newContext()` and `context.newPage()`.
+- Assemble the initial payload of the flow.
+- Dispatch the first events/handlers according to the main flowchart.
+- Execute the handler of the first step when the flow requires a local gate.
+- Close the context at the end.
 
+A Service **MUST NOT**:
+- Reconstruct state that should live in a typed payload.
+- Decide step success by reading selectors directly (It MUST use a Handler for this).
+
+### Synchronous Flow (No Events)
+
+**IF** the user requests a flow without events (synchronous procedural execution), you **MUST** inject the Page directly into the Service and execute it.
+
+**[GOOD] Example of Non-Event Flow:**
 ```typescript
-import { ODGDecorators } from "@odg/chemical-x";
-import type { EventBusInterface } from "@odg/events";
-import type { LoggerInterface } from "@odg/log";
-
-import type { EventTypes } from "#types/EventsInterface";
-import type { BrowserClassEngine } from "@engine";
-import { ContainerName, EventName } from "@enums";
-import { $inject } from "~/ContainerInject";
-
-import type { ExampleHandler } from "../../Handlers/Example/ExampleHandler";
-
-@ODGDecorators.injectable(ContainerName.MyCrawlerService, "Singleton")
-export class MyCrawlerService {
-
+class MyCrawlerService {
     public constructor(
-        @$inject(ContainerName.Logger) protected log: LoggerInterface,
-        @$inject(ContainerName.EventBus) protected bus: EventBusInterface<EventTypes>,
-        @$inject(ContainerName.Browser) protected browser: BrowserClassEngine,
-        @$inject(ContainerName.ExampleHandler) protected exampleHandler: ExampleHandler,
-    ) {
+        @$inject(ContainerName.MyPage) private readonly myPage: MyPage
+    ) {}
+
+    public async execute(page: PageClassEngine): Promise<void> {
+        await this.myPage.setPage(page).execute();
     }
-
-    public async execute(): Promise<void> {
-        await this.log.info("Iniciando serviço de crawler");
-
-        const context = await this.browser.newContext();
-        const page = await context.newPage();
-
-        // Dispara o evento que aciona a Page via Listener
-        await this.bus.dispatch(EventName.ExampleEvent, { page });
-
-        // Aguarda confirmação via Handler
-        // Você tb pode colocar handler dentro do evento se preferir, mas cuidado ao executar um evento dentro do handler
-        await this.exampleHandler.setPage(page).execute();
-
-        await context.close();
-    }
-
 }
 ```
 
-**Exemplo canônico:** [`src/app/Services/ExampleCrawlerService.ts`](../../src/app/Services/ExampleCrawlerService.ts)
-
 ---
 
-## Fluxo completo de um ciclo de execução
+## Canonical Chained Flow (Event-Driven)
 
-```
+If using the event-driven architecture, you **MUST** follow this canonical chain:
+
+```text
 Service.execute()
     │
-    ├── 1. browser.newContext() → context.newPage() → page
+    ├── creates page + flowContext
     │
-    ├── 2. bus.dispatch(EventName.ExampleEvent, { page })
-    │         └── ExampleEventListener.handler({ page })
-    │                   └── ExamplePage.setPage(page).execute()
-    │                               └── interação com o browser
+    ├── dispatch(SearchEvent, { page, flowContext })
+    │         └── SearchEventListener.handler(...)
+    │                   ├── SearchPage.execute()
+    │                   └── SearchHandler.execute()
     │
-    └── 3. ExampleHandler.setPage(page).execute()
-                │
-                ├── waitForHandler: identifySuccess() vs identifyFailure()
-                |
-                └── AttemptableFlow()  → logica de retrying, success, failure, finish do attemptableFlow
+    ├── dispatch(LoginEvent, { page, flowContext })
+    │         └── LoginEventListener.handler(...)
+    │                   ├── LoginPage.execute()
+    │                   └── LoginHandler.execute()
+    │
+    ├── dispatch(AccountEvent, { page, flowContext })
+    │         └── AccountEventListener.handler(...)
+    │                   └── AccountPage.execute()
+    |
+    ├── AccountToSettingsHandler.execute() // Validating page transition
+    |
+    ├── dispatch(SettingsEvent, { page, flowContext })
+    └── finish
 ```

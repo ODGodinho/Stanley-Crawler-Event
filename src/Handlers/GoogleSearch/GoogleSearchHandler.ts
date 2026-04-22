@@ -36,7 +36,7 @@ export class GoogleSearchToSelectionHandler extends BaseHandler implements Handl
      */
     public override async retrying(exception: Exception): Promise<RetryAction> {
         await this.log.warning(exception.message);
-        await this.bus.dispatch(EventName.SearchPageEvent, { page: this.page });
+        await this.bus.dispatch(EventName.SearchEvent, { page: this.page });
 
         return RetryAction.Default;
     }
@@ -90,7 +90,7 @@ export class GoogleSearchToSelectionHandler extends BaseHandler implements Handl
      * @returns {Promise<HandlerSolutionType>}
      */
     public async noResultSolution(): Promise<HandlerSolutionType> {
-        await this.bus.dispatch(EventName.SearchPageEvent, { page: this.page });
+        await this.bus.dispatch(EventName.SearchEvent, { page: this.page });
 
         return RetryAction.Retry;
     }

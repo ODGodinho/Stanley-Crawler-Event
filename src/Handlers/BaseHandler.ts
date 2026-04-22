@@ -1,10 +1,9 @@
 import { BaseHandler as BaseHandlerChemical } from "@odg/chemical-x";
-import type { ConfigInterface } from "@odg/config";
 import type { EventBusInterface } from "@odg/events";
 import type { LoggerInterface } from "@odg/log";
 
 import type { EventTypes } from "#types/EventsInterface";
-import type { ConfigType } from "@configs";
+import type { MyConfig } from "@configs";
 import type { PageClassEngine } from "@engine";
 import { ContainerName } from "@enums";
 import * as Selectors from "@selectors";
@@ -19,7 +18,7 @@ export abstract class BaseHandler extends BaseHandlerChemical<PageClassEngine> {
     public readonly log!: LoggerInterface;
 
     @$inject(ContainerName.Config)
-    public readonly config!: ConfigInterface<ConfigType>;
+    public readonly config!: MyConfig;
 
     public readonly $$s = Selectors;
 

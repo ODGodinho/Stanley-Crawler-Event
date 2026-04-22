@@ -1,281 +1,182 @@
 # Pages, Handlers & Selectors
 
-Este guia cobre como criar e registrar os três elementos de automação mais comuns do template: Pages (lógica de interação com a UI), Handlers (validação de resultado) e Selectors (seletores CSS/XPath tipados).
+This guide covers the three most common automation elements in the template: Pages, Handlers, and Selectors. It focuses on the strict responsibilities of each component, observable identifiers, and retry boundaries.
+
+You **MUST** adhere to the rules defined in this document.
 
 ---
 
 ## Pages
 
-### O que é uma Page
+### What is a Page?
 
-Cada Page representa uma ação ou tela do crawler, seguindo o Page Object Pattern. Se uma mesma URL tem dois propósitos diferentes, crie Pages separadas: `HomePage` e `SearchPage` ficam no mesmo domínio com responsabilidades separadas.
+Each Page represents a single action or intent in the crawler, strictly following the Page Object Pattern.
 
-### Ciclo de vida de uma Page
+**CRITICAL RULE (Intent vs URL):**
+Pages are intent-oriented, NOT URL-oriented.
+- **IF** the same URL has 3 different intents (e.g., Home, Search, Best Flights all happen on `latam.com`), you **MUST** create 3 separate Pages. You **MUST NOT** merge them into a single Page just because the URL is the same.
+- **IF** an intent spans across multiple URLs, you still follow the intent logic, but keep responsibilities segregated.
+
+### Page Lifecycle
 
 ```
 Page.setPage(pageEngine)
     │
-    └── execute()         ← implementar aqui a lógica de interação
+    └── execute()         ← You MUST implement interaction logic here
           │
-          └── attempt()   ← retorna número máximo de tentativas
-                          ← retry automático em caso de falha
+          └── attempt()   ← Returns max retry attempts (auto-retry on failure)
 ```
 
-### Como criar uma Page
+### What a Page MUST DO
 
-**1. Scaffolding com comando (recomendado)**
+A Page **MUST**:
+- Navigate to URLs.
+- Fill out fields.
+- Click elements.
+- Await elements strictly necessary for the immediate action.
+- Consume typed state necessary for its own step.
+
+### What a Page MUST NOT DO (Anti-Patterns)
+
+A Page **MUST NOT**:
+- Decide if the flow advanced successfully (This is the Handler's job).
+- Dispatch the next step of the flow.
+- Reinvent state that already exists in the typed payload.
+- Contain inline business logic or conditional flow routing.
+
+### How to Create a Page
+
+You **MUST ALWAYS** use the official scaffolding command to create pages.
 
 ```bash
-yarn odg make:page <NomeDaPage>
-# Flags úteis:
-#   --selectors       cria o arquivo de selectors junto
-#   --event           cria o listener de evento que dispara a page
-#   --handler-from    cria o handler que antecede essa page
-#   --handler-to      cria o handler que sucede essa page
+yarn odg make:page <PageName>
+# Useful Flags:
+#   --selectors       Creates the selectors file together
+#   --event           Creates the event listener that triggers the page
+#   --handler-from    Creates the handler that precedes this page
+#   --handler-to      Creates the handler that succeeds this page
 ```
 
-**2. Arquivos a criar/editar manualmente**
+> **RULE:** When creating a page, handler, selectors, and events, you **MUST ALWAYS** prefer using `make:page` with the additional flags + `--register` to automatically create enums.
 
-| Arquivo                                      | O que fazer                                         |
-| -------------------------------------------- | --------------------------------------------------- |
-| `src/Pages/<Name>Page.ts`           | Criar a classe herdando de `BasePage` (Feito pelo comando)               |
-| `src/Pages/index.ts`                | Re-exportar a nova Page (Feito pelo comando)                          |
-| `src/app/Enums/ContainerName.ts`             | Adicionar `"<Name>Page" = "<name>.page"` (Requer ação manual)   |
-| `src/Selectors/<Name>Selector.ts`   | Criar os seletores (se `--selectors` não foi usado request ação manual) |
+#### Manual Steps After Scaffold
 
-**3. Estrutura padrão da classe**
+| File | What you MUST do |
+| --- | --- |
+| `src/Pages/<Name>Page.ts` | Inherit from `BasePage` (Done by command) |
+| `src/Pages/index.ts` | Re-export the new Page (Done by command) |
+| `src/app/Enums/ContainerName.ts` | Add `"<Name>Page" = "<name>.page"` (Done by command if `--register` flag is used) |
+| `src/Selectors/<Name>Selector.ts` | Create selectors (If `--selectors` was omitted, Manual Action Required) |
 
-```typescript
-import { ODGDecorators, type PageInterface } from "@odg/chemical-x";
+**Note:** When the `--register` flag is used, **no manual action** is required for adding enums or updating barrel files.
 
-import { ConfigName, ContainerName } from "@app/Enums";
-import { BasePage } from "@pages/BasePage";
-import { myPageSelector, type MyPageSelectorType } from "@selectors";
-
-@ODGDecorators.injectable(ContainerName.MyPage)
-@ODGDecorators.attemptableFlow()
-export class MyPage extends BasePage implements PageInterface {
-
-    public readonly $s: MyPageSelectorType = myPageSelector;
-
-    public async execute(): Promise<void> {
-        await this.page.goto("https://example.com", { waitUntil: "load" });
-        await this.page.fill(this.$s.searchInput, "query");
-    }
-
-    public async attempt(): Promise<number> {
-        return this.config.get(ConfigName.PAGE_ATTEMPT);
-    }
-
-}
-```
-
-> **Importante:** `@ODGDecorators.injectable` já registra a classe no container; não adicionar `@provide` manual.
-
-**Exemplo canônico:** [`src/Pages/Google/SearchPage.ts`](../../src/Pages/Google/SearchPage.ts)
-
-### BasePage — dependências disponíveis
-
-`BasePage` (`src/Pages/BasePage.ts`) já injeta via `@$inject`:
-
-| Propriedade | Tipo                         | Descrição                              |
-| ----------- | ---------------------------- | -------------------------------------- |
-| `this.log`  | `LoggerInterface`            | Logger injetado                        |
-| `this.config` | `ConfigInterface<ConfigType>` | Config validada via Zod              |
-| `this.page` | `PageClassEngine`            | Instância do page do Playwright/Puppeteer apenas se browser estiver habilitado |
-| `this.$$s`  | `typeof Selectors`           | Todos os selectors do projeto          |
+#### BasePage Injected Dependencies
+`BasePage` already injects the following via `@$inject`:
+- `this.log`: `LoggerInterface`
+- `this.config`: `ConfigInterface<ConfigType>`
+- `this.page`: `PageClassEngine` (Available if browser is enabled)
+- `this.$$s`: `typeof Selectors`
 
 ---
 
 ## Handlers
 
-### O que é um Handler
+### What is a Handler?
 
-Um Handler aguarda a confirmação de que uma Page executou com sucesso (ou falhou). Ele corre uma `Promise.race` entre seletores que indicam sucesso e seletores que indicam falha, com retry automático e re-dispatch opcional de eventos.
-Tambem pode ser feito no padrão **Nullish Coalescing Operator** `??` para casos mais simples, onde o handler valida uma request do browser/axios e valida múltiplos cenários diferentes para mesma request:
+A Handler waits for confirmation that a Page executed successfully or failed.
 
-### Ciclo de vida de um Handler
+### CRITICAL RULE: Validation Strategy
+You **MUST** choose the validation strategy based on the context:
 
-```
-Handler.setPage(pageEngine)
-    │
-    └── execute()
-          │
-          ├── waitForHandler()     ← Promise.race([ sucesso, falha ]) | identifyError1 ?? identifyError2 ?? identifyAnyError ?? successSolution.bind(this) — retorna HandlerFunction
-          └── retrying, success, finish, attempt ...  ← Implementa interface e fluxo attemptableFlow
-```
+1. **HTML Selectors Validation:**
+   - **WHEN** the handler evaluates HTML elements appearing on a page, you **MUST** use `Promise.race([identifySuccess(), identifyFailure()])` to resolve the fastest outcome.
+2. **Request Validation (Axios/Browser API):**
+   - **WHEN** the handler evaluates a single HTTP request and must handle multiple potential outcomes (e.g., success, wrong password, rate limit), you **MUST** use the Nullish Coalescing Operator (`??`).
+   - Example: `identifyError1 ?? identifyError2 ?? identifyAnyError ?? successSolution.bind(this)`
 
-### Como criar um Handler
+### CRITICAL RULE: Infinite Loop Prevention in Handlers
 
-**1. Scaffolding**
+**WHEN** writing a `failureSolution()` that cannot recover and needs to trigger a retry:
+- You **MUST** dispatch the page event again (e.g., `await this.bus.dispatch(EventName.MyPageEvent)`).
+- You **MUST NOT** return `RetryAction.Retry` after dispatching the event internally, as this bypasses the attempt counter and creates an infinite loop.
+- **INSTEAD**, you **MUST** throw an exception (e.g., `throw new Exception("Login failed, retrying...")`). This forces the flow into the `retrying()` method, which safely relies on the `@attemptableFlow` counter.
 
-```bash
-# yarn odg make:page Login --handler-to Search - Gera: LoginToSearchHandler.ts
-yarn odg make:page <NomeDaPage> --handler-to <DestinoDoPage>
+| 🔴 [BAD] - Infinite Loop | 🟢 [GOOD] - Controlled Retry |
+| --- | --- |
+| `await this.bus.dispatch(EventName.X);`<br>`return RetryAction.Retry;` | `await this.bus.dispatch(EventName.X);`<br>`throw new Exception("Failed");` |
 
-# ou
+### Handler Naming Convention
 
-# yarn odg make:handler Search - Gera: SearchHandler.ts
-yarn odg make:handler <NomeDoHandler>
-```
+- **`ExampleHandler`**:
+  - Use when the handler validates an expected result independent of page transitions (e.g., `LoginHandler` validates if login worked, regardless of where it came from).
+- **`OriginToDestinationHandler`**:
+  - Use when the handler validates a specific transition between an origin and a destination (e.g., `HomeToLoginHandler`).
 
-**2. Estrutura padrão da classe**
+### Observable Identifiers
 
-```typescript
-import {
-    type HandlerFunction,
-    type HandlerInterface,
-    HandlerSolutionType,
-    ODGDecorators,
-    RetryAction,
-} from "@odg/chemical-x";
-import type { Exception } from "@odg/exception";
+Before marking success, the handler **MUST** pick a strong observable identifier.
+Order of preference:
+1. Completed request with a compatible response.
+2. Expected URL change.
+3. Visible selector of the *next* step.
+4. Disappearance of the previous state combined with the presence of new state.
 
-import { ConfigName, ContainerName, EventName } from "@enums";
-import { BaseHandler } from "@handlers/BaseHandler";
-
-@ODGDecorators.injectable(ContainerName.MyHandler)
-export class MyHandler extends BaseHandler implements HandlerInterface {
-
-    public async waitForHandler(): Promise<HandlerFunction> {
-        return Promise.race([
-            this.identifySuccess(),
-            this.identifyFailure(),
-        ]);
-    }
-
-    public async getTimeout(): Promise<number> {
-        return this.config.get(ConfigName.HANDLER_TIMEOUT);
-    }
-
-    public async attempt(): Promise<number> {
-        return this.config.get(ConfigName.HANDLER_ATTEMPT);
-    }
-
-    public override async retrying(exception: Exception): Promise<RetryAction> {
-        await this.log.warning(exception.message);
-
-        // Se podemos colocar isso em 1 solution especifica, podemos controlar melhor quais casos sao retentados
-        await this.bus.dispatch(EventName.MyPageEvent, { page: this.page });
-
-        return RetryAction.Default;
-    }
-
-    public override async success(): Promise<void> {
-        await this.log.alert("Handler resolvido com sucesso");
-    }
-
-    private async identifySuccess(): Promise<HandlerFunction> {
-        return this.page.locator(this.$$s.mySelector.success)
-            .waitFor({ timeout: await this.getTimeout() })
-            .then(() => this.successSolution.bind(this));
-    }
-
-    private async identifyFailure(): Promise<HandlerFunction> {
-        return this.page.locator(this.$$s.mySelector.failure)
-            .waitFor({ timeout: await this.getTimeout() })
-            .then(() => this.failureSolution.bind(this));
-    }
-
-    private async failureSolution(): Promise<HandlerSolutionType> {
-        // Colocar o dispatch da page aqui e no retry pode gerar recursividade de tentativa. pois se isso falhar o flow cai no fluxo de retrying
-        await this.bus.dispatch(EventName.MyPageEvent, { page: this.page });
-
-        // Retry n tem contador limite, cuidado com loop infinito, prefira algo como throw new Exception("Falha identificada jogando para retrying function para validar se pode rodar waitForHandler novamente") para cair no fluxo de retrying e controlar melhor os casos de retry"
-        return RetryAction.Retry;
-    }
-
-}
-```
-
-> **Importante:** `@ODGDecorators.injectable` já registra o handler no container.
-
-**Exemplo canônico:** [`src/Handlers/GoogleSearch/GoogleSearchHandler.ts`](../../src/Handlers/GoogleSearch/GoogleSearchHandler.ts)
-
-### BaseHandler — dependências disponíveis
-
-`BaseHandler` (`src/Handlers/BaseHandler.ts`) já injeta via `@$inject`:
-
-| Propriedade  | Tipo                             | Descrição                          |
-| ------------ | -------------------------------- | ---------------------------------- |
-| `this.bus`   | `EventBusInterface<EventTypes>`  | Barramento de eventos              |
-| `this.log`   | `LoggerInterface`                | Logger injetado                    |
-| `this.config` | `ConfigInterface<ConfigType>`   | Config validada via Zod            |
-| `this.page`  | `PageClassEngine`                | Instância do page                  |
-| `this.$$s`   | `typeof Selectors`               | Todos os selectors do projeto      |
+Weak identifiers that you **MUST NOT** use alone:
+- Clicking a button without verifying the consequence.
+- Absence of exceptions.
+- Logs indicating an action was tried.
 
 ---
 
-### Quando usar cada tipo de handler
-
-Existe 2 possibilidades de nomes para handler, abaixo alguns exemplos de quando usar cada um:
-
-- `ExampleHandler`
-  - Use quando o handler valida um resultado esperado
-  - Não depende de uma transição de pagina
-  - Exemplo: `LoginHandler` valida o resultado do login, independentemente de onde ele foi iniciado ou para onde foi redirecionado apos isso
-- `ExampleToDestinationHandler`
-  - Use quando o handler valida uma transição específica entre uma origem e um destino.
-  - O resultado esperado da ação é chegar em uma página ou estado definido.
-  - Normalmente usado em automações que tem ponto de partida e chegada bem definidos, como um funil de vendas, onde cada etapa tem uma página e o handler valida a transição entre elas. (via request ou seletores)
-  - Exemplo: `BuyToPaymentHandler` valida que a `BuyPage` levou o fluxo para a `PaymentPage`.
-  - Usado quando mais uma pagina pode levar a mais de 1 lugar dessa forma podemos validar oque chamamos de caminho feliz (BuyToPayment)
-
-#### Regra prática
-
-- Se valida um resultado, use `ExampleHandler`.
-- Se valida uma transição + resultado, use `OriginToDestinationHandler`.
-- Se não estiver claro o que o handler valida, a IA deve perguntar antes de definir o nome.
-
 ## Selectors
 
-### O que são Selectors
+### What are Selectors?
 
-Selectors são constantes TypeScript que centralizam seletores CSS/XPath em uma estrutura tipada. Jamais escrever seletores inline dentro de Pages ou Handlers.
+Selectors are TypeScript constants that centralize CSS/XPath selectors into a typed structure.
 
-### Como criar um Selector
+**CRITICAL IMPLEMENTATION RULE:** Selectors identified during the planning phase or in specs are **placeholders**. During the implementation phase, you **MUST** manually inspect the real target page to identify the final, correct CSS selectors.
 
-**1. Criar o arquivo**
+**CRITICAL RULE:** You **MUST NEVER** write inline selectors inside Pages or Handlers.
 
-```text
-src/Selectors/<Name>Selector.ts
+| 🔴 [BAD] - Inline Selector | 🟢 [GOOD] - Centralized Selector |
+| --- | --- |
+| `await this.page.click('.btn-submit');` | `await this.page.click(this.$$s.myPage.buttons.submit);` |
+
+### Dynamic Selectors
+
+**WHEN** you need a dynamic selector (e.g., a selector that depends on a runtime variable like `userId`), you **MUST NOT** use string interpolation inside the Page file.
+You **MUST** use the `unicorn` method from `@odg/chemical-x/Str`.
+
+**[GOOD] Example for Dynamic Selectors:**
+In `src/Selectors/MySelector.ts`:
+```typescript
+export const mySelector = {
+    userButton: "#user-{{userId}}",
+};
 ```
 
-**2. Estrutura padrão**
+In `MyPage.ts`:
+```typescript
+import { Str } from "@odg/chemical-x";
 
+const dynamicSelector = new Str(this.$$s.mySelector.userButton).unicorn({
+    userId: "123"
+});
+await this.page.click(dynamicSelector);
+```
+
+### Standard Selector Structure
 ```typescript
 export const myPageSelector = {
     searchInput: "input[name=\"q\"]",
     buttons: {
         submit: "button[type=\"submit\"]",
     },
-    results: {
-        titles: ".result h3",
+    states: {
+        success: ".result h3",
         empty: ".no-results",
+        error: ".alert-error",
     },
 };
-
-export type MyPageSelectorType = typeof myPageSelector;
 ```
-
-**3. Exportar no index**
-
-Adicionar em `src/Selectors/index.ts`.
-
-**4. Usar na Page**
-
-```typescript
-public readonly $s: MyPageSelectorType = myPageSelector;
-
-// Na execução:
-await this.page.fill(this.$s.searchInput, value);
-```
-
-**Exemplos canônicos:**
-
-- [`src/Selectors/Google/SearchSelector.ts`](../../src/Selectors/Google/SearchSelector.ts)
-- [`src/Selectors/Google/ListSelector.ts`](../../src/Selectors/Google/ListSelector.ts)
-
-# Guia geração de arquivos
-
-Para gerar arquivos com `yarn odg make:` use o guia existente em `./node_modules/@odg/command/agents.md` e os exemplos canônicos do repositório. O comando é flexível para criar Pages, Handlers, Selectors e suas conexões, mas a estrutura e convenções descritas neste guia devem ser seguidas para garantir consistência e aderência à arquitetura do template.
+Useful groupings: `inputs`, `buttons`, `states`, `elements`, `alerts`.

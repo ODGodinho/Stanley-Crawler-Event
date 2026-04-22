@@ -8,8 +8,8 @@ import type { SearchPage } from "@pages/Google/SearchPage";
 import { $inject } from "~/ContainerInject";
 
 @ODGDecorators.injectable(ContainerName.SearchEventListener, "Singleton")
-@ODGDecorators.registerListener(EventName.SearchPageEvent, ContainerName.SearchEventListener, {})
-export class SearchEventListener implements EventListenerInterface<EventTypes, EventName.SearchPageEvent> {
+@ODGDecorators.registerListener(EventName.SearchEvent, ContainerName.SearchEventListener, {})
+export class SearchEventListener implements EventListenerInterface<EventTypes, EventName.SearchEvent> {
 
     public constructor(
         @$inject(ContainerName.Logger) public readonly log: LoggerInterface,

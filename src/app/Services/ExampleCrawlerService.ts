@@ -26,7 +26,7 @@ export class ExampleCrawlerService {
         const context = await this.browser.newContext();
         const page = await context.newPage();
 
-        await this.bus.dispatch(EventName.SearchPageEvent, {
+        await this.bus.dispatch(EventName.SearchEvent, {
             page,
         });
         await this.searchToSelectionHandler

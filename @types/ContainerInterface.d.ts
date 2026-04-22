@@ -1,18 +1,18 @@
-import type { ConfigInterface } from "@odg/config";
-import type { EventBusInterface, EventListenerInterface } from "@odg/events";
+import type { EventBusInterface } from "@odg/events";
 import type { JSONLoggerPlugin } from "@odg/json-log";
 import type { Logger, LoggerInterface } from "@odg/log";
 import type { MessageInterface } from "@odg/message";
 
 import type { Container } from "@app/Container";
-import type { ConfigType } from "@configs";
+import type { MyConfig } from "@configs";
 import type {
     BrowserClassEngine,
     BrowserManagerType,
 } from "@engine";
-import type { ContainerName, EventName } from "@enums";
+import type { ContainerName } from "@enums";
 import type { GoogleSearchToSelectionHandler } from "@handlers";
-import type { SearchPage } from "@pages/Google/SearchPage";
+import type { SearchEventListener } from "@listeners";
+import type { SearchPage } from "@pages";
 import type { EventServiceProvider } from "@providers/EventServiceProvider";
 import type { ExampleCrawlerService } from "@services/ExampleCrawlerService";
 import type { Kernel, ProcessKernel } from "~/Console";
@@ -28,7 +28,7 @@ export interface ContainerInterface {
     [ContainerName.Kernel]: Kernel;
     [ContainerName.BrowserManager]: BrowserManagerType;
     [ContainerName.Container]: Container;
-    [ContainerName.Config]: ConfigInterface<ConfigType>;
+    [ContainerName.Config]: MyConfig;
     [ContainerName.ConsoleLogger]: LoggerInterface;
     [ContainerName.JSONLogger]: JSONLoggerPlugin;
     [ContainerName.EventServiceProvider]: EventServiceProvider<EventTypes>;
@@ -38,11 +38,11 @@ export interface ContainerInterface {
     // Pages
     [ContainerName.SearchPage]: SearchPage;
 
-    // Handler
+    // Handlers
     [ContainerName.GoogleSearchToSelectionHandler]: GoogleSearchToSelectionHandler;
 
     // Events
-    [ContainerName.SearchEventListener]: EventListenerInterface<EventTypes, EventName.SearchPageEvent>;
+    [ContainerName.SearchEventListener]: SearchEventListener;
 
     // Services
     [ContainerName.ExampleCrawlerService]: ExampleCrawlerService;

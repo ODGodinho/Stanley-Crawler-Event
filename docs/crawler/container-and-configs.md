@@ -1,86 +1,57 @@
 # Container, Config & Enums
 
-Este guia cobre como registrar dependências no container, configurar variáveis de ambiente e usar os enums centrais do template.
+This guide covers how to register dependencies in the container, configure environment variables, and properly close enums and typed contracts after scaffolding.
+
+You **MUST** adhere to the rules defined in this document.
 
 ---
 
 ## Container
 
-### O que é o Container
+### What is the Container?
 
-O Container (`src/app/Container.ts`) é a Composition Root do projeto. Todos os bindings, escopos e bootstrapping vivem aqui. Nenhuma camada de negócio deve instanciar dependências diretamente ou chamar `container.get()`.
+The Container (`src/app/Container.ts`) is the Composition Root of the project. All bindings, scopes, and bootstrapping live here.
 
-### Fluxo de bootstrapping
+**CRITICAL RULE:** Business layers **MUST NEVER** instantiate dependencies directly using `new` and **MUST NEVER** call `container.get()`. You **MUST ALWAYS** use constructor injection via `@$inject(ContainerName.X)`.
+
+### Bootstrapping Flow
 
 ```
 Container.setUp()
     │
     ├── bindKernel()     ← Config, ConsoleLogger, Logger, Container (self)
-    ├── ODGDecorators.loadModule(this)   ← Pages, Handlers, Listeners com @ODGDecorators
+    ├── ODGDecorators.loadModule(this)   ← Pages, Handlers, Listeners with @ODGDecorators
     ├── bindCrawler()    ← BrowserManager (Playwright/Puppeteer)
-    ├── Kernel.init()    ← inicializa ProcessKernel
+    ├── Kernel.init()    ← Initializes ProcessKernel
     └── bindStanley()    ← Requester (Axios), JSONLogger, EventBus
 ```
 
-### Quando usar decorator vs. binding manual
+### Decorator vs. Manual Binding
 
-| Situação                                   | Abordagem                                 |
-| ------------------------------------------ | ----------------------------------------- |
-| Classes de domínio (Listener, Service) | `@ODGDecorators.injectable(ContainerName.X, "Singleton")` |
-| Pages e Handlers com lifecycle gerenciado  | `@ODGDecorators.injectable(ContainerName.X)` evite singleton para conseguir rodar múltiplas instâncias simultaneamente |
-| Class de lib/pacotes npm externos   | Binding manual em `Container.ts`          |
-| Factories ou valores dinâmicos             | `.toDynamicValue(() => ...)` em `Container.ts` |
+| Situation | Approach |
+| --- | --- |
+| Domain Classes (Listener, Service) | `@ODGDecorators.injectable(ContainerName.X, "Singleton")` |
+| Pages and Handlers (managed lifecycle) | `@ODGDecorators.injectable(ContainerName.X)` (No singleton) |
+| Factories/Libs/Dynamic Values | Manual binding in `Container.ts` |
 
-### Como registrar uma nova dependência
+### How to Register a New Dependency
 
-#### **1. Declare o nome no enum**
-
-Arquivo: `src/app/Enums/ContainerName.ts`
-
+#### 1. Declare the Name in Enum
+File: `src/app/Enums/ContainerName.ts`
 ```typescript
 export enum ContainerName {
-    // ...existentes...
-
     // Services
     "MyCrawlerService" = "my.crawler.service",
 }
 ```
+You **MUST** use `PascalCase` for keys and `dot.case` for values.
 
-##### **Regras**
-
-- chave em `PascalCase`, valor em `dot.case`.
-
-#### **2a. Binding via decorator (classes de domínio)**
-
-```typescript
-import { injectable } from "inversify";
-
-import { ContainerName } from "@enums";
-
-@ODGDecorators.injectable(ContainerName.MyCrawlerService, "Singleton")
-export class MyCrawlerService {
-    // ...
-}
-```
-
-A classe é descoberta automaticamente desde que seu arquivo seja importado em `src/index.ts` ou via barrel de pasta.
-
-**2b. Binding manual (infraestrutura / valores dinâmicos)**
-
-Arquivo: `src/app/Container.ts`, dentro do método `bindStanley()` ou `bindKernel()`:
-
-```typescript
-this.bind(ContainerName.MyInfra)
-    .toDynamicValue(() => new MyInfra(someParam))
-    .inSingletonScope();
-```
-
-**3. Injetar via construtor**
-
+#### 2. Inject via Constructor
 ```typescript
 import { $inject } from "~/ContainerInject";
 import { ContainerName } from "@enums";
 
+@injectable()
 export class MyClass {
     public constructor(
         @$inject(ContainerName.Logger) private readonly log: LoggerInterface,
@@ -89,73 +60,59 @@ export class MyClass {
 }
 ```
 
-**Exemplo canônico:** [`src/app/Container.ts`](../../src/app/Container.ts)
-
----
-
-## ContainerInject
-
-`src/ContainerInject.ts` exporta `$inject` e `$multiInject` com tipagem forte baseada em `ContainerInterface`. Sempre importar daqui, nunca usar `inject` do inversify diretamente.
-
-```typescript
-import { $inject } from "~/ContainerInject";
-```
-
-`ContainerInterface` (`@types/ContainerInterface.d.ts`) mapeia cada `ContainerName` ao seu tipo concreto. Ao adicionar uma nova classe ao container, adicionar também o mapeamento na interface.
-
 ---
 
 ## Config
 
-### Adicionar uma nova variável de ambiente
+### Adding a New Environment Variable
 
-#### **1. Declare a chave no enum**
+**CRITICAL RULE:** You **MUST NEVER** read values directly from `process.env`. You **MUST ALWAYS** read values through the typed `config` service.
 
-Arquivo: `src/app/Enums/ConfigName.ts`
+| 🔴 [BAD] | 🟢 [GOOD] |
+| --- | --- |
+| `const headless = process.env.USE_HEADLESS;` | `const headless = await this.config.get(ConfigName.USE_HEADLESS);` |
 
+#### 1. Declare the Key in Enum
+File: `src/app/Enums/ConfigName.ts`
 ```typescript
 export enum ConfigName {
-    USE_HEADLESS    = "USE_HEADLESS",
-    APP_NAME        = "APP_NAME",
-    MY_NEW_VAR      = "MY_NEW_VAR",  // ← adicionar aqui
+    MY_NEW_VAR = "MY_NEW_VAR", // ← Step 1: Add here
 }
 ```
 
-**2. Adicione a validação Zod**
-
-Arquivo: `src/Configs/index.ts`
-
+#### 2. Add Zod Validation
+File: `src/Configs/index.ts`
 ```typescript
 export const configValidator = zod.object({
-    [ConfigName.USE_HEADLESS]: CustomValidator.zodStringToBoolean(),
-    [ConfigName.APP_NAME]:     zod.string().nullish(),
-    [ConfigName.MY_NEW_VAR]:   zod.string(),  // ← validação Zod obrigatória
+    [ConfigName.MY_NEW_VAR]: zod.string(), // ← Step 2: Mandatory Zod validation
 });
 ```
 
-**3. Adicione ao `.env.example`**
-
+#### 3. Add to `.env.example` and Tests
+File: `.env.example`
 ```ini
-# Comentário sobre a funcionalidade da config
-MY_NEW_VAR=valor_padrao
+# Step 3: Add placeholder and comment
+MY_NEW_VAR=default_value
 ```
 
-#### **4. Ler o valor na lógica de negócio**
+**CRITICAL RULE (Tests):** If you add a **required** (not `.optional()`) variable to the Zod schema, you **MUST** also add a dummy value to `tests/vitest/init.ts` in the `process.env` block, otherwise the test suite will fail to boot.
 
+#### 4. Read the Value in Business Logic
 ```typescript
-const value = await this.config.get(ConfigName.MY_NEW_VAR);
+class MyClass {
+    public constructor(@$inject(ContainerName.Config) private readonly config: MyConfig) {}
+
+    public async doSomething() {
+        const value = await this.config.get(ConfigName.MY_NEW_VAR);
+    }
+}
 ```
 
-> **Nunca** acessar `process.env.MY_NEW_VAR` diretamente em Pages, Handlers, Services ou Listeners. Usar sempre `config.get(ConfigName.X)`. process env so deve ser usado para carregar class config
+### Mandatory Post-Scaffold Checklist for Configs
 
----
-
-## Enums centrais
-
-| Enum         | Arquivo                              | Finalidade                                         |
-| ------------ | ------------------------------------ | -------------------------------------------------- |
-| `ContainerName` | `src/app/Enums/ContainerName.ts` | Identificadores de todos os bindings do container  |
-| `ConfigName`    | `src/app/Enums/ConfigName.ts`    | Nomes das variáveis de ambiente/config             |
-| `EventName`     | `src/app/Enums/EventName.ts`     | Nomes dos eventos do barramento pub/sub            |
-
-Todos exportados via `src/app/Enums/index.ts`.
+Whenever a new flow requires configuration, you **MUST** close the entire chain:
+1. Update `src/app/Enums/ConfigName.ts`.
+2. Update `src/Configs/index.ts`.
+3. Update `.env.example` with comments.
+4. Update `tests/vitest/init.ts` (if required key).
+5. Read via `config.get(ConfigName.X)`.

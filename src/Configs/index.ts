@@ -1,3 +1,4 @@
+import type { ConfigInterface } from "@odg/config";
 import zod from "zod";
 
 import { ConfigName } from "@app/Enums";
@@ -12,3 +13,5 @@ export const configValidator = zod.object({
 });
 
 export type ConfigType = zod.infer<typeof configValidator>;
+
+export type MyConfig = ConfigInterface<ConfigType>;
