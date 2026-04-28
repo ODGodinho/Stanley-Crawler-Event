@@ -125,3 +125,6 @@ build/
 
 # Electron-Forge
 out/
+
+# Turbo
+.turbo/
