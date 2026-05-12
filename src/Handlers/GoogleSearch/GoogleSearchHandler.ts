@@ -35,7 +35,7 @@ export class GoogleSearchToSelectionHandler extends BaseHandler implements Handl
      * @returns {Promise<RetryAction>}
      */
     public override async retrying(exception: Exception): Promise<RetryAction> {
-        await this.log.warning(exception.message);
+        await this.logger.warning(exception.message);
         await this.bus.dispatch(EventName.SearchEvent, { page: this.page });
 
         return RetryAction.Default;
@@ -51,7 +51,7 @@ export class GoogleSearchToSelectionHandler extends BaseHandler implements Handl
         const result = this.page.locator(this.$$s.googleListSelector.results.resultTitles).first();
         const resultText = await result.textContent() ?? "";
 
-        await this.log.alert(`Google search result: ${resultText}`);
+        await this.logger.alert(`Google search result: ${resultText}`);
     }
 
     /**
@@ -63,10 +63,11 @@ export class GoogleSearchToSelectionHandler extends BaseHandler implements Handl
      * @returns {Promise<HandlerFunction>}
      */
     public async identifySuccessSearch(): Promise<HandlerFunction> {
-        return this.page.locator(this.$$s.googleListSelector.results.resultTitles)
+        await this.page.locator(this.$$s.googleListSelector.results.resultTitles)
             .first()
-            .waitFor({ timeout: await this.getTimeout() })
-            .then(() => this.successSolution.bind(this));
+            .waitFor({ timeout: await this.getTimeout() });
+
+        return this.successSolution.bind(this);
     }
 
     /**
@@ -78,9 +79,10 @@ export class GoogleSearchToSelectionHandler extends BaseHandler implements Handl
      * @returns {Promise<HandlerFunction>}
      */
     public async identifyNoResult(): Promise<HandlerFunction> {
-        return this.page.locator(this.$$s.googleListSelector.notResult)
-            .waitFor({ timeout: await this.getTimeout() })
-            .then(() => this.noResultSolution.bind(this));
+        await this.page.locator(this.$$s.googleListSelector.notResult)
+            .waitFor({ timeout: await this.getTimeout() });
+
+        return this.noResultSolution.bind(this);
     }
 
     /**

@@ -12,13 +12,13 @@ import { $inject } from "~/ContainerInject";
 export class SearchEventListener implements EventListenerInterface<EventTypes, EventName.SearchEvent> {
 
     public constructor(
-        @$inject(ContainerName.Logger) public readonly log: LoggerInterface,
+        @$inject(ContainerName.Logger) public readonly logger: LoggerInterface,
         @$inject(ContainerName.SearchPage) public readonly searchPage: SearchPage,
     ) {
     }
 
     public async handler({ page }: EventBrowserParameters): Promise<void> {
-        await this.log.debug("SearchEventListener is sended");
+        await this.logger.debug("SearchEventListener dispatched");
         await this.searchPage
             .setPage(page)
             .execute();

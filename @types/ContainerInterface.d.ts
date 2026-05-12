@@ -1,6 +1,6 @@
 import type { EventBusInterface } from "@odg/events";
 import type { JSONLoggerPlugin } from "@odg/json-log";
-import type { Logger, LoggerInterface } from "@odg/log";
+import type { LoggerInterface } from "@odg/log";
 import type { MessageInterface } from "@odg/message";
 
 import type { Container } from "@app/Container";
@@ -20,7 +20,7 @@ import type { Kernel, ProcessKernel } from "~/Console";
 import type { EventTypes } from "./EventsInterface";
 
 export interface ContainerInterface {
-    [ContainerName.Logger]: Logger | LoggerInterface;
+    [ContainerName.Logger]: LoggerInterface;
     [ContainerName.Browser]: BrowserClassEngine | undefined;
     [ContainerName.Requester]: MessageInterface;
     [ContainerName.EventBus]: EventBusInterface<EventTypes>;
@@ -41,7 +41,7 @@ export interface ContainerInterface {
     // Handlers
     [ContainerName.GoogleSearchToSelectionHandler]: GoogleSearchToSelectionHandler;
 
-    // Events
+    // Events Listeners
     [ContainerName.SearchEventListener]: SearchEventListener;
 
     // Services

@@ -139,10 +139,10 @@ Include the execution of your page in an event so that you can execute any page 
 ```typescript
 export class ExampleEventListener implements EventListenerInterface<EventTypes, EventName.ExampleEvent> {
     @$inject(ContainerName.Logger)
-    public readonly log!: LoggerInterface;
+    public readonly logger!: LoggerInterface;
 
     public async handler(_receivedData: unknown) {
-        await this.log.info("Example Event Listener");
+        await this.logger.info("Example Event Listener");
     }
 }
 ```

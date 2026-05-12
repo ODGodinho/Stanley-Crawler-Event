@@ -54,7 +54,7 @@ import { ContainerName } from "@enums";
 @injectable()
 export class MyClass {
     public constructor(
-        @$inject(ContainerName.Logger) private readonly log: LoggerInterface,
+        @$inject(ContainerName.Logger) private readonly logger: LoggerInterface,
         @$inject(ContainerName.MyCrawlerService) private readonly service: MyCrawlerService,
     ) {}
 }
@@ -63,14 +63,6 @@ export class MyClass {
 ---
 
 ## Config
-
-### Adding a New Environment Variable
-
-**CRITICAL RULE:** You **MUST NEVER** read values directly from `process.env`. You **MUST ALWAYS** read values through the typed `config` service.
-
-| 🔴 [BAD] | 🟢 [GOOD] |
-| --- | --- |
-| `const headless = process.env.USE_HEADLESS;` | `const headless = await this.config.get(ConfigName.USE_HEADLESS);` |
 
 #### 1. Declare the Key in Enum
 File: `src/app/Enums/ConfigName.ts`

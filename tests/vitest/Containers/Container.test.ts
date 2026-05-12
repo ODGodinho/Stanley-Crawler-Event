@@ -20,9 +20,9 @@ describe("Container Test", () => {
         const service = await container.getAsync(ContainerName.ExampleCrawlerService);
 
         expect(service).toBeInstanceOf(ExampleCrawlerService);
-        expect(service).toHaveProperty("log");
+        expect(service).toHaveProperty("logger");
 
-        expect(service["log"]).not.toBeUndefined();
+        expect(service["logger"]).not.toBeUndefined();
         await container.unbindAsync(ContainerName.Browser);
     });
 

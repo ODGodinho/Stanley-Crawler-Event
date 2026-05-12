@@ -15,7 +15,7 @@ export abstract class BaseHandler extends BaseHandlerChemical<PageClassEngine> {
     public readonly bus!: EventBusInterface<EventTypes>;
 
     @$inject(ContainerName.Logger)
-    public readonly log!: LoggerInterface;
+    public readonly logger!: LoggerInterface;
 
     @$inject(ContainerName.Config)
     public readonly config!: MyConfig;

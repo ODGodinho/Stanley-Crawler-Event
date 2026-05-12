@@ -1,5 +1,6 @@
 import "reflect-metadata";
-import type { Logger } from "@odg/log";
+
+import { Logger } from "@odg/log";
 
 import { ContainerName } from "@enums";
 
@@ -19,11 +20,13 @@ const project = new Container();
     await project.get(ContainerName.Logger).info("Shutdown");
 })()
     .catch(async (exception) => {
-        await project.getOptional(ContainerName.Logger)?.critical(exception);
+        const logger = project.getOptional(ContainerName.Logger);
+
+        await logger?.critical(exception);
 
         if (
-            !project.isBound(ContainerName.Logger)
-            || !(project.getOptional(ContainerName.Logger) as Logger).getHandlers().length
+            !logger
+            || !(logger instanceof Logger && logger.getHandlers().length > 0)
             // eslint-disable-next-line no-console -- Only for critical debugger
         ) console.error(exception);
     })

@@ -10,7 +10,7 @@ import { $inject } from "~/ContainerInject";
 export abstract class BasePage extends ChemicalBasePage<PageClassEngine> {
 
     @$inject(ContainerName.Logger)
-    public readonly log!: LoggerInterface;
+    public readonly logger!: LoggerInterface;
 
     @$inject(ContainerName.Config)
     public readonly config!: MyConfig;

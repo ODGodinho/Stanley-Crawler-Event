@@ -1,10 +1,12 @@
 import { ODGDecorators } from "@odg/chemical-x";
+import { ConfigInterface } from "@odg/config";
 import type { EventBusInterface } from "@odg/events";
 import type { LoggerInterface } from "@odg/log";
 
 import type { EventTypes } from "#types/EventsInterface";
+import { ConfigType } from "@configs";
 import type { BrowserClassEngine } from "@engine";
-import { ContainerName, EventName } from "@enums";
+import { ConfigName, ContainerName, EventName } from "@enums";
 import { $inject } from "~/ContainerInject";
 
 import type { GoogleSearchToSelectionHandler } from "../../Handlers/GoogleSearch/GoogleSearchHandler";
@@ -13,18 +15,19 @@ import type { GoogleSearchToSelectionHandler } from "../../Handlers/GoogleSearch
 export class ExampleCrawlerService {
 
     public constructor(
-        @$inject(ContainerName.Logger) protected log: LoggerInterface,
+        @$inject(ContainerName.Logger) protected logger: LoggerInterface,
         @$inject(ContainerName.EventBus) protected bus: EventBusInterface<EventTypes>,
         @$inject(ContainerName.Browser) protected browser: BrowserClassEngine,
+        @$inject(ContainerName.Config) protected config: ConfigInterface<ConfigType>,
         @$inject(ContainerName.GoogleSearchToSelectionHandler)
         protected searchToSelectionHandler: GoogleSearchToSelectionHandler,
     ) {
     }
 
     public async execute(): Promise<void> {
-        await this.log.info("Executing example crawler service");
-        const context = await this.browser.newContext();
-        const page = await context.newPage();
+        await this.logger.info("Executing example crawler service");
+        const context = this.browser.contexts()[0] ?? await this.browser.newContext();
+        const page = context.pages()[0] ?? await context.newPage();
 
         await this.bus.dispatch(EventName.SearchEvent, {
             page,
@@ -33,7 +36,9 @@ export class ExampleCrawlerService {
             .setPage(page)
             .execute();
 
-        await context.close();
+        if (!await this.config.get(ConfigName.BROWSER_CONNECT)) {
+            await context.close();
+        }
     }
 
 }

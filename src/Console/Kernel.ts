@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 
 import { ODGDecorators } from "@odg/chemical-x";
 import type { Logger, LoggerInterface } from "@odg/log";
-import { chromium } from "playwright";
+import { chromium, ConnectOverCDPOptions, LaunchOptions } from "playwright";
 
 import type { ContainerInterface } from "#types";
 import type { Container } from "@app/Container";
@@ -78,13 +78,25 @@ export class Kernel {
     }
 
     private async bootBrowser(): Promise<void> {
-        const browser = await this.browserManager.newBrowser(async () => chromium.launch({
+        const browserConnect = await this.config.get(ConfigName.BROWSER_CONNECT);
+        const browserOptions: ConnectOverCDPOptions | LaunchOptions = {
             args: [
                 // Use this to working in docker
                 "--no-zygote",
             ],
             headless: await this.config.get(ConfigName.USE_HEADLESS),
-        }));
+        };
+
+        const browser = await this.browserManager.newBrowser(async () => {
+            if (browserConnect) {
+                return chromium.connectOverCDP(
+                    browserConnect,
+                    browserOptions,
+                );
+            }
+
+            return chromium.launch(browserOptions);
+        });
 
         this.container.bind(
             ContainerName.Browser,
