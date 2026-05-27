@@ -8,7 +8,8 @@ import {
     vi,
 } from "vitest";
 
-import { ContainerName } from "../../../src/app/Enums/index.js";
+import { ContainerName } from "#enums";
+
 import { container } from "../SingletonTest.js";
 
 describe("Test process kernel", async () => {
@@ -153,7 +154,7 @@ describe("Test process kernel", async () => {
 
         assert(logger);
 
-        const mock = vi.spyOn(logger, "emergency");
+        const mock = vi.spyOn(logger, "emergency").mockReturnValue(Promise.resolve());
 
         expect(() => {
             processKernel["uncaughtException"](new Exception("Uncaught exception"));

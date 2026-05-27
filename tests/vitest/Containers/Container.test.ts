@@ -1,7 +1,8 @@
 import { chromium } from "playwright";
 
-import { ContainerName } from "../../../src/app/Enums/index.js";
-import { ExampleCrawlerService } from "../../../src/app/Services/index.js";
+import { ContainerName } from "#enums";
+import { ExampleCrawlerService } from "#services";
+
 import { container } from "../SingletonTest.js";
 
 function bind(): undefined {

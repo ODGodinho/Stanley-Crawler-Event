@@ -3,9 +3,6 @@ import { defineConfig } from "vitest/config";
 const coverage100 = 100;
 
 const vite = defineConfig({
-    resolve: {
-        tsconfigPaths: true,
-    },
     test: {
         globals: true,
         coverage: {

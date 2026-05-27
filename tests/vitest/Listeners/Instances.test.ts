@@ -1,6 +1,7 @@
 import type { EventListenerInterface } from "@odg/events";
 
-import { ContainerName } from "../../../src/app/Enums/index.js";
+import { ContainerName } from "#enums";
+
 import { container } from "../SingletonTest.js";
 
 const listeners = Object.values(ContainerName).filter((value) => value.endsWith(".event.listener"));

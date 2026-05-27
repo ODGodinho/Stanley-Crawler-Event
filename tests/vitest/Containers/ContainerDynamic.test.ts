@@ -1,6 +1,7 @@
-import { ContainerName } from "../../../src/app/Enums/index.js";
-import * as Engine from "../../../src/engine.js";
-import * as BasePageInterface from "../../../src/Interfaces/index.js";
+import * as Engine from "#engine";
+import { ContainerName } from "#enums";
+import * as BasePageInterface from "#interfaces";
+
 import { container } from "../SingletonTest.js";
 
 const dynamics = [

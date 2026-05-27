@@ -1,8 +1,8 @@
 import { chromium } from "playwright";
 import { vi } from "vitest";
 
-import { Container } from "../../../src/app/Container.js";
-import { ConfigName, ContainerName } from "../../../src/app/Enums/index.js";
+import { Container } from "#app/Container.js";
+import { ConfigName, ContainerName } from "#enums";
 
 describe("Container Kernel Test", () => {
     let container: Container;

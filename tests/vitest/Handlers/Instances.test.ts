@@ -1,7 +1,8 @@
 import type { HandlerInterface } from "@odg/chemical-x";
 
-import { ContainerName } from "../../../src/app/Enums/index.js";
-import { BaseHandler } from "../../../src/Handlers/BaseHandler.js";
+import { ContainerName } from "#enums";
+import { BaseHandler } from "#handlers/BaseHandler.js";
+
 import { container } from "../SingletonTest.js";
 
 const handlers = Object.values(ContainerName).filter((value) => value.endsWith(".handler"));
