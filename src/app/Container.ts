@@ -12,12 +12,12 @@ import { EventEmitterBus } from "@odg/events";
 import { JSONLoggerPlugin } from "@odg/json-log";
 import { ConsoleLogger, Logger } from "@odg/log";
 
+import { type ConfigType, configValidator } from "#configs";
+import { ConfigName, ContainerName } from "#enums";
 import type {
     ContainerInterface,
     EventTypes,
 } from "#types";
-import { type ConfigType, configValidator } from "@configs";
-import { ConfigName, ContainerName } from "@enums";
 
 import { Browser, Context, Page } from "../Browser";
 import type {
@@ -26,11 +26,11 @@ import type {
     PageClassEngine,
 } from "../engine";
 
-import "@handlers";
-import "@listeners";
-import "@pages";
-import "@providers";
-import "@services";
+import "#handlers";
+import "#listeners";
+import "#pages";
+import "#providers";
+import "#services";
 import "../Console";
 
 export class Container extends ContainerBase<ContainerInterface> {

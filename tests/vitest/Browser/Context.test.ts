@@ -1,7 +1,7 @@
 import { chromium } from "playwright";
 
-import { Context, Page } from "@browser";
-import { ContainerName } from "@enums";
+import { Context, Page } from "#browser";
+import { ContainerName } from "#enums";
 
 import { container } from "../SingletonTest";
 

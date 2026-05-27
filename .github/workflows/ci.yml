@@ -13,19 +13,26 @@ jobs:
       matrix:
         version: [ 24 ]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           persist-credentials: false
-      - uses: actions/setup-node@v3
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: ${{ matrix.version }}
-          registry-url: "https://npm.pkg.github.com/"
-          cache: yarn
-      - name: Yarn Install
-        run: yarn
-      - name: Playwright Install
-        run: yarn playwright install chromium
+          bun-version: latest
+      - name: Bun Install
+        run: bun install --frozen-lockfile
+      - name: Get Playwright Version
+        run: echo "PLAYWRIGHT_VERSION=$(bun pm ls | grep playwright | awk '{print $2}')" >> $GITHUB_ENV
+      - name: Cache Playwright Browsers
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+      - name: Install Playwright Browsers (if cache miss)
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: bunx playwright install chromium
       - if: ${{ github.event_name == 'pull_request' }}
         name: Review Dog Pull Request
         uses: reviewdog/action-eslint@v1
@@ -35,13 +42,13 @@ jobs:
           eslint_flags: .
           fail_on_error: true
       - name: Build Code
-        run: yarn build
+        run: bun run build
       - name: Run Tests
         env:
           USE_HEADLESS: "true"
-        run: "yarn test:ci"
+        run: bun run test:ci
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: unittests
@@ -49,11 +56,8 @@ jobs:
           fail_ci_if_error: true
           verbose: true
       - if: ${{ github.event_name == 'push' && vars.IS_PACKAGE == 'true' }}
-        name: Install semantic release
-        run: yarn global add semantic-release
-      - if: ${{ github.event_name == 'push' && vars.IS_PACKAGE == 'true' }}
         name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: semantic-release
+        run: bunx semantic-release

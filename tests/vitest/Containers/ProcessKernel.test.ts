@@ -8,7 +8,7 @@ import {
     vi,
 } from "vitest";
 
-import { ContainerName } from "@enums";
+import { ContainerName } from "#enums";
 
 import { container } from "../SingletonTest";
 

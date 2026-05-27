@@ -1,6 +1,6 @@
-import * as Engine from "@engine";
-import { ContainerName } from "@enums";
-import * as BasePageInterface from "@interfaces";
+import * as Engine from "#engine";
+import { ContainerName } from "#enums";
+import * as BasePageInterface from "#interfaces";
 
 import { container } from "../SingletonTest";
 

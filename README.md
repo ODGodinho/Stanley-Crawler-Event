@@ -76,8 +76,8 @@
 
 ## 📁 Dependencies
 
-- [Node.js](https://nodejs.org) 18 or later
-- [Yarn](https://yarnpkg.com/) Optional/Recommended
+- [Bun](https://bun.sh/) Recommended
+  - [Node.js](https://nodejs.org) 24 or later
 - [Playwright](https://playwright.dev/)
   - For web scraping / crawling / automation
 - [@odg/axios](https://www.npmjs.com/package/@odg/axios)
@@ -200,16 +200,16 @@ To Make a file run command
 > Use this to make Page, Handler, Selectors...
 
 ```powershell
-yarn odg make
+bunx odg make
 ```
 
 #### Example to make Page File
 
 ```powershell
-yarn odg make:page Search
+bunx odg make:page Search
 
 # help with
-yarn odg make:page --help
+bunx odg make:page --help
 ```
 
 ## 💓 Cycle Time
@@ -247,21 +247,19 @@ Copy `.env.example` to `.env` and add the values according to your needs.
 First install dependencies with the following command
 
 ```bash
-yarn install
-# or
-npm install
+bun install
 ```
 
 ## 📨 Build and Run
 
 To build the project, you can use the following command
 
-> if you change files, you need to run `yarn build` and `yarn start` again
+> if you change files, you need to run `bun run build` and `bun start` again
 
 ```bash
-yarn build && yarn start
+bun run build && bun start
 # or
-yarn dev
+bun run dev
 ```
 
 ## 🧪 Teste Code
@@ -269,7 +267,7 @@ yarn dev
 To Test execute this command
 
 ```bash
-yarn test
+bun run test
 # or
-yarn test:watch
+bun run test:watch
 ```

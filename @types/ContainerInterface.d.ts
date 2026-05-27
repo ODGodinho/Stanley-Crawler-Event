@@ -3,19 +3,20 @@ import type { JSONLoggerPlugin } from "@odg/json-log";
 import type { LoggerInterface } from "@odg/log";
 import type { MessageInterface } from "@odg/message";
 
-import type { Container } from "@app/Container";
-import type { MyConfig } from "@configs";
+import type { Container } from "#app/Container";
+import type { MyConfig } from "#configs";
 import type {
     BrowserClassEngine,
     BrowserManagerType,
-} from "@engine";
-import type { ContainerName } from "@enums";
-import type { GoogleSearchToSelectionHandler } from "@handlers";
-import type { SearchEventListener } from "@listeners";
-import type { SearchPage } from "@pages";
-import type { EventServiceProvider } from "@providers/EventServiceProvider";
-import type { ExampleCrawlerService } from "@services/ExampleCrawlerService";
-import type { Kernel, ProcessKernel } from "~/Console";
+} from "#engine";
+import type { ContainerName } from "#enums";
+import type { GoogleSearchToSelectionHandler } from "#handlers";
+import type { SearchEventListener } from "#listeners";
+import type { SearchPage } from "#pages";
+import type { EventServiceProvider } from "#providers";
+import type { ExampleCrawlerService } from "#services";
+
+import type { Kernel, ProcessKernel } from "../src/Console";
 
 import type { EventTypes } from "./EventsInterface";
 

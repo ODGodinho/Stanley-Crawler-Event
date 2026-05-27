@@ -1,7 +1,7 @@
 import type { HandlerInterface } from "@odg/chemical-x";
 
-import { ContainerName } from "@enums";
-import { BaseHandler } from "@handlers/BaseHandler";
+import { ContainerName } from "#enums";
+import { BaseHandler } from "#handlers/BaseHandler";
 
 import { container } from "../SingletonTest";
 

@@ -1,13 +1,13 @@
 import { ODGDecorators } from "@odg/chemical-x";
-import { ConfigInterface } from "@odg/config";
+import type { ConfigInterface } from "@odg/config";
 import type { EventBusInterface } from "@odg/events";
 import type { LoggerInterface } from "@odg/log";
 
+import { $inject } from "#/ContainerInject";
+import { ConfigType } from "#configs";
+import type { BrowserClassEngine } from "#engine";
+import { ConfigName, ContainerName, EventName } from "#enums";
 import type { EventTypes } from "#types/EventsInterface";
-import { ConfigType } from "@configs";
-import type { BrowserClassEngine } from "@engine";
-import { ConfigName, ContainerName, EventName } from "@enums";
-import { $inject } from "~/ContainerInject";
 
 import type { GoogleSearchToSelectionHandler } from "../../Handlers/GoogleSearch/GoogleSearchHandler";
 

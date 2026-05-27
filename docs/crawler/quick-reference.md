@@ -27,7 +27,7 @@ This is a high-level summary for AI agents to quickly understand the project arc
 - **Event-driven**: Listener executes Page AND executes the Handler (since no Service is present).
 
 ## CLI Post-Scaffold Checks
-When using `yarn odg make:** --register`:
+When using `bun odg make:** --register`:
 - **`ContainerName.ts`**: Verify values are `dotted.format` (not `PascalCase`).
 - **`ContainerName.ts`**: Ensure entries are in the correct section (`// Pages`, `// Handlers`, `// Events`).
 - **Selectors**: Auto-generated selectors are placeholders; you **MUST** update them with real values identified via manual page inspection during implementation.

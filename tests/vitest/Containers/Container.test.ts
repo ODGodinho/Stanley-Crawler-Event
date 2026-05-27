@@ -1,7 +1,7 @@
 import { chromium } from "playwright";
 
-import { ContainerName } from "@enums";
-import { ExampleCrawlerService } from "@services/ExampleCrawlerService";
+import { ContainerName } from "#enums";
+import { ExampleCrawlerService } from "#services";
 
 import { container } from "../SingletonTest";
 

@@ -5,9 +5,9 @@ import {
     EventServiceProvider as EventServiceProviderBase,
 } from "@odg/events";
 
+import { $inject } from "#/ContainerInject";
+import { ContainerName } from "#enums";
 import type { EventTypes } from "#types/EventsInterface";
-import { ContainerName } from "@enums";
-import { $inject } from "~/ContainerInject";
 
 import type { Container } from "../Container";
 

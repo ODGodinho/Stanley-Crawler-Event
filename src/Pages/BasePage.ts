@@ -1,11 +1,11 @@
 import { BasePage as ChemicalBasePage } from "@odg/chemical-x";
 import type { LoggerInterface } from "@odg/log";
 
-import type { MyConfig } from "@configs";
-import type { PageClassEngine } from "@engine";
-import { ContainerName } from "@enums";
-import * as Selectors from "@selectors";
-import { $inject } from "~/ContainerInject";
+import { $inject } from "#/ContainerInject";
+import type { MyConfig } from "#configs";
+import type { PageClassEngine } from "#engine";
+import { ContainerName } from "#enums";
+import * as Selectors from "#selectors";
 
 export abstract class BasePage extends ChemicalBasePage<PageClassEngine> {
 

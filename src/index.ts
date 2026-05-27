@@ -2,7 +2,7 @@ import "reflect-metadata";
 
 import { Logger } from "@odg/log";
 
-import { ContainerName } from "@enums";
+import { ContainerName } from "#enums";
 
 import { Container } from "./app/Container";
 

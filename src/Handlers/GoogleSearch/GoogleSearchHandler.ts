@@ -7,8 +7,8 @@ import {
 } from "@odg/chemical-x";
 import type { Exception } from "@odg/exception";
 
-import { ConfigName, ContainerName, EventName } from "@enums";
-import { BaseHandler } from "@handlers/BaseHandler";
+import { ConfigName, ContainerName, EventName } from "#enums";
+import { BaseHandler } from "#handlers/BaseHandler";
 
 @ODGDecorators.injectable(ContainerName.GoogleSearchToSelectionHandler)
 export class GoogleSearchToSelectionHandler extends BaseHandler implements HandlerInterface {

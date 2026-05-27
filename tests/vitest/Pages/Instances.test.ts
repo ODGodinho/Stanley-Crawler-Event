@@ -1,7 +1,7 @@
 import type { PageInterface } from "@odg/chemical-x";
 
-import { ContainerName } from "@enums";
-import { BasePage } from "@pages/BasePage";
+import { ContainerName } from "#enums";
+import { BasePage } from "#pages/BasePage";
 
 import { container } from "../SingletonTest";
 

@@ -2,7 +2,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: ./docker/node/Dockerfile
+      dockerfile: ./docker/bun/Dockerfile
     volumes:
       - /app/node_modules/
       - ./:/app/

@@ -2,10 +2,10 @@ import { ODGDecorators } from "@odg/chemical-x";
 import type { EventListenerInterface } from "@odg/events";
 import type { LoggerInterface } from "@odg/log";
 
+import { $inject } from "#/ContainerInject";
+import { ContainerName, EventName } from "#enums";
+import type { SearchPage } from "#pages/Google";
 import type { EventBrowserParameters, EventTypes } from "#types/EventsInterface";
-import { ContainerName, EventName } from "@enums";
-import type { SearchPage } from "@pages/Google/SearchPage";
-import { $inject } from "~/ContainerInject";
 
 @ODGDecorators.injectable(ContainerName.SearchEventListener, "Singleton")
 @ODGDecorators.registerListener(EventName.SearchEvent, ContainerName.SearchEventListener, {})

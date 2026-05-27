@@ -133,3 +133,6 @@ out/
 .playwright-cli/
 .playwright-mcp/
 .playwright/
+
+# Clinic Analysis
+.clinic/

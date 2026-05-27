@@ -33,7 +33,7 @@ If the task involves any of the packages below, you **MUST** read their specific
 
 You **MUST ALWAYS** obey the following technical rules. There are NO exceptions unless explicitly requested by the user.
 
-1. **CLI Scaffolding First:** You MUST NEVER manually create files for Pages, Handlers, Selectors, or Events. You MUST ALWAYS use the official CLI (`yarn odg make:**`) to generate them before writing any logic.
+1. **CLI Scaffolding First:** You MUST NEVER manually create files for Pages, Handlers, Selectors, or Events. You MUST ALWAYS use the official CLI (`bunx odg make:**`) to generate them before writing any logic.
 2. **Enums Over Strings:** You MUST use `ContainerName`, `ConfigName`, and `EventName`. You MUST NEVER use loose strings for dependency injection or event names.
 3. **Injection Pattern:** You MUST use `@$inject` and `@$multiInject` from `~/ContainerInject`. You MUST NEVER use direct Inversify injections (`@inject`).
 4. **Decorator Order:** You MUST place `@ODGDecorators.injectable(...)` at the absolute top, above all other decorators.
@@ -42,6 +42,6 @@ You **MUST ALWAYS** obey the following technical rules. There are NO exceptions 
 7. **Barrels (`index.ts`):** You MUST keep barrel files updated whenever you create or delete public files.
 8. **Async/Await:** You MUST use `async` and `await` consistently. You MUST NEVER use `.then()` chaining for control flow.
 9. **Composition Root:** You MUST keep all wiring and manual bindings inside the composition root (`src/app/Container.ts`).
-10. **Linting:** You MUST run `lint eslint --fix` after your manual adjustments and after every `yarn odg make:**` command.
+10. **Linting:** You MUST run `lint eslint --fix` after your manual adjustments and after every `bunx odg make:**` command.
 11. **Sensible Configs:** All configs MUST exist inside `.env.example`. You MUST NEVER place sensitive data (like real passwords) in `.env.example`; leave them empty or use placeholder values.
 12. **Class Structure:** You MUST respect access modifier ordering (`public`, then `protected`, then `private`). You MUST respect element ordering (`properties`, then `constructor`, then `methods`).

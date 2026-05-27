@@ -1,8 +1,8 @@
 import type { ConfigInterface } from "@odg/config";
 import zod from "zod";
 
-import { ConfigName } from "@app/Enums";
-import { CustomValidator } from "~/Validator";
+import { CustomValidator } from "#/Validator";
+import { ConfigName } from "#app/Enums";
 
 export const configValidator = zod.object({
     [ConfigName.USE_HEADLESS]: CustomValidator.zodStringToBoolean(),

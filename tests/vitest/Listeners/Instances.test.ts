@@ -1,6 +1,6 @@
 import type { EventListenerInterface } from "@odg/events";
 
-import { ContainerName } from "@enums";
+import { ContainerName } from "#enums";
 
 import { container } from "../SingletonTest";
 
