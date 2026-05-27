@@ -4,14 +4,14 @@ import { ODGDecorators } from "@odg/chemical-x";
 import type { Logger, LoggerInterface } from "@odg/log";
 import { chromium, ConnectOverCDPOptions, LaunchOptions } from "playwright";
 
-import type { Container } from "#app/Container";
-import type { BrowserManagerType } from "#engine";
-import { ConfigName, ContainerName } from "#enums";
 import type { ContainerInterface } from "#types";
 
-import { $inject } from "../ContainerInject";
+import type { Container } from "../app/Container.js";
+import { ConfigName, ContainerName } from "../app/Enums/index.js";
+import { $inject } from "../ContainerInject.js";
+import type { BrowserManagerType } from "../engine.js";
 
-import { ProcessKernel } from "./ProcessKernel";
+import { ProcessKernel } from "./ProcessKernel.js";
 
 /**
  * Kernel command class

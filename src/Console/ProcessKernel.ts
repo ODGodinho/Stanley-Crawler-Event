@@ -1,9 +1,8 @@
 import { ODGDecorators } from "@odg/chemical-x";
 
-import type { Container } from "#app/Container";
-import { ContainerName } from "#enums";
-
-import { $inject } from "../ContainerInject";
+import type { Container } from "../app/Container.js";
+import { ContainerName } from "../app/Enums/index.js";
+import { $inject } from "../ContainerInject.js";
 
 @ODGDecorators.injectable(ContainerName.ProcessKernel, "Singleton")
 export class ProcessKernel {

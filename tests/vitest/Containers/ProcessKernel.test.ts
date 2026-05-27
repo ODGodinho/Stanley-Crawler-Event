@@ -8,9 +8,8 @@ import {
     vi,
 } from "vitest";
 
-import { ContainerName } from "#enums";
-
-import { container } from "../SingletonTest";
+import { ContainerName } from "../../../src/app/Enums/index.js";
+import { container } from "../SingletonTest.js";
 
 describe("Test process kernel", async () => {
     let capturedUncaughtException: ((...parameters: unknown[]) => void) | undefined;

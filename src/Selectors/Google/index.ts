@@ -1,3 +1,3 @@
-export * from "./SearchSelector";
+export * from "./SearchSelector.js";
 
-export * from "./ListSelector";
+export * from "./ListSelector.js";

@@ -2,7 +2,7 @@ import type {
     Browser as BrowserBase,
     Context as ContextBase,
     Page as PageBase,
-} from "../src/Browser";
+} from "../src/Browser/index.ts";
 
 declare module "playwright" {
     interface Page extends PageBase { }

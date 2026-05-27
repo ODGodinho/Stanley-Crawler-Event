@@ -1,7 +1,7 @@
 import type { EventObjectType } from "@odg/events";
 
-import type { PageClassEngine } from "#engine";
-import type { EventName } from "#enums";
+import type { EventName } from "../src/app/Enums/index.ts";
+import type { PageClassEngine } from "../src/engine.ts";
 
 interface EventBaseInterface extends EventObjectType {
     [EventName.SearchEvent]: EventBrowserParameters;

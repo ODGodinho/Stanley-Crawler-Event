@@ -1,6 +1,5 @@
-import { ContainerName } from "#enums";
-
-import { container } from "../SingletonTest";
+import { ContainerName } from "../../../src/app/Enums/index.js";
+import { container } from "../SingletonTest.js";
 
 describe("EventServiceProvider Test", () => {
     test("EventServiceProvider Boot", async () => {

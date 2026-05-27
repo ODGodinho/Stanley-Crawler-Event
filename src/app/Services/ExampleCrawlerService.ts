@@ -3,13 +3,13 @@ import type { ConfigInterface } from "@odg/config";
 import type { EventBusInterface } from "@odg/events";
 import type { LoggerInterface } from "@odg/log";
 
-import { ConfigType } from "#configs";
-import type { BrowserClassEngine } from "#engine";
-import { ConfigName, ContainerName, EventName } from "#enums";
 import type { EventTypes } from "#types";
 
-import { $inject } from "../../ContainerInject";
-import type { GoogleSearchToSelectionHandler } from "../../Handlers/GoogleSearch/GoogleSearchHandler";
+import { ConfigType } from "../../Configs/index.js";
+import { $inject } from "../../ContainerInject.js";
+import type { BrowserClassEngine } from "../../engine.js";
+import type { GoogleSearchToSelectionHandler } from "../../Handlers/index.js";
+import { ConfigName, ContainerName, EventName } from "../Enums/index.js";
 
 @ODGDecorators.injectable(ContainerName.ExampleCrawlerService, "Singleton")
 export class ExampleCrawlerService {

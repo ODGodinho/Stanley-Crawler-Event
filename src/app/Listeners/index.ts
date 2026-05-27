@@ -1,1 +1,1 @@
-export * from "./SearchEventListener";
+export * from "./SearchEventListener.js";

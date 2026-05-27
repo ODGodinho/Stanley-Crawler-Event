@@ -1,1 +1,1 @@
-export * from "./ExampleCrawlerService";
+export * from "./ExampleCrawlerService.js";

@@ -5,11 +5,11 @@ import {
     EventServiceProvider as EventServiceProviderBase,
 } from "@odg/events";
 
-import { ContainerName } from "#enums";
 import type { EventTypes } from "#types";
 
-import { $inject } from "../../ContainerInject";
-import type { Container } from "../Container";
+import { $inject } from "../../ContainerInject.js";
+import type { Container } from "../Container.js";
+import { ContainerName } from "../Enums/index.js";
 
 /**
  * Event Service Provider to Register all event Listeners

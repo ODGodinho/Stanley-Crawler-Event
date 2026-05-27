@@ -2,9 +2,8 @@ import "reflect-metadata";
 
 import { Logger } from "@odg/log";
 
-import { ContainerName } from "#enums";
-
-import { Container } from "./app/Container";
+import { Container } from "./app/Container.js";
+import { ContainerName } from "./app/Enums/index.js";
 
 const project = new Container();
 

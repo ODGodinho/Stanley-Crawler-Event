@@ -1,3 +1,3 @@
-export * from "./Kernel";
+export * from "./Kernel.js";
 
-export * from "./ProcessKernel";
+export * from "./ProcessKernel.js";

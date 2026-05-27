@@ -22,6 +22,8 @@
             "#interfaces/*": [ "./src/Interfaces/*" ],
             "#listeners": [ "./src/app/Listeners" ],
             "#listeners/*": [ "./src/app/Listeners/*" ],
+            "#validator": [ "./src/Validator" ],
+            "#validator/*": [ "./src/Validator/*" ],
             "#pages": [ "./src/Pages" ],
             "#pages/*": [ "./src/Pages/*" ],
             "#providers": [ "./src/app/Provider" ],

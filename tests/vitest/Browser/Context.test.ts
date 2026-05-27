@@ -1,9 +1,8 @@
 import { chromium } from "playwright";
 
-import { Context, Page } from "#browser";
-import { ContainerName } from "#enums";
-
-import { container } from "../SingletonTest";
+import { ContainerName } from "../../../src/app/Enums/index.js";
+import { Context, Page } from "../../../src/Browser/index.js";
+import { container } from "../SingletonTest.js";
 
 describe("Context Create Instance", () => {
     test("new Context", async () => {

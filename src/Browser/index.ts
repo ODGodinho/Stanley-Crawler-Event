@@ -1,5 +1,5 @@
-export * from "./Browser";
+export * from "./Browser.js";
 
-export * from "./Context";
+export * from "./Context.js";
 
-export * from "./Page";
+export * from "./Page.js";

@@ -1,1 +1,1 @@
-export * from "./GoogleSearchHandler";
+export * from "./GoogleSearchHandler.js";
