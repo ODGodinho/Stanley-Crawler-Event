@@ -5,7 +5,6 @@
         "tsBuildInfoFile": "dist/tsconfig.build.tsbuildinfo",
         "paths": {
             "#types": [ "./@types" ],
-            "#types/*": [ "./@types/*" ],
             "#app": [ "./src/app" ],
             "#app/*": [ "./src/app/*" ],
             "#browser": [ "./src/Browser" ],
@@ -30,8 +29,7 @@
             "#selectors": [ "./src/Selectors" ],
             "#selectors/*": [ "./src/Selectors/*" ],
             "#services": [ "./src/app/Services" ],
-            "#services/*": [ "./src/app/Services/*" ],
-            "#/*": [ "./src/*" ]
+            "#services/*": [ "./src/app/Services/*" ]
         },
         "rootDir": ".",
         "typeRoots": [

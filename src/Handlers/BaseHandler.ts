@@ -2,12 +2,13 @@ import { BaseHandler as BaseHandlerChemical } from "@odg/chemical-x";
 import type { EventBusInterface } from "@odg/events";
 import type { LoggerInterface } from "@odg/log";
 
-import { $inject } from "#/ContainerInject";
 import type { MyConfig } from "#configs";
 import type { PageClassEngine } from "#engine";
 import { ContainerName } from "#enums";
 import * as Selectors from "#selectors";
-import type { EventTypes } from "#types/EventsInterface";
+import type { EventTypes } from "#types";
+
+import { $inject } from "../ContainerInject";
 
 export abstract class BaseHandler extends BaseHandlerChemical<PageClassEngine> {
 
