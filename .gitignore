@@ -136,3 +136,7 @@ out/
 
 # Clinic Analysis
 .clinic/
+
+# IA Agent ignores
+.claude/
+.review/

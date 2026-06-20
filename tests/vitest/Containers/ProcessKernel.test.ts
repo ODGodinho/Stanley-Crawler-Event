@@ -1,6 +1,6 @@
 import { Exception } from "@odg/exception";
 import {
-    assert,
+    afterEach,
     beforeEach,
     describe,
     expect,
@@ -152,7 +152,7 @@ describe("Test process kernel", async () => {
         const logger = container.get(ContainerName.Logger);
         const processKernel = container.get(ContainerName.ProcessKernel);
 
-        assert(logger);
+        expect(logger).toBeDefined();
 
         const mock = vi.spyOn(logger, "emergency").mockReturnValue(Promise.resolve());
 
@@ -166,7 +166,7 @@ describe("Test process kernel", async () => {
         const logger = container.get(ContainerName.Logger);
         const processKernel = container.get(ContainerName.ProcessKernel);
 
-        assert(logger);
+        expect(logger).toBeDefined();
 
         const mock = vi.spyOn(logger, "debug");
 

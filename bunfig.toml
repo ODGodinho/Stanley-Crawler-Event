@@ -1,0 +1,7 @@
+[test]
+
+root="tests/vitest"
+preload=[
+  "./tests/vitest/preload-inversify.ts",
+  "./tests/vitest/init.ts",
+]

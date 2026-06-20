@@ -83,7 +83,7 @@ export class Kernel {
         const browserConnect = await this.config.get(ConfigName.BROWSER_CONNECT);
         const browserOptions: ConnectOverCDPOptions | LaunchOptions = {
             args: [
-                // Use this to working in docker
+                // Use this to working in Docker
                 "--no-zygote",
             ],
             headless: await this.config.get(ConfigName.USE_HEADLESS),

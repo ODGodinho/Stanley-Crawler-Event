@@ -20,7 +20,7 @@ import { ContainerName } from "../Enums/index.js";
 export class EventServiceProvider<Events extends EventTypes> extends EventServiceProviderBase<Events> {
 
     /**
-     * Listeners for events in the application.
+     * Listeners for events in the app.
      *
      * @type {EventListener<EventTypes>}
      * @memberof EventServiceProvider

@@ -21,6 +21,8 @@
         "#engine": "./src/engine.ts",
         "#enums": "./src/app/Enums/index.ts",
         "#enums/*": "./src/app/Enums/*",
+        "#exceptions": "./src/Exceptions",
+        "#exceptions/*": "./src/Exceptions/*",
         "#factory": "./src/app/Factory/index.ts",
         "#factory/*": "./src/app/Factory/*",
         "#handlers": "./src/Handlers/index.ts",
@@ -41,18 +43,21 @@
         "#services/*": "./src/app/Services/*"
     },
     "scripts": {
-        "clean": "rimraf dist/ node_modules/ bun.lock*",
-        "reset": "bun run clean && bun install && bun run build",
         "build": "rimraf dist/ && tsc --project ./tsconfig.build.json && tsc-alias -p tsconfig.build.json",
-        "build:watch": "bun run build && (concurrently \"tsc --project ./tsconfig.build.json -w\" \"tsc-alias -p tsconfig.build.json -w\")",
+        "build:watch": "concurrently 'bun run tsc:build -w' 'bun run tsc:alias -w'",
+        "clean": "rimraf dist/ node_modules/ bun.lock*",
         "dev": "bun ./src/index.ts",
         "start": "bun ./dist/index.js",
+        "reset": "bun run clean && bun install && bun run build",
         "lint": "odg-lint",
         "lint:fix": "odg-lint --fix",
         "prepare": "husky",
         "test": "vitest run",
         "test:ci": "vitest run --passWithNoTests",
-        "test:watch": "vitest --watch"
+        "test:watch": "vitest --watch",
+        "tsc:check": "tsc --noEmit -p tsconfig.json",
+        "tsc:build": "tsc --project ./tsconfig.build.json",
+        "tsc:alias": "tsc-alias -p tsconfig.build.json"
     },
     "engines": {
         "node": ">=24.0.0",
@@ -62,7 +67,7 @@
         "access": "public"
     },
     "lint-staged": {
-        "*": [ "bun run lint:fix" ]
+        "*": "bun run lint:fix"
     },
     "release": {
         "branches": [
@@ -95,32 +100,32 @@
     "author": "Dragons Gamers <https://www.linkedin.com/in/victor-alves-odgodinho>",
     "license": "MIT",
     "devDependencies": {
-        "@odg/command": "^1.16.0",
-        "@odg/eslint-config": "^3.7.0",
-        "@odg/tsconfig": "^1.4.0",
-        "@types/node": ">=24.0.0 <26.0.0",
-        "@vitest/coverage-istanbul": "^4.1.7",
+        "@odg/command": "^1.20.2",
+        "@odg/eslint-config": "^3.11.2",
+        "@odg/tsconfig": "^1.5.1",
+        "@types/node": "^26.0.0",
+        "@vitest/coverage-istanbul": "^4.1.9",
         "bun-types": "^1.3.14",
-        "eslint": "^9.39.4",
         "husky": "^9.1.7",
-        "lint-staged": "^17.0.5",
+        "lint-staged": "^17.0.7",
+        "rimraf": "^6.1.3",
         "tsc-alias": "^1.8.17",
         "typescript": "^6.0.3",
-        "vite": "^8.0.14",
-        "vitest": "^4.1.7"
+        "vite": "^8.0.16",
+        "vitest": "^4.1.9"
     },
     "dependencies": {
         "@inversifyjs/strongly-typed": "^3.0.0",
-        "@odg/axios": "^1.17.0",
-        "@odg/chemical-x": "^2.7.0",
-        "@odg/config": "^1.7.0",
-        "@odg/events": "^1.7.0",
-        "@odg/exception": "^1.13.0",
-        "@odg/json-log": "^1.10.0",
-        "@odg/log": "^1.11.0",
-        "@odg/message": "^1.17.0",
-        "inversify": "^8.1.0",
-        "playwright": "^1.60.0",
+        "@odg/axios": "^1.21.2",
+        "@odg/chemical-x": "^2.11.2",
+        "@odg/config": "^1.10.3",
+        "@odg/events": "^1.11.2",
+        "@odg/exception": "^1.17.2",
+        "@odg/json-log": "^1.14.2",
+        "@odg/log": "^1.15.2",
+        "@odg/message": "^1.21.2",
+        "inversify": "^8.1.1",
+        "playwright": "^1.61.0",
         "reflect-metadata": "^0.2.2",
         "zod": "^4.4.3"
     },
