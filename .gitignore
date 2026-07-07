@@ -137,6 +137,9 @@ out/
 # Clinic Analysis
 .clinic/
 
-# IA Agent ignores
+# IA Agent
 .claude/
 .review/
+.mcp.json
+!.claude/skills/
+!.claude/clauderules.md

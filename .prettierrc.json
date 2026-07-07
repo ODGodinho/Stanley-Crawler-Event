@@ -1,0 +1,25 @@
+{
+    "tabWidth": 4,
+    "useTabs": false,
+    "printWidth": 120,
+    "semi": true,
+    "singleQuote": false,
+    "jsxSingleQuote": false,
+    "quoteProps": "consistent",
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "bracketSameLine": false,
+    "arrowParens": "always",
+    "endOfLine": "lf",
+    "singleAttributePerLine": true,
+    "overrides": [
+        {
+            "files": [ "*.yml", "*.yaml" ],
+            "options": { "tabWidth": 2 }
+        },
+        {
+            "files": [ "*.md", "*.mdx" ],
+            "options": { "proseWrap": "preserve" }
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "aaron-bond.better-comments",
+        "editorconfig.editorconfig",
+        "vivaxy.vscode-conventional-commits",
+        "streetsidesoftware.code-spell-checker-portuguese-brazilian",
+        "streetsidesoftware.code-spell-checker",
+        "mihelcic.colored-regions",
+        "mikestead.dotenv",
+        "faissaloux.package-manager-intellisense",
+        "shardulm94.trailing-spaces",
+        "wayou.vscode-todo-highlight",
+        "yoavbls.pretty-ts-errors",
+        "vitest.explorer"
+    ]
+}
