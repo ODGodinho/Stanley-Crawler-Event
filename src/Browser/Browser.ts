@@ -5,7 +5,7 @@ import type {
     ContextClassEngine,
     ContextOptionsEngine,
     PageClassEngine,
-} from "../engine.js";
+} from "#engine";
 
 export class Browser extends BrowserBase<
     BrowserClassEngine,

@@ -14,7 +14,7 @@ describe.each(dynamics)("Container Dynamic Value Get", (containerName: Container
         await expect(container.getAsync(containerName)).resolves.toBeDefined();
     });
 
-    test("Test Not Empty", async () => {
+    test("Test barrel files import is not error and defined", async () => {
         expect(BasePageInterface).toBeDefined();
         expect(Engine).toBeDefined();
     });

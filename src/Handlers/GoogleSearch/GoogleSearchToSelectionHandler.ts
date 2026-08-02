@@ -7,7 +7,8 @@ import {
 } from "@odg/chemical-x";
 import type { Exception } from "@odg/exception";
 
-import { ConfigName, ContainerName, EventName } from "../../app/Enums/index.js";
+import { ConfigName, ContainerName, EventName } from "#enums";
+
 import { BaseHandler } from "../BaseHandler.js";
 
 @ODGDecorators.injectable(ContainerName.GoogleSearchToSelectionHandler)

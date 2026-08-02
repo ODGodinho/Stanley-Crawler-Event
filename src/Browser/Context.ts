@@ -3,7 +3,7 @@ import { Context as ContextBase, type PageOptionsLibraryInterface } from "@odg/c
 import type {
     ContextClassEngine,
     PageClassEngine,
-} from "../engine.js";
+} from "#engine";
 
 export class Context extends ContextBase<
     ContextClassEngine,

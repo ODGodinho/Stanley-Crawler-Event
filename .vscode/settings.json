@@ -52,6 +52,13 @@
     "js/ts.preferences.preferTypeOnlyAutoImports": true,
     "js/ts.preferences.importModuleSpecifier": "non-relative",
     "js/ts.suggest.autoImports": true,
+    "js/ts.preferences.autoImportFileExcludePatterns": [
+        ".*/**/*",
+        "dist/**/*",
+        "build/**/*",
+        "logs/**/*",
+        "out/**/*"
+    ],
 
     // Optimize todo hightlight
     "todohighlight.isEnable": true,

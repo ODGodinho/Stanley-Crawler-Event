@@ -5,11 +5,10 @@ import { ODGDecorators } from "@odg/chemical-x";
 import type { Logger, LoggerInterface } from "@odg/log";
 import { chromium, ConnectOverCDPOptions, LaunchOptions } from "playwright";
 
+import type { Container } from "#app/Container.js";
 import { $inject } from "#app/ContainerInject.js";
-
-import type { Container } from "../app/Container.js";
-import { ConfigName, ContainerName } from "../app/Enums/index.js";
-import type { BrowserClassEngine, BrowserManagerType } from "../engine.js";
+import type { BrowserClassEngine, BrowserManagerType } from "#engine";
+import { ConfigName, ContainerName } from "#enums";
 
 import { ProcessKernel } from "./ProcessKernel.js";
 

@@ -2,11 +2,12 @@ import crypto from "node:crypto";
 
 import { ODGDecorators, type PageInterface } from "@odg/chemical-x";
 
-import { ConfigName, ContainerName } from "../../app/Enums/index.js";
+import { ConfigName, ContainerName } from "#enums";
 import {
     googleSearchSelector,
     type GoogleSearchSelectorType,
-} from "../../Selectors/index.js";
+} from "#selectors";
+
 import { BasePage } from "../BasePage.js";
 
 @ODGDecorators.injectable(ContainerName.SearchPage)
