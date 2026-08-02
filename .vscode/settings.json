@@ -30,7 +30,6 @@
     "eslint.workingDirectories": [ { "mode": "auto" } ],
     "eslint.useFlatConfig": true,
     "eslint.runtime": "bun",
-    "eslint.run": "onSave",
 
     "js/ts.preferences.quoteStyle": "double",
     "js/ts.format.semicolons": "ignore",

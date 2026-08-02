@@ -37,7 +37,7 @@ export class Kernel {
      */
     public async boot(): Promise<void> {
         await Promise.all([
-            this.container.get(ContainerName.Logger).info("Kernel Starting"),
+            this.logger.info("Kernel Starting"),
             this.bootLogs(),
             this.bootBrowser(),
             this.container.get(ContainerName.EventServiceProvider).boot(),

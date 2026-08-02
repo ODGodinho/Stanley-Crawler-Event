@@ -2,7 +2,7 @@
     "extends": "./node_modules/@odg/tsconfig/tsconfig.node.json",
     "compilerOptions": {
         "outDir": "./dist",
-        "tsBuildInfoFile": "./dist/tsconfig.build.tsbuildinfo",
+        "tsBuildInfoFile": "./dist/tsconfig.check.tsbuildinfo",
         "paths": {
             "#types": [ "./@types" ],
             "#app/*": [ "./src/app/*" ],
