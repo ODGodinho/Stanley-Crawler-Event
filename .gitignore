@@ -115,6 +115,10 @@ web_modules/
 .yarn/install-state.gz
 .pnp.*
 
+# bun
+.bun/
+bun.lockb
+
 # Compiled code
 lib/
 dist/
