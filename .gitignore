@@ -134,11 +134,14 @@ out/
 .playwright-mcp/
 .playwright/
 
+# Test artifacts (trace/screenshot on failure)
+tests/.results/
+
 # Clinic Analysis
 .clinic/
 
 # IA Agent
-.claude/
+.claude/*
 .review/
 .mcp.json
 !.claude/skills/

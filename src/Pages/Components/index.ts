@@ -1,1 +1,1 @@
-export * from "./BaseComponentPage.js";
+export * from "./BaseComponent.js";

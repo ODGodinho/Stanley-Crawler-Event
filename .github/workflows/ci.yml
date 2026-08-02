@@ -3,7 +3,6 @@ name: Ci Job
 on:
   push:
     branches: [ main, master ]
-  pull_request_target:
 
 jobs:
   review-and-test:
@@ -11,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [ 24 ]
+        version: [ 26 ]
     steps:
       - uses: actions/checkout@v4
         with:

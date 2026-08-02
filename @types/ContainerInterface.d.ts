@@ -3,19 +3,16 @@ import type { JSONLoggerPlugin } from "@odg/json-log";
 import type { LoggerInterface } from "@odg/log";
 import type { MessageInterface } from "@odg/message";
 
-import type { Container } from "../src/app/Container.ts";
-import type { ContainerName } from "../src/app/Enums/index.ts";
-import type { SearchEventListener } from "../src/app/Listeners/index.ts";
-import type { EventServiceProvider } from "../src/app/Provider/index.ts";
-import type { ExampleCrawlerService } from "../src/app/Services/index.ts";
-import type { MyConfig } from "../src/Configs/index.ts";
-import type { Kernel, ProcessKernel } from "../src/Console/index.ts";
-import type {
-    BrowserClassEngine,
-    BrowserManagerType,
-} from "../src/engine.ts";
-import type { GoogleSearchToSelectionHandler } from "../src/Handlers/index.ts";
-import type { SearchPage } from "../src/Pages/index.ts";
+import type { Container } from "#app/Container.js";
+import type { MyConfig } from "#configs";
+import type { BrowserClassEngine, BrowserManagerType } from "#engine";
+import type { ContainerName } from "#enums";
+import type { GoogleSearchToSelectionHandler } from "#handlers";
+import type { Kernel, ProcessKernel } from "#kernel";
+import type { SearchEventListener } from "#listeners";
+import type { SearchPage } from "#pages";
+import type { EventServiceProvider } from "#providers";
+import type { ExampleCrawlerService } from "#services";
 
 import type { EventTypes } from "./EventsInterface.d.ts";
 

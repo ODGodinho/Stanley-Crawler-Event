@@ -1,3 +1,7 @@
+import type {
+    ContainerInterface,
+    EventTypes,
+} from "#types";
 import { AxiosMessage } from "@odg/axios";
 import {
     BrowserManager,
@@ -12,27 +16,17 @@ import { EventEmitterBus } from "@odg/events";
 import { JSONLoggerPlugin } from "@odg/json-log";
 import { ConsoleLogger, Logger } from "@odg/log";
 
-import type {
-    ContainerInterface,
-    EventTypes,
-} from "#types";
+import { Browser, Context, Page } from "#browser";
+import { type ConfigType, configValidator } from "#configs";
+import type { BrowserClassEngine, ContextClassEngine, PageClassEngine } from "#engine";
+import { ConfigName, ContainerName } from "#enums";
 
-import { Browser, Context, Page } from "../Browser/index.js";
-import { type ConfigType, configValidator } from "../Configs/index.js";
-import type {
-    BrowserClassEngine,
-    ContextClassEngine,
-    PageClassEngine,
-} from "../engine.js";
-
-import { ConfigName, ContainerName } from "./Enums/index.js";
-
-import "../Handlers/index.js";
-import "./Listeners/index.js";
-import "../Pages/index.js";
-import "./Provider/index.js";
-import "./Services/index.js";
-import "../Console/index.js";
+import "#handlers";
+import "#listeners";
+import "#pages";
+import "#providers";
+import "#services";
+import "#kernel";
 
 export class Container extends ContainerBase<ContainerInterface> {
 

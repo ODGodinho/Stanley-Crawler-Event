@@ -25,15 +25,13 @@
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
-    "eslint.runtime": "node",
 
     // Monorepo: resolve o tsconfig/config do pacote certo (perf + type-aware correto)
-    "eslint.workingDirectories": [
-        {
-            "mode": "auto"
-        }
-    ],
+    "eslint.workingDirectories": [ { "mode": "auto" } ],
     "eslint.useFlatConfig": true,
+    "eslint.runtime": "bun",
+    "eslint.run": "onSave",
+
     "js/ts.preferences.quoteStyle": "double",
     "js/ts.format.semicolons": "ignore",
     "js/ts.format.insertSpaceAfterCommaDelimiter": true,
@@ -105,11 +103,19 @@
     // Silent the stylistic rules in you IDE, but still auto fix them
     "eslint.rules.customizations": [
         {
-            "rule": "@stylistic/*",
+            "rule": "@stylistic/*|comment-content|no-negated*|no-empty*|*no-multiple-empty-lines*|*comment-content*",
             "severity": "info"
         },
         {
-            "rule": "style*|*-indent|indent|*-spacing|*-spaces|*order|*-dangle|*-newline|*quotes|*semi|sort-imports",
+            "rule": "*consistent*",
+            "severity": "info"
+        },
+        {
+            "rule": "*max-len*|*complexity*|*max-params*|*no-magic-numbers*|*no-duplicate-string*",
+            "severity": "warn"
+        },
+        {
+            "rule": "*style*|*-indent|indent|*-spacing|*-spaces|*order|*-dangle|*-newline|*quotes|*semi|sort-imports",
             "severity": "info"
         }
     ],

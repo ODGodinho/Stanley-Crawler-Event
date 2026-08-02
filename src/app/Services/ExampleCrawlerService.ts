@@ -1,15 +1,13 @@
+import type { EventTypes } from "#types";
 import { ODGDecorators } from "@odg/chemical-x";
-import type { ConfigInterface } from "@odg/config";
 import type { EventBusInterface } from "@odg/events";
 import type { LoggerInterface } from "@odg/log";
 
-import type { EventTypes } from "#types";
-
-import { ConfigType } from "../../Configs/index.js";
-import { $inject } from "../../ContainerInject.js";
-import type { BrowserClassEngine } from "../../engine.js";
-import type { GoogleSearchToSelectionHandler } from "../../Handlers/index.js";
-import { ConfigName, ContainerName, EventName } from "../Enums/index.js";
+import { $inject } from "#app/ContainerInject.js";
+import type { MyConfig } from "#configs";
+import type { BrowserClassEngine } from "#engine";
+import { ConfigName, ContainerName, EventName } from "#enums";
+import type { GoogleSearchToSelectionHandler } from "#handlers";
 
 @ODGDecorators.injectable(ContainerName.ExampleCrawlerService, "Singleton")
 export class ExampleCrawlerService {
@@ -18,7 +16,7 @@ export class ExampleCrawlerService {
         @$inject(ContainerName.Logger) protected logger: LoggerInterface,
         @$inject(ContainerName.EventBus) protected bus: EventBusInterface<EventTypes>,
         @$inject(ContainerName.Browser) protected browser: BrowserClassEngine,
-        @$inject(ContainerName.Config) protected config: ConfigInterface<ConfigType>,
+        @$inject(ContainerName.Config) protected config: MyConfig,
         @$inject(ContainerName.GoogleSearchToSelectionHandler)
         protected searchToSelectionHandler: GoogleSearchToSelectionHandler,
     ) {

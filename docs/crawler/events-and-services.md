@@ -8,36 +8,11 @@ You **MUST** adhere to the rules defined in this document.
 
 ## Events
 
+Event/payload structure and dispatch-permission rules follow the shared `odg` skill's events.md — this section states only this project's listener/service behavior.
+
 ### What are Events?
 
 Events are typed contracts for the asynchronous bus. The event name lives in `EventName` and the payload lives in `@types/EventsInterface.d.ts`. The bus decouples whoever initiates a step from whoever executes it.
-
-### Payload Modeling Rule
-
-**Minimum payload for a simple step:**
-```typescript
-export interface EventBrowserParameters {
-    page: PageClassEngine;
-}
-```
-
-**Payload for chained flows:**
-```typescript
-export interface SearchFlowContext {
-    query: string;
-    email: string;
-}
-
-export interface EventFlowParameters extends EventBrowserParameters {
-    flowContext: SearchFlowContext;
-}
-```
-
-### How to Create an Event
-
-1. You **MUST** add the name in the enum `src/app/Enums/EventName.ts`.
-2. You **MUST** add the corresponding payload in `@types/EventsInterface.d.ts`.
-3. You **MUST ONLY** dispatch the event from a Service or Handler. You **MUST NEVER** dispatch an event directly from a Page.
 
 ## Listeners
 
@@ -57,7 +32,6 @@ A Listener **MUST**:
 A Listener **MUST NOT**:
 - Validate the success of the flow (This is the Handler's job).
 - Decide retries.
-- Dispatch steps of different contexts.
 
 ### Automatic Registration
 

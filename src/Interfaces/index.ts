@@ -1,3 +1,1 @@
-export interface Example {
-    example(): unknown;
-}
+export type * from "./ExampleInterface.js";

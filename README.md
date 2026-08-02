@@ -67,7 +67,7 @@
 
 ## 📗 Libraries
 
-- [Node.js 24](https://nodejs.org/?n=dragonsgamers)
+- [Node.js 26](https://nodejs.org/?n=dragonsgamers)
 - [Typescript](https://www.typescriptlang.org/?n=dragonsgamers)
 - [Eslint](https://eslint.org/?n=dragonsgamers)
 - [ODG-Linter-JS](https://github.com/ODGodinho/ODG-Linter-Js?n=dragonsgamers)
@@ -77,7 +77,7 @@
 ## 📁 Dependencies
 
 - [Bun](https://bun.sh/) Recommended
-  - [Node.js](https://nodejs.org) 24 or later
+  - [Node.js](https://nodejs.org) 26 or later
 - [Playwright](https://playwright.dev/)
   - For web scraping / crawling / automation
 - [@odg/axios](https://www.npmjs.com/package/@odg/axios)
