@@ -4,11 +4,10 @@ import type { EventBusInterface } from "@odg/events";
 import type { LoggerInterface } from "@odg/log";
 
 import { $inject } from "#app/ContainerInject.js";
+import type { MyConfig } from "#configs";
 import type { PageClassEngine } from "#engine";
 import { ContainerName } from "#enums";
-
-import type { MyConfig } from "../Configs/Config.js";
-import * as Selectors from "../Selectors/index.js";
+import * as Selectors from "#selectors";
 
 export abstract class BaseHandler extends BaseHandlerChemical<PageClassEngine> {
 

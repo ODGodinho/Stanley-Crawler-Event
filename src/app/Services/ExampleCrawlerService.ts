@@ -34,7 +34,7 @@ export class ExampleCrawlerService {
             .setPage(page)
             .execute();
 
-        if (!await this.config.get(ConfigName.BROWSER_CONNECT)) {
+        if (!await this.config.get(ConfigName.BROWSER_CDP_URL)) {
             await context.close();
         }
     }

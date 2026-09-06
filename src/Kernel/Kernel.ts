@@ -71,16 +71,8 @@ export class Kernel {
         ]);
     }
 
-    /**
-     * Create the browser the same way production does: honors BROWSER_CONNECT
-     * (connectOverCDP) or falls back to chromium.launch, using the shared launch
-     * options (args + headless). Returns the wrapper without binding it — the
-     * caller owns the lifecycle (`bootBrowser` binds it; the test fixture closes it).
-     *
-     * @returns {Promise<BrowserClassEngine>}
-     */
     public async createBrowser(): Promise<BrowserClassEngine> {
-        const browserConnect = await this.config.get(ConfigName.BROWSER_CONNECT);
+        const browserConnect = await this.config.get(ConfigName.BROWSER_CDP_URL);
         const browserOptions: ConnectOverCDPOptions | LaunchOptions = {
             args: [
                 // Use this to working in Docker

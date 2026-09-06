@@ -71,7 +71,7 @@ describe("Container Kernel Test", () => {
 
         await kernel["bootBrowser"]();
 
-        expect(configGetMock).toHaveBeenCalledWith(ConfigName.BROWSER_CONNECT);
+        expect(configGetMock).toHaveBeenCalledWith(ConfigName.BROWSER_CDP_URL);
         expect(connectOverCDPMock).toHaveBeenCalledOnce();
         expect(connectOverCDPMock).toHaveBeenCalledWith(
             browserConnectUrl,

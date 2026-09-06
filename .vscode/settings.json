@@ -28,7 +28,6 @@
 
     // Monorepo: resolve o tsconfig/config do pacote certo (perf + type-aware correto)
     "eslint.workingDirectories": [ { "mode": "auto" } ],
-    "eslint.useFlatConfig": true,
     "eslint.runtime": "bun",
 
     "js/ts.preferences.quoteStyle": "double",
